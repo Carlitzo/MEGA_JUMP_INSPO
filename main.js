@@ -1,42 +1,47 @@
-(async () => {
-    // Create a new application
-    const app = new PIXI.Application();
-  
-    // Initialize the application
-    await app.init({ background: '#1099bb', resizeTo: window });
-  
-    // Append the application canvas to the document body
+const app = new PIXI.Application();
+document.body.style.margin = 0;
+
+async function setup() {
+    await app.init({background: '#1099bb', resizeTo: window});
     document.body.appendChild(app.canvas);
-  
-    // Create and add a container to the stage
-    const container = new PIXI.Container();
-  
-    app.stage.addChild(container);
-  
-    // Load the bunny texture
-    const texture = await PIXI.Assets.load('https://pixijs.com/assets/bunny.png');
-  
-    // Create a 5x5 grid of bunnies in the container
-    for (let i = 0; i < 25; i++) {
-      const bunny = new PIXI.Sprite(texture);
-  
-      bunny.x = (i % 5) * 40;
-      bunny.y = Math.floor(i / 5) * 40;
-      container.addChild(bunny);
+}
+
+async function preload() {
+  const assets = [
+    { alias: 'background', src: 'https://pixijs.com/assets/tutorials/fish-pond/pond_background.jpg' },
+    { alias: 'fish1', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish1.png' },
+    { alias: 'fish2', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish2.png' },
+    { alias: 'fish3', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish3.png' },
+    { alias: 'fish4', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish4.png' },
+    { alias: 'fish5', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish5.png' },
+    { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/fish-pond/wave_overlay.png' },
+    { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/fish-pond/displacement_map.png' },
+  ];
+  await PIXI.Assets.load(assets);
+}
+
+function addBackground(app) {
+    const background = PIXI.Sprite.from('background');
+
+    background.anchor.set(0.5);
+
+    if (app.screen.width > app.screen.height) {
+        background.width = app.screen.width * 1.2;
+        background.scale.y = background.scale.x;
+    } else {
+        background.height = app.screen.height * 1.2;
+        background.scale.x = background.scale.y;
     }
-  
-    // Move the container to the center
-    container.x = app.screen.width / 2;
-    container.y = app.screen.height / 2;
-  
-    // Center the bunny sprites in local container coordinates
-    container.pivot.x = container.width / 2;
-    container.pivot.y = container.height / 2;
-  
-    // Listen for animate update
-    app.ticker.add((time) => {
-      // Continuously rotate the container!
-      // * use delta to create frame-independent transform *
-      container.rotation -= 0.01 * time.deltaTime;
-    });
-  })();
+
+    background.x = app.screen.width / 2;
+    background.y = app.screen.height / 2;
+
+    app.stage.addChild(background);
+}
+
+(async () => {
+    await setup();
+    await preload();
+
+    addBackground(app);
+})();
