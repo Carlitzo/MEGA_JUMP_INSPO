@@ -1,4 +1,6 @@
-const app = new PIXI.Application();
+import { Application, Sprite, Container, Assets } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+
+const app = new Application();
 document.body.style.margin = 0;
 
 const fishes = [];
@@ -21,12 +23,12 @@ async function preload() {
         { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/fish-pond/wave_overlay.png' },
         { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/fish-pond/displacement_map.png' },
     ];
-    await PIXI.Assets.load(assets);
+    await Assets.load(assets);
 }
 
 // Egentligen sin egen fil (enligt tutorialen)
 function addBackground(app) {
-    const background = PIXI.Sprite.from('background');
+    const background = Sprite.from('background');
 
     background.anchor.set(0.5);
 
@@ -47,7 +49,7 @@ function addBackground(app) {
 // addFishes.js
 function addFishes(app, fishes) {
     // Add container for all the lil fishies
-    const fishContainer = new PIXI.Container();
+    const fishContainer = new Container();
     app.stage.addChild(fishContainer);
 
     // How many fishies
@@ -58,7 +60,7 @@ function addFishes(app, fishes) {
 
     for (let i = 0; i < fishCount; i++) {
         const fishAsset = fishAssets[i % fishAssets.length];
-        const fish = PIXI.Sprite.from(fishAsset);
+        const fish = Sprite.from(fishAsset);
 
         fish.anchor.set(0.5);
 
