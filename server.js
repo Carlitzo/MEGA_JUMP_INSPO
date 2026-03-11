@@ -1,3 +1,3 @@
 import { serveDir } from "jsr:@std/http/file-server";
 
-Deno.serve((req) => serveDir(req, { fsRoot: "./server.js" }));
+Deno.serve((req) => serveDir(req, "./public/"));
