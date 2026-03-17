@@ -1,118 +1,71 @@
 import { Application, Sprite, Container, Assets } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { preloadAssets } from './preloadAssets.js';
+
+export const gameAssets = {
+        intialBackground: '',
+        backgrounds: [],
+        character: {
+                flying: [],
+                idle: [],
+                jumping: [],
+                moving: []
+        },
+        collectibles: []
+};
 
 const app = new Application();
-document.body.style.margin = 0;
-
-const fishes = [];
-
-async function setup() {
-    await app.init({background: '#1099bb', resizeTo: window});
-    // Tydligen fixade detta scrollen, by default är den ett inline element -> browsern lägger till några pixlar
-    app.canvas.style.display = 'block';
-    document.body.appendChild(app.canvas);
-}
-
-async function preload() {
-    const assets = [
-        { alias: 'background', src: 'https://pixijs.com/assets/tutorials/fish-pond/pond_background.jpg' },
-        { alias: 'fish1', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish1.png' },
-        { alias: 'fish2', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish2.png' },
-        { alias: 'fish3', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish3.png' },
-        { alias: 'fish4', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish4.png' },
-        { alias: 'fish5', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish5.png' },
-        { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/fish-pond/wave_overlay.png' },
-        { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/fish-pond/displacement_map.png' },
-    ];
-    await Assets.load(assets);
-}
-
-// Egentligen sin egen fil (enligt tutorialen)
-function addBackground(app) {
-    const background = Sprite.from('background');
-
-    background.anchor.set(0.5);
-
-    if (app.screen.width > app.screen.height) {
-        background.width = app.screen.width * 1.2;
-        background.scale.y = background.scale.x;
-    } else {
-        background.height = app.screen.height * 1.2;
-        background.scale.x = background.scale.y;
-    }
-
-    background.x = app.screen.width / 2;
-    background.y = app.screen.height / 2;
-
-    app.stage.addChild(background);
-}
-
-// addFishes.js
-function addFishes(app, fishes) {
-    // Add container for all the lil fishies
-    const fishContainer = new Container();
-    app.stage.addChild(fishContainer);
-
-    // How many fishies
-    const fishCount = 20;
-
-    // Different aliases of the sprites we wish to use from our preload function
-    const fishAssets = ['fish1', 'fish2', 'fish3', 'fish4', 'fish5'];
-
-    for (let i = 0; i < fishCount; i++) {
-        const fishAsset = fishAssets[i % fishAssets.length];
-        const fish = Sprite.from(fishAsset);
-
-        fish.anchor.set(0.5);
-
-        fish.direction = Math.random() * Math.PI * 2;
-        fish.speed = 0.2 + Math.random() * 2;
-        fish.turnSpeed = Math.random() - 0.8;
-
-        fish.x = Math.random() * app.screen.width;
-        fish.y = Math.random() * app.screen.height;
-        fish.scale.set(0.5 + Math.random() * 0.2);
-
-        fishContainer.addChild(fish);
-        fishes.push(fish);
-    }
-}
-
-// addFishes.js
-function animateFishes(app, fishes, time) {
-    const delta = time.deltaTime;
-
-    const stagePadding = 100;
-    const boundWidth = app.screen.width + stagePadding * 2;
-    const boundHeight = app.screen.height + stagePadding * 2;
-
-    fishes.forEach((fish) => {
-        fish.direction += fish.turnSpeed * 0.01;
-        fish.x += Math.sin(fish.direction) * fish.speed;
-        fish.y += Math.cos(fish.direction) * fish.speed;
-        fish.rotation = -fish.direction - Math.PI / 2;
-
-        if (fish.x < -stagePadding) {
-            fish.x += boundWidth;
-        }
-        if (fish.x > app.screen.width + stagePadding) {
-            fish.x -= boundWidth;
-        }
-        if (fish.y < -stagePadding) {
-            fish.y += boundHeight;
-        }
-        if (fish.y > app.screen.height + stagePadding) {
-            fish.y -= boundHeight;
-        }
-    });
-}
+let gameStarted = false;
 
 (async () => {
-    await setup();
-    await preload();
 
-    addBackground(app);
+   	await app.init({ resizeTo: window, backgroundColor: 0x87ceeb});
 
-    addFishes(app, fishes);
+        document.body.appendChild(app.canvas);
 
-    app.ticker.add((time) => animateFishes(app, fishes, time));
+        await preloadAssets(app);
+
+        console.log(gameAssets);
+
 })();
+
+// rendera bakgrunden, skapa bober, 
+
+// funktion som intierar spelet genom att en gång anropa renderInitialAssets, renderLogs
+function initializeGame() {
+
+}
+
+// funktion som startar själva spelet när bober hoppar
+// gameStarted = true, continuallyRenderBackgrounds(app), renderLogs(app)
+function startGame() {
+
+}
+
+// funktion som renderar alla initiala assets (bakgrund, bober, logs(via anrop till renderLogs));
+// render bober kan göras inuti denna
+// render background med startpad inuti denna
+export function renderInitialAssets(app) {
+
+}
+
+// rendera alla bakgrunder som inte har bottenplan
+// inuti denna finns en app.ticker som körs så fort som startGame() har anropats (startGame anropar denna funktionen)
+// app.ticker kontrollerar vilken bakgrundsbild som just nu syns och hanterar loopandet av bakgrundsbilder.
+export function continuallyRenderBackgrounds(app) {
+
+}
+
+// rendera alla logs i spelet, om gameStarted = false rendera de första logsen på nuvarande skärmen
+// om gameStarted är true så rendera alla logs på nästakommande bakgrundsbild istället
+export function renderLogs(app) {
+
+        if (!gameStarted) {
+        // Rendera logs i start-vyn (dvs samma bakgrundsbild som bober befinner sig i);
+        } else {
+        // Rendera logs i nästkommande vy så att spelet kontinuerligt renderas
+                app.ticker.add((time) => {
+                        const dx = time.deltaTime * 0.2;
+                        
+                });
+        };
+}
