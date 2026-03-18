@@ -14,8 +14,23 @@ export async function preloadAssets (app) {
                 });
         };
 
+        const animationObj = {
+                idleFrames: [],
+                flyingFrames: [],
+                jumpingFrames: [],
+                walkingFrames: []
+        }
+
+        for (let i = 0; i < 20; i++) {
+                const number = String(i).padStart(2, '0');
+                animationObj.idleFrames.push(`Characters-Character02-Idle_${number}.png`);
+                animationObj.flyingFrames.push(`Characters-Character02-Fly_${number}.png`);
+                animationObj.jumpingFrames.push(`Characters-Character02-Jump_${number}.png`);
+                animationObj.walkingFrames.push(`Characters-Character02-walk_${number}.png`);
+        };
+
         await Assets.load('./Assets/Character/Character.json');
-        gameAssets.player = new Bober(app);
+        gameAssets.player = new Bober(app, animationObj);
     
         gameAssets.collectibles.push({
                 alias: 'bigLog',

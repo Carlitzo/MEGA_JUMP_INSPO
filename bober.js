@@ -1,26 +1,15 @@
 import { Application, Sprite, Container, Assets, Graphics, AnimatedSprite } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 
 export class Bober {
-        constructor(app) {
-                const idleFrames = [];
-                const flyingFrames = [];
-                const walkingFrames = [];
-                const jumpingFrames = [];
-
-                for (let i = 0; i < 20; i++) {
-                        const number = String(i).padStart(2, '0');
-                        flyingFrames.push(`Characters-Character02-Fly_${number}.png`);
-                        idleFrames.push(`Characters-Character02-Idle_${number}.png`);
-                        jumpingFrames.push(`Characters-Character02-Jump_${number}.png`);
-                        walkingFrames.push(`Characters-Character02-walk_${number}.png`);
-                };
+        constructor(app, animationObj) {
 
                 this.animations = {
-                        idle: AnimatedSprite.fromFrames(idleFrames),
-                        flying: AnimatedSprite.fromFrames(flyingFrames),
-                        walking: AnimatedSprite.fromFrames(walkingFrames),
-                        jumping: AnimatedSprite.fromFrames(jumpingFrames)
+                        idle: AnimatedSprite.fromFrames(animationObj.idleFrames),
+                        flying: AnimatedSprite.fromFrames(animationObj.flyingFrames),
+                        walking: AnimatedSprite.fromFrames(animationObj.walkingFrames),
+                        jumping: AnimatedSprite.fromFrames(animationObj.jumpingFrames)
                 };
+                
                 Object.values(this.animations).forEach(anim => {
                         anim.animationSpeed = 0.5;
                         anim.anchor.set(0.5, 1);
