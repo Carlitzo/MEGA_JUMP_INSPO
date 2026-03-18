@@ -19,6 +19,7 @@ export let gameStarted = false;
         document.body.appendChild(app.canvas);
 
         await preloadAssets(app);
+        renderInitialAssets(app);
         
 })();
 

@@ -9,10 +9,10 @@ export class Bober {
 
                 for (let i = 0; i < 20; i++) {
                         const number = String(i).padStart(2, '0');
-                        flyingFrames.push(`./Assets/Character/Characters-Character02-Fly_${number}.png`);
-                        idleFrames.push(`./Assets/Character/Characters-Character02-Idle_${number}.png`);
-                        jumpingFrames.push(`./Assets/Character/Characters-Character02-Jump_${number}.png`);
-                        walkingFrames.push(`./Assets/Character/Characters-Character02-walk_${number}.png`);
+                        flyingFrames.push(`Characters-Character02-Fly_${number}.png`);
+                        idleFrames.push(`Characters-Character02-Idle_${number}.png`);
+                        jumpingFrames.push(`Characters-Character02-Jump_${number}.png`);
+                        walkingFrames.push(`Characters-Character02-walk_${number}.png`);
                 };
 
                 this.animations = {
