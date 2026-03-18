@@ -6,7 +6,18 @@ import { gameAssets } from './main.js';
 // render bober kan göras inuti denna
 // render background med startpad inuti denna
 export async function renderInitialAssets(app) {
-        const backgroundWithStart = await Sprite.from(gameAssets.intialBackground);
+        const backgroundWithStart = await Assets.load(gameAssets.intialBackground);
+        const backgroundSprite = new Sprite(backgroundWithStart);
 
-        app.stage.addChild(gameAssets.player, backgroundWithStart);
+        backgroundSprite.anchor.set(0.5, 1);
+
+        const scaleX = app.screen.width / backgroundSprite.texture.width;
+        const scaleY = app.screen.height / backgroundSprite.texture.height;
+        const scale = Math.max(scaleX, scaleY);
+
+        backgroundSprite.scale.set(scale);
+        backgroundSprite.x = app.screen.width / 2;
+        backgroundSprite.y = app.screen.height;
+
+        app.stage.addChild(backgroundSprite, gameAssets.player.container);
 }

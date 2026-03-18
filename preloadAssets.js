@@ -15,7 +15,7 @@ export async function preloadAssets (app) {
         };
 
         await Assets.load('./Assets/Character/Character.json');
-        gameAssets.player = new Bober();
+        gameAssets.player = new Bober(app);
     
         gameAssets.collectibles.push({
                 alias: 'bigLog',

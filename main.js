@@ -17,6 +17,9 @@ export let gameStarted = false;
    	await app.init({ resizeTo: window, backgroundColor: 0x87ceeb});
 
         document.body.appendChild(app.canvas);
+        app.canvas.style.width = '100%';
+        app.canvas.style.height = '100%';
+        app.canvas.style.objectFit = 'cover';
 
         await preloadAssets(app);
         renderInitialAssets(app);
