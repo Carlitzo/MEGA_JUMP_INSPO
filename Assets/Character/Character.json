@@ -1,0 +1,1935 @@
+{
+  "frames": {
+    "Characters-Character02-Fly_00.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 284,
+        "h": 357
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 284,
+        "y": 79,
+        "w": 284,
+        "h": 357
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_01.png": {
+      "frame": {
+        "x": 0,
+        "y": 357,
+        "w": 284,
+        "h": 356
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 284,
+        "y": 80,
+        "w": 284,
+        "h": 356
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_02.png": {
+      "frame": {
+        "x": 0,
+        "y": 713,
+        "w": 284,
+        "h": 354
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 284,
+        "y": 81,
+        "w": 284,
+        "h": 354
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_03.png": {
+      "frame": {
+        "x": 0,
+        "y": 1067,
+        "w": 283,
+        "h": 353
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 82,
+        "w": 283,
+        "h": 353
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_04.png": {
+      "frame": {
+        "x": 0,
+        "y": 1420,
+        "w": 283,
+        "h": 351
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 83,
+        "w": 283,
+        "h": 351
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_05.png": {
+      "frame": {
+        "x": 0,
+        "y": 1771,
+        "w": 283,
+        "h": 348
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 85,
+        "w": 283,
+        "h": 348
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_06.png": {
+      "frame": {
+        "x": 0,
+        "y": 2119,
+        "w": 283,
+        "h": 347
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 86,
+        "w": 283,
+        "h": 347
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_07.png": {
+      "frame": {
+        "x": 0,
+        "y": 2466,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 87,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_08.png": {
+      "frame": {
+        "x": 0,
+        "y": 2811,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 88,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_09.png": {
+      "frame": {
+        "x": 0,
+        "y": 3156,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 89,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_10.png": {
+      "frame": {
+        "x": 0,
+        "y": 3501,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 90,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_08.png": {
+      "frame": {
+        "x": 0,
+        "y": 3846,
+        "w": 233,
+        "h": 250
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 270,
+        "y": 136,
+        "w": 233,
+        "h": 250
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_15.png": {
+      "frame": {
+        "x": 233,
+        "y": 3846,
+        "w": 234,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 158,
+        "w": 234,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_08.png": {
+      "frame": {
+        "x": 467,
+        "y": 3846,
+        "w": 226,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 189,
+        "w": 226,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_02.png": {
+      "frame": {
+        "x": 693,
+        "y": 3846,
+        "w": 218,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 189,
+        "w": 218,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_05.png": {
+      "frame": {
+        "x": 283,
+        "y": 1067,
+        "w": 232,
+        "h": 258
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 178,
+        "w": 232,
+        "h": 258
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_15.png": {
+      "frame": {
+        "x": 284,
+        "y": 0,
+        "w": 205,
+        "h": 258
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 178,
+        "w": 205,
+        "h": 258
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_10.png": {
+      "frame": {
+        "x": 284,
+        "y": 258,
+        "w": 233,
+        "h": 257
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 263,
+        "y": 121,
+        "w": 233,
+        "h": 257
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_11.png": {
+      "frame": {
+        "x": 489,
+        "y": 0,
+        "w": 233,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 267,
+        "y": 128,
+        "w": 233,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_09.png": {
+      "frame": {
+        "x": 284,
+        "y": 515,
+        "w": 233,
+        "h": 254
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 267,
+        "y": 128,
+        "w": 233,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_12.png": {
+      "frame": {
+        "x": 284,
+        "y": 769,
+        "w": 233,
+        "h": 254
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 270,
+        "y": 136,
+        "w": 233,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_06.png": {
+      "frame": {
+        "x": 283,
+        "y": 1325,
+        "w": 231,
+        "h": 254
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 182,
+        "w": 231,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_04.png": {
+      "frame": {
+        "x": 283,
+        "y": 1579,
+        "w": 228,
+        "h": 254
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 182,
+        "w": 228,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_14.png": {
+      "frame": {
+        "x": 283,
+        "y": 1833,
+        "w": 205,
+        "h": 254
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 182,
+        "w": 205,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_16.png": {
+      "frame": {
+        "x": 283,
+        "y": 2087,
+        "w": 205,
+        "h": 254
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 182,
+        "w": 205,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_13.png": {
+      "frame": {
+        "x": 283,
+        "y": 2341,
+        "w": 233,
+        "h": 253
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 143,
+        "w": 233,
+        "h": 253
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_14.png": {
+      "frame": {
+        "x": 488,
+        "y": 1833,
+        "w": 234,
+        "h": 252
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 150,
+        "w": 234,
+        "h": 252
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_07.png": {
+      "frame": {
+        "x": 516,
+        "y": 1579,
+        "w": 228,
+        "h": 252
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 185,
+        "w": 228,
+        "h": 252
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_19.png": {
+      "frame": {
+        "x": 514,
+        "y": 1325,
+        "w": 224,
+        "h": 252
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 188,
+        "w": 224,
+        "h": 252
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_03.png": {
+      "frame": {
+        "x": 738,
+        "y": 1325,
+        "w": 224,
+        "h": 252
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 185,
+        "w": 224,
+        "h": 252
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_13.png": {
+      "frame": {
+        "x": 962,
+        "y": 1325,
+        "w": 205,
+        "h": 252
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 185,
+        "w": 205,
+        "h": 252
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_17.png": {
+      "frame": {
+        "x": 1167,
+        "y": 1325,
+        "w": 205,
+        "h": 252
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 185,
+        "w": 205,
+        "h": 252
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_12.png": {
+      "frame": {
+        "x": 488,
+        "y": 2085,
+        "w": 205,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 189,
+        "w": 205,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_18.png": {
+      "frame": {
+        "x": 515,
+        "y": 1023,
+        "w": 205,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 189,
+        "w": 205,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_16.png": {
+      "frame": {
+        "x": 720,
+        "y": 1023,
+        "w": 233,
+        "h": 248
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 165,
+        "w": 233,
+        "h": 248
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_07.png": {
+      "frame": {
+        "x": 953,
+        "y": 1023,
+        "w": 233,
+        "h": 247
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 143,
+        "w": 233,
+        "h": 247
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_09.png": {
+      "frame": {
+        "x": 1186,
+        "y": 1023,
+        "w": 222,
+        "h": 247
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 274,
+        "y": 192,
+        "w": 222,
+        "h": 247
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_01.png": {
+      "frame": {
+        "x": 517,
+        "y": 256,
+        "w": 211,
+        "h": 247
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 192,
+        "w": 211,
+        "h": 247
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_11.png": {
+      "frame": {
+        "x": 722,
+        "y": 0,
+        "w": 210,
+        "h": 247
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 274,
+        "y": 192,
+        "w": 210,
+        "h": 247
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_19.png": {
+      "frame": {
+        "x": 517,
+        "y": 503,
+        "w": 205,
+        "h": 247
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 192,
+        "w": 205,
+        "h": 247
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_10.png": {
+      "frame": {
+        "x": 517,
+        "y": 750,
+        "w": 234,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 192,
+        "w": 234,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_09.png": {
+      "frame": {
+        "x": 722,
+        "y": 503,
+        "w": 233,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 192,
+        "w": 233,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_08.png": {
+      "frame": {
+        "x": 728,
+        "y": 247,
+        "w": 232,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 193,
+        "w": 232,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_07.png": {
+      "frame": {
+        "x": 955,
+        "y": 0,
+        "w": 231,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 193,
+        "w": 231,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_17.png": {
+      "frame": {
+        "x": 960,
+        "y": 245,
+        "w": 231,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 173,
+        "w": 231,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_06.png": {
+      "frame": {
+        "x": 1186,
+        "y": 0,
+        "w": 229,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 193,
+        "w": 229,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_04.png": {
+      "frame": {
+        "x": 751,
+        "y": 748,
+        "w": 226,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 194,
+        "w": 226,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_06.png": {
+      "frame": {
+        "x": 955,
+        "y": 492,
+        "w": 234,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 150,
+        "w": 234,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_04.png": {
+      "frame": {
+        "x": 977,
+        "y": 736,
+        "w": 233,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 165,
+        "w": 233,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_05.png": {
+      "frame": {
+        "x": 1189,
+        "y": 490,
+        "w": 228,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 194,
+        "w": 228,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_15.png": {
+      "frame": {
+        "x": 1191,
+        "y": 245,
+        "w": 228,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 194,
+        "w": 228,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_03.png": {
+      "frame": {
+        "x": 1415,
+        "y": 0,
+        "w": 224,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 195,
+        "w": 224,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_02.png": {
+      "frame": {
+        "x": 1419,
+        "y": 244,
+        "w": 223,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 195,
+        "w": 223,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_01.png": {
+      "frame": {
+        "x": 1639,
+        "y": 0,
+        "w": 221,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 196,
+        "w": 221,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_00.png": {
+      "frame": {
+        "x": 1210,
+        "y": 734,
+        "w": 219,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 196,
+        "w": 219,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_10.png": {
+      "frame": {
+        "x": 1417,
+        "y": 489,
+        "w": 218,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 274,
+        "y": 196,
+        "w": 218,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-walk_00.png": {
+      "frame": {
+        "x": 283,
+        "y": 2594,
+        "w": 205,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 196,
+        "w": 205,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_03.png": {
+      "frame": {
+        "x": 283,
+        "y": 2838,
+        "w": 231,
+        "h": 243
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 173,
+        "w": 231,
+        "h": 243
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_18.png": {
+      "frame": {
+        "x": 488,
+        "y": 2594,
+        "w": 228,
+        "h": 242
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 181,
+        "w": 228,
+        "h": 242
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_02.png": {
+      "frame": {
+        "x": 516,
+        "y": 2334,
+        "w": 228,
+        "h": 241
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 181,
+        "w": 228,
+        "h": 241
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_05.png": {
+      "frame": {
+        "x": 716,
+        "y": 2085,
+        "w": 234,
+        "h": 240
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 158,
+        "w": 234,
+        "h": 240
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_01.png": {
+      "frame": {
+        "x": 722,
+        "y": 1831,
+        "w": 224,
+        "h": 240
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 188,
+        "w": 224,
+        "h": 240
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_19.png": {
+      "frame": {
+        "x": 0,
+        "y": 357,
+        "w": 284,
+        "h": 356
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 284,
+        "y": 80,
+        "w": 284,
+        "h": 356
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_18.png": {
+      "frame": {
+        "x": 0,
+        "y": 713,
+        "w": 284,
+        "h": 354
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 284,
+        "y": 81,
+        "w": 284,
+        "h": 354
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_17.png": {
+      "frame": {
+        "x": 0,
+        "y": 1067,
+        "w": 283,
+        "h": 353
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 82,
+        "w": 283,
+        "h": 353
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_16.png": {
+      "frame": {
+        "x": 0,
+        "y": 1420,
+        "w": 283,
+        "h": 351
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 83,
+        "w": 283,
+        "h": 351
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_15.png": {
+      "frame": {
+        "x": 0,
+        "y": 1771,
+        "w": 283,
+        "h": 348
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 85,
+        "w": 283,
+        "h": 348
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_14.png": {
+      "frame": {
+        "x": 0,
+        "y": 2119,
+        "w": 283,
+        "h": 347
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 86,
+        "w": 283,
+        "h": 347
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_13.png": {
+      "frame": {
+        "x": 0,
+        "y": 2466,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 87,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_12.png": {
+      "frame": {
+        "x": 0,
+        "y": 2811,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 88,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Fly_11.png": {
+      "frame": {
+        "x": 0,
+        "y": 3156,
+        "w": 283,
+        "h": 345
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 285,
+        "y": 89,
+        "w": 283,
+        "h": 345
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Jump_00.png": {
+      "frame": {
+        "x": 1210,
+        "y": 734,
+        "w": 219,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 196,
+        "w": 219,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_19.png": {
+      "frame": {
+        "x": 1639,
+        "y": 0,
+        "w": 221,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 196,
+        "w": 221,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_18.png": {
+      "frame": {
+        "x": 1419,
+        "y": 244,
+        "w": 223,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 195,
+        "w": 223,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_17.png": {
+      "frame": {
+        "x": 1415,
+        "y": 0,
+        "w": 224,
+        "h": 244
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 195,
+        "w": 224,
+        "h": 244
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_16.png": {
+      "frame": {
+        "x": 751,
+        "y": 748,
+        "w": 226,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 194,
+        "w": 226,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_14.png": {
+      "frame": {
+        "x": 1186,
+        "y": 0,
+        "w": 229,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 193,
+        "w": 229,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_13.png": {
+      "frame": {
+        "x": 955,
+        "y": 0,
+        "w": 231,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 193,
+        "w": 231,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_12.png": {
+      "frame": {
+        "x": 728,
+        "y": 247,
+        "w": 232,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 193,
+        "w": 232,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Characters-Character02-Idle_11.png": {
+      "frame": {
+        "x": 722,
+        "y": 503,
+        "w": 233,
+        "h": 245
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 273,
+        "y": 192,
+        "w": 233,
+        "h": 245
+      },
+      "sourceSize": {
+        "w": 788,
+        "h": 504
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "Character.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1860,
+      "h": 4096
+    },
+    "scale": 1
+  }
+}

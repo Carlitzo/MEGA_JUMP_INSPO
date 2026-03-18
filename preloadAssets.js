@@ -1,4 +1,6 @@
+import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { gameAssets } from './main.js';
+import { Bober } from './bober.js';
 
 // funktion som pre-loadar alla våra assets direkt
 export async function preloadAssets (app) {
@@ -11,26 +13,9 @@ export async function preloadAssets (app) {
                         src: `./Assets/Background/0${i}_preview_without_start_position_01.png`
                 });
         };
-    
-        for (let i = 0; i < 20; i++) {
-                const number = String(i).padStart(2, '0');
-                gameAssets.character.flying.push({
-                        alias: `characterFlying_${number}`,
-                        src: `./Assets/Character/Flying/Characters-Character01-Fly_${number}.png`
-                });
-                gameAssets.character.idle.push({
-                        alias: `characterIdle_${number}`,
-                        src: `./Assets/Character/Idle/Characters-Character01-Idle_${number}.png`
-                });
-                gameAssets.character.jumping.push({
-                        alias: `characterJumping_${number}`,
-                        src: `./Assets/Character/Jumping/Characters-Character01-Jump_${number}.png`
-                });
-                gameAssets.character.moving.push({
-                        alias: `characterMoving_${number}`,
-                        src: `./Assets/Character/Moving/Characters-Character01-walk_${number}.png`
-                });
-        };
+
+        await Assets.load('./Assets/Character/Character.json');
+        gameAssets.player = new Bober();
     
         gameAssets.collectibles.push({
                 alias: 'bigLog',
