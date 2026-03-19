@@ -20,4 +20,6 @@ export async function renderInitialAssets(app) {
         backgroundSprite.y = app.screen.height;
 
         app.stage.addChild(backgroundSprite, gameAssets.player.container);
+
+        await renderLogs(app);
 }

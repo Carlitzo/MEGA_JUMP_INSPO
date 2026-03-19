@@ -8,8 +8,8 @@ export async function preloadAssets (app) {
         gameAssets.intialBackground = './Assets/Background/04_preview with start position-01.png';
     
         for (let i = 0; i < 4; i++) {
-                gameAssets.backgrounds.push({
-                        alias: `backgroundWithoutStart_0${i}`,
+                await Assets.load({
+                        alias: `backgroundWithoutStart_${i}0`,
                         src: `./Assets/Background/0${i}_preview_without_start_position_01.png`
                 });
         };
@@ -31,24 +31,28 @@ export async function preloadAssets (app) {
 
         await Assets.load('./Assets/Character/Character.json');
         gameAssets.player = new Bober(app, animationObj);
+        
+        await Assets.load({ alias: 'bigLog', src: './Assets/Collectibles/bigLog.png'});
+        await Assets.load({ alias: 'smolLog', src: './Assets/Collectibles/smolLog.png'});
+        await Assets.load({ alias: 'magnet', src: './Assets/Collectibles/Magnet.png'});
+        await Assets.load({ alias: 'luckyClover', src: './Assets/Collectibles/Luck.png'});
+        // gameAssets.collectibles.push({
+        //         alias: 'bigLog',
+        //         src: './Assets/Collectibles/bigLog.png'
+        // });
     
-        gameAssets.collectibles.push({
-                alias: 'bigLog',
-                src: './Assets/Collectibles/bigLog.png'
-        });
+        // gameAssets.collectibles.push({
+        //         alias: 'smolLog',
+        //         src: './Assets/Collectibles/smolLog.png'
+        // });
     
-        gameAssets.collectibles.push({
-                alias: 'smolLog',
-                src: './Assets/Collectibles/smolLog.png'
-        });
+        // gameAssets.collectibles.push({
+        //         alias: 'magnet',
+        //         src: './Assets/Collectibles/Magnet.png'
+        // });
     
-        gameAssets.collectibles.push({
-                alias: 'magnet',
-                src: './Assets/Collectibles/Magnet.png'
-        });
-    
-        gameAssets.collectibles.push({
-                alias: 'luckyClover',
-                src: './Assets/Collectibles/Luck.png'
-        });
+        // gameAssets.collectibles.push({
+        //         alias: 'luckyClover',
+        //         src: './Assets/Collectibles/Luck.png'
+        // });
 }
