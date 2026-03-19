@@ -1,6 +1,6 @@
 import { Sprite, Container, Assets, AnimatedSprite } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { renderLogs } from './renderLogs.js';
-import { gameAssets } from './main.js';
+import { gameAssets, createChunk, updateChunks } from './main.js';
 
 // funktion som renderar alla initiala assets (bakgrund, bober, logs(via anrop till renderLogs));
 // render bober kan göras inuti denna
@@ -21,12 +21,17 @@ export async function renderInitialAssets(app) {
 
         app.stage.addChild(backgroundSprite, gameAssets.player.container);
 
+        app.ticker.add((time) => {
+                let dx = time.deltaTime * 0.2;
+                 
+                
+        });
+
         await renderLogs(app);
-}
 
-// Rendera en chunk
-function renderChunk(app) {
-        // if chunk in -y, move it back to top
-}
+        // Skapar spriten ovanför och under start-chunken vid start
+        createChunk(-app.screen.height, app);
+        createChunk(app.screen.height, app);
 
-// One function to collect coins, in this function, call separate function "DestroyLog"
+        updateChunks();
+}

@@ -9,7 +9,7 @@ export async function preloadAssets (app) {
     
         for (let i = 0; i < 4; i++) {
                 await Assets.load({
-                        alias: `backgroundWithoutStart_${i}0`,
+                        alias: `backgroundWithoutStart_0${i}`,
                         src: `./Assets/Background/0${i}_preview_without_start_position_01.png`
                 });
         };

@@ -27,7 +27,6 @@ export async function renderLogs(app) {
                         logSprite.scale.set(0.13);
                         logSprite.roundPixels = true;
 
-                        console.log(logSprite);
                         logContainer.addChild(logSprite);
                 }
         } else {
