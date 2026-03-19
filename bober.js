@@ -3,6 +3,11 @@ import { Application, Sprite, Container, Assets, Graphics, AnimatedSprite } from
 export class Bober {
         constructor(app, animationObj) {
 
+                // Central source for the velocity of the user
+                // Is used for handling logic related to how fast the world should move
+                this.velocityX = 0;
+                this.velocityY = 0;
+
                 this.animations = {
                         idle: AnimatedSprite.fromFrames(animationObj.idleFrames),
                         flying: AnimatedSprite.fromFrames(animationObj.flyingFrames),

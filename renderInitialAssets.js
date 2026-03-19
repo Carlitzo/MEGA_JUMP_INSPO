@@ -23,3 +23,10 @@ export async function renderInitialAssets(app) {
 
         await renderLogs(app);
 }
+
+// Rendera en chunk
+function renderChunk(app) {
+        // if chunk in -y, move it back to top
+}
+
+// One function to collect coins, in this function, call separate function "DestroyLog"
