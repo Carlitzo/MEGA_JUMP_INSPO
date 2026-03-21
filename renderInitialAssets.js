@@ -1,6 +1,6 @@
 import { Sprite, Container, Assets, AnimatedSprite } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { renderLogs } from './renderLogs.js';
-import { gameAssets, createChunk, updateChunks } from './main.js';
+import { gameAssets, createChunk, updateChunks , world} from './main.js';
 
 // funktion som renderar alla initiala assets (bakgrund, bober, logs(via anrop till renderLogs));
 // render bober kan göras inuti denna
@@ -19,7 +19,7 @@ export async function renderInitialAssets(app) {
         backgroundSprite.x = app.screen.width / 2;
         backgroundSprite.y = app.screen.height;
 
-        app.stage.addChild(backgroundSprite, gameAssets.player.container);
+        world.addChild(backgroundSprite, gameAssets.player.container);
 
         app.ticker.add((time) => {
                 let dx = time.deltaTime * 0.2;

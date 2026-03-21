@@ -1,18 +1,18 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { gameStarted, gameAssets } from './main.js';
+import { gameStarted, world } from './main.js';
 
 // rendera alla logs i spelet, om gameStarted = false rendera de första logsen på nuvarande skärmen
 // om gameStarted är true så rendera alla logs på nästakommande bakgrundsbild istället
-export async function renderLogs(app) {
+export async function renderLogs(app, chunk = null) {
         const logContainer = new Container();
+        const logCount = 10;
 
-        logContainer.width = app.screen.width;
-        logContainer.height = app.screen.height / 2;
-        logContainer.interactiveChildren = true;
+        // logContainer.width = app.screen.width;
+        // logContainer.height = app.screen.height / 2;
+        // logContainer.interactiveChildren = true;
 
         if (!gameStarted) {
                 // Rendera logs i start-vyn (dvs samma bakgrundsbild som bober befinner sig i);
-                const logCount = 10;
                 for (let i = 0; i < logCount; i++) {
                         let logSprite = null;
                         
@@ -30,11 +30,11 @@ export async function renderLogs(app) {
                         logContainer.addChild(logSprite);
                 }
         } else {
-                // Rendera logs i nästkommande vy så att spelet kontinuerligt renderas
-                app.ticker.add((time) => {
-                        const dx = time.deltaTime * 0.2;
+                // // Rendera logs i nästkommande vy så att spelet kontinuerligt renderas
+                // app.ticker.add((time) => {
+                //         const dx = time.deltaTime * 0.2;
                         
-                });
+                // });
         };
-        app.stage.addChild(logContainer);
+        world.addChild(logContainer);
 }
