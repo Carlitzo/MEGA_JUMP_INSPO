@@ -36,23 +36,4 @@ export async function preloadAssets (app) {
         await Assets.load({ alias: 'smolLog', src: './Assets/Collectibles/smolLog.png'});
         await Assets.load({ alias: 'magnet', src: './Assets/Collectibles/Magnet.png'});
         await Assets.load({ alias: 'luckyClover', src: './Assets/Collectibles/Luck.png'});
-        // gameAssets.collectibles.push({
-        //         alias: 'bigLog',
-        //         src: './Assets/Collectibles/bigLog.png'
-        // });
-    
-        // gameAssets.collectibles.push({
-        //         alias: 'smolLog',
-        //         src: './Assets/Collectibles/smolLog.png'
-        // });
-    
-        // gameAssets.collectibles.push({
-        //         alias: 'magnet',
-        //         src: './Assets/Collectibles/Magnet.png'
-        // });
-    
-        // gameAssets.collectibles.push({
-        //         alias: 'luckyClover',
-        //         src: './Assets/Collectibles/Luck.png'
-        // });
 }

@@ -1,6 +1,7 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { preloadAssets } from './preloadAssets.js';
 import { renderInitialAssets } from './renderInitialAssets.js';
+import { keys } from './input.js';
 
 export const gameAssets = {
         intialBackground: '',
@@ -10,6 +11,7 @@ export const gameAssets = {
 };
 
 const app = new Application();
+export const world = new Container();
 export let gameStarted = false;
 
 (async () => {
@@ -20,10 +22,32 @@ export let gameStarted = false;
         app.canvas.style.width = '100%';
         app.canvas.style.height = '100%';
         app.canvas.style.objectFit = 'cover';
+        app.stage.addChild(world);
 
         await preloadAssets(app);
         renderInitialAssets(app);
-        
+
+        app.ticker.add((time) => {
+                const dt = 4 * time.deltaTime;
+                if (keys['ArrowLeft']) {
+                        gameAssets.player.container.x -= dt;
+                        gameAssets.player.setState('walking');
+                        gameAssets.player.container.scale.x = -0.38;
+                } else if (keys['ArrowRight']) {
+                        gameAssets.player.container.x += dt;
+                        gameAssets.player.setState('walking');
+                        gameAssets.player.container.scale.x = 0.38;
+                } else {
+                        gameAssets.player.setState('idle');
+                }
+                if (keys['ArrowUp'] && !gameStarted) {
+                        startGame();
+                }
+
+                const halfWidth = gameAssets.player.container.width / 6;
+                gameAssets.player.container.x = Math.max(halfWidth, Math.min(app.screen.width - halfWidth, gameAssets.player.container.x));
+        })
+
 })();
 
 // rendera bakgrunden, skapa bober, 
@@ -32,18 +56,14 @@ export let gameStarted = false;
 // gameStarted = true, continuallyRenderBackgrounds(app), renderLogs(app)
 function startGame() {
 
+        app.ticker.add((time) => {
+                // Här vill vi uppdatera bakgrundsbilder;
+
+        })
 }
 
-// Detta värdet hade egentligen varit bättre i ett game-state men har det här sålänge. 
-// Kommer höjas/sänkas varje gång en spelaren typ tar en boost eller ett log osv.
-// Används i vår ticker så att vi vet hur mycket vi ska röra världen vid varje tick
-// speed = hur många pixlar per tick ska världen röra sig neråt
-let speed = 5;
 let chunks = [];
 
-// Denna funktionen ska ha hand om att sortera om alla chunksen vid spelande
-// Problem -> Kan inte kolla chunk.y för att bestämma positionen då chunk.y alltid kommer att vara densamma
-// Kanske bättre att wrappa alla backgrounds i en större container, typ "world" och sen kolla vart allt ligger på y-axeln relativt till world?
 export function updateChunks() {
         // Kod för att hitta chunken som är högst upp och längst ner
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
@@ -52,14 +72,13 @@ export function updateChunks() {
         console.log(bottomChunk.y);
 }
 
-// Skapar och populate:ar arrayen 'chunks' med bakgrunds-sprites som kan återanvändas.
-// Måste bara komma på något sätt att ta bort start-chunkens bild och ersätta den med rätt sprite
-export async function createChunk(worldY, app) {
-        const background = Sprite.from('backgroundWithoutStart_03');
+export function createChunk(worldY, app, bgAlias) {
+        const background = Sprite.from(bgAlias);
         background.width = app.screen.width;
         background.height = app.screen.height;
         background.y = worldY;
-        app.stage.addChild(background);
+        world.addChild(background);
         chunks.push(background);
+
         return background;
 }
