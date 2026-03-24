@@ -21,7 +21,7 @@ export class Bober {
                 this.container = new Container();
                 this.container.x = app.screen.width / 2;
                 this.container.y = app.screen.height * 0.93;
-                this.container.scale.set(0.38);
+                this.container.scale.set(0.22);
 
                 this.current = this.animations.idle;
                 this.container.addChild(this.current);

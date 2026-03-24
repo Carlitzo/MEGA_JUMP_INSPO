@@ -2,38 +2,30 @@ import { Sprite, Container, Assets, AnimatedSprite } from 'https://cdn.jsdelivr.
 import { renderLogs } from './renderLogs.js';
 import { gameAssets, createChunk, updateChunks, world } from './main.js';
 
-// funktion som renderar alla initiala assets (bakgrund, bober, logs(via anrop till renderLogs));
-// render bober kan göras inuti denna
-// render background med startpad inuti denna
 export async function renderInitialAssets(app) {
-        const backgroundWithStart = await Assets.load(gameAssets.intialBackground);
-        const backgroundSprite = new Sprite(backgroundWithStart);
+        const texture = Assets.get('backgroundWithStart');
+        const backgroundSprite = new Sprite(texture);
 
         backgroundSprite.anchor.set(0.5, 1);
 
-        const scaleX = app.screen.width / backgroundSprite.texture.width;
-        const scaleY = app.screen.height / backgroundSprite.texture.height;
-        const scale = Math.max(scaleX, scaleY);
+        backgroundSprite.height = app.screen.height;
+        backgroundSprite.width = app.screen.width;
 
-        backgroundSprite.scale.set(scale * 1.1);
+        // const scaleX = app.screen.width / backgroundSprite.texture.width;
+        // const scaleY = app.screen.height / backgroundSprite.texture.height;
+        // const scale = Math.max(scaleX, scaleY);
+
+        // backgroundSprite.scale.set(scale * 1.1);
         backgroundSprite.x = app.screen.width / 2;
         backgroundSprite.y = app.screen.height;
 
         world.addChild(backgroundSprite);
         app.stage.addChild(gameAssets.player.container);
 
-        app.ticker.add((time) => {
-                let dx = time.deltaTime * 0.2;
-                 
-                
-        });
-
         await renderLogs(app);
 
-        createChunk(-app.screen.height, app, 'backgroundWithoutStart_02');
-        createChunk((-app.screen.height * 2), app, 'backgroundWithoutStart_02');
-        createChunk(app.screen.height, app, 'backgroundWithoutStart_02');
-        createChunk((app.screen.height * 2), app, 'backgroundWithoutStart_02');
-
+        createChunk(0, app, 'backgroundWithoutStart_03');
+        createChunk(-app.screen.height, app, 'backgroundWithoutStart_03');
+        createChunk(app.screen.height * 2, app, 'backgroundWithoutStart_03');
         
 }

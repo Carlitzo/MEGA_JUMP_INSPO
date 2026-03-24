@@ -2,11 +2,12 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 import { gameAssets } from './main.js';
 import { Bober } from './bober.js';
 
-// funktion som pre-loadar alla våra assets direkt
 export async function preloadAssets (app) {
-        //Funktion som laddar in alla våra sprites/assets.
-        gameAssets.intialBackground = './Assets/Background/04_preview with start position-01.png';
-    
+
+        await Assets.load({
+                alias: 'backgroundWithStart',
+                src: './Assets/Background/04_preview with start position-01.png'
+        });
         for (let i = 0; i < 4; i++) {
                 await Assets.load({
                         alias: `backgroundWithoutStart_0${i}`,

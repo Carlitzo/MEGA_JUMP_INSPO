@@ -1,8 +1,6 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { gameStarted, gameAssets, world } from './main.js';
 
-// rendera alla logs i spelet, om gameStarted = false rendera de första logsen på nuvarande skärmen
-// om gameStarted är true så rendera alla logs på nästakommande bakgrundsbild istället
 export async function renderLogs(app) {
         const logContainer = new Container();
         const widthPadding = app.screen.width * 0.1;

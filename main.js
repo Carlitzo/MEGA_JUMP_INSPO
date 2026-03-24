@@ -4,8 +4,6 @@ import { renderInitialAssets } from './renderInitialAssets.js';
 import { keys } from './input.js';
 
 export const gameAssets = {
-        intialBackground: '',
-        backgrounds: [],
         collectibles: [],
         player: null
 };
@@ -35,11 +33,11 @@ let lowestAllowed = 0;
                 if (keys['ArrowLeft']) {
                         gameAssets.player.container.x -= dt;
                         gameAssets.player.setState('walking');
-                        gameAssets.player.container.scale.x = -0.38;
+                        gameAssets.player.container.scale.x = -0.22;
                 } else if (keys['ArrowRight']) {
                         gameAssets.player.container.x += dt;
                         gameAssets.player.setState('walking');
-                        gameAssets.player.container.scale.x = 0.38;
+                        gameAssets.player.container.scale.x = 0.22;
                 } else {
                         gameAssets.player.setState('idle');
                 }
@@ -53,8 +51,6 @@ let lowestAllowed = 0;
 
 })();
 
-// funktion som startar själva spelet när bober hoppar
-// gameStarted = true, continuallyRenderBackgrounds(app), renderLogs(app)
 async function startGame(app) {
         
         gameStarted = true;
@@ -107,7 +103,6 @@ async function launchCharacter(app) {
 }
 
 export function updateChunks() {
-        // Kod för att hitta chunken som är högst upp och längst ner
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
 
@@ -127,11 +122,20 @@ function terminateGame(app, ticker) {
 }
 
 export function createChunk(worldY, app, bgAlias) {
-        const background = Sprite.from(bgAlias);
+        const texture = Assets.get(bgAlias);
+        const background = new Sprite(texture);
 
-        background.width = app.screen.width;
+        background.anchor.set(0.5, 1);
+
+        // const scaleX = app.screen.width / background.texture.width;
+        // const scaleY = app.screen.height / background.texture.height;
+        // const scale = Math.max(scaleX, scaleY);
+
+        // background.scale.set(scale * 1.1);
         background.height = app.screen.height;
+        background.width = app.screen.width;
 
+        background.x = app.screen.width / 2;
         background.y = worldY;
 
         world.addChild(background);
