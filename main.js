@@ -13,6 +13,7 @@ export const gameAssets = {
 const app = new Application();
 export const world = new Container();
 export let gameStarted = false;
+const chunks = [];
 
 (async () => {
 
@@ -41,35 +42,59 @@ export let gameStarted = false;
                         gameAssets.player.setState('idle');
                 }
                 if (keys['ArrowUp'] && !gameStarted) {
-                        startGame();
+                        startGame(app);
+                        gameStarted = true;
                 }
 
-                const halfWidth = gameAssets.player.container.width / 6;
+                const halfWidth = gameAssets.player.container.width / 8;
                 gameAssets.player.container.x = Math.max(halfWidth, Math.min(app.screen.width - halfWidth, gameAssets.player.container.x));
         })
 
 })();
 
-// rendera bakgrunden, skapa bober, 
-
 // funktion som startar själva spelet när bober hoppar
 // gameStarted = true, continuallyRenderBackgrounds(app), renderLogs(app)
-function startGame() {
+async function startGame(app) {
+        await launchCharacter(app);
 
         app.ticker.add((time) => {
-                // Här vill vi uppdatera bakgrundsbilder;
+                const dx = time.deltaTime;
 
-        })
+                gameAssets.player.velocityY -= gameAssets.player.decayRate;
+                world.y += gameAssets.player.velocityY * dx;
+                gameAssets.player.container.y = app.screen.height / 2;
+                updateChunks(app);
+        });
 }
 
-let chunks = [];
+async function launchCharacter(app) {
+        
+        return new Promise((resolve) => {
+                const onTick = (time) => {
+                        const dx = time.deltaTime;
+                        //world.y += gameAssets.player.velocityY * dx;
+                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 1.2);
+                        
+                        
+                        
+                        console.log("player container Y: " + gameAssets.player.container.y);
+                        console.log("app: " + app.screen.height / 2);
+                        
+
+                        if (gameAssets.player.container.y <= app.screen.height / 2) {
+                                app.ticker.remove(onTick);
+                                resolve();
+                        }
+                };
+
+                app.ticker.add(onTick);
+        });
+}
 
 export function updateChunks() {
         // Kod för att hitta chunken som är högst upp och längst ner
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
-        console.log(topChunk.y);
-        console.log(bottomChunk.y);
 }
 
 export function createChunk(worldY, app, bgAlias) {

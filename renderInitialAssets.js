@@ -15,11 +15,12 @@ export async function renderInitialAssets(app) {
         const scaleY = app.screen.height / backgroundSprite.texture.height;
         const scale = Math.max(scaleX, scaleY);
 
-        backgroundSprite.scale.set(scale * 1.3);
+        backgroundSprite.scale.set(scale * 1.1);
         backgroundSprite.x = app.screen.width / 2;
         backgroundSprite.y = app.screen.height;
 
-        world.addChild(backgroundSprite, gameAssets.player.container);
+        world.addChild(backgroundSprite);
+        app.stage.addChild(gameAssets.player.container);
 
         app.ticker.add((time) => {
                 let dx = time.deltaTime * 0.2;
