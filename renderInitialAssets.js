@@ -3,35 +3,28 @@ import { renderLogs } from './renderLogs.js';
 import { gameAssets, createChunk, updateChunks, world } from './main.js';
 
 export async function renderInitialAssets(app) {
+        const bgContainer = new Container();
         const texture = Assets.get('backgroundWithStart');
         const backgroundSprite = new Sprite(texture);
 
+        bgContainer.width = app.screen.width;
+        bgContainer.height = app.screen.height;
+
         backgroundSprite.anchor.set(0.5, 1);
-
-        backgroundSprite.height = app.screen.height;
         backgroundSprite.width = app.screen.width;
-
-        // const scaleX = app.screen.width / backgroundSprite.texture.width;
-        // const scaleY = app.screen.height / backgroundSprite.texture.height;
-        // const scale = Math.max(scaleX, scaleY);
-
-        // backgroundSprite.scale.set(scale * 1.1);
+        backgroundSprite.height = app.screen.height;
         backgroundSprite.x = app.screen.width / 2;
         backgroundSprite.y = app.screen.height;
 
-        world.addChild(backgroundSprite);
+        bgContainer.addChild(backgroundSprite);
+        world.addChild(bgContainer);
         app.stage.addChild(gameAssets.player.container);
 
-        await renderLogs(app);
-
-        // First above start
         createChunk(0, app, 'backgroundWithoutStart_03');
-        // Second above start
         createChunk(-app.screen.height, app, 'backgroundWithoutStart_03');
-
-        // First below start
         createChunk(app.screen.height * 2, app, 'backgroundWithoutStart_03');
-        // Second below start
         createChunk(app.screen.height * 3, app, 'backgroundWithoutStart_03');
+        
+        await renderLogs(app, bgContainer);
         
 }

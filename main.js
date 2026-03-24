@@ -2,6 +2,7 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 import { preloadAssets } from './preloadAssets.js';
 import { renderInitialAssets } from './renderInitialAssets.js';
 import { keys } from './input.js';
+import { renderLogs } from './renderLogs.js';
 
 export const gameAssets = {
         collectibles: [],
@@ -102,12 +103,13 @@ async function launchCharacter(app) {
         });
 }
 
-export function updateChunks() {
+export async function updateChunks() {
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
 
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
                 bottomChunk.y = topChunk.y - (app.screen.height * 2);
+
         }
 }
 
@@ -121,25 +123,26 @@ function terminateGame(app, ticker) {
         console.log("TERMINATE");
 }
 
-export function createChunk(worldY, app, bgAlias) {
+export async function createChunk(worldY, app, bgAlias) {
+        const bgContainer = new Container();
         const texture = Assets.get(bgAlias);
         const background = new Sprite(texture);
 
         background.anchor.set(0.5, 1);
 
-        // const scaleX = app.screen.width / background.texture.width;
-        // const scaleY = app.screen.height / background.texture.height;
-        // const scale = Math.max(scaleX, scaleY);
-
-        // background.scale.set(scale * 1.1);
-        background.height = app.screen.height;
         background.width = app.screen.width;
+        background.height = app.screen.height;
 
-        background.x = app.screen.width / 2;
-        background.y = worldY;
+        bgContainer.width = app.screen.width;
+        bgContainer.height = app.screen.height;
 
-        world.addChild(background);
+        bgContainer.x = app.screen.width / 2;
+        bgContainer.y = worldY;
+
+        bgContainer.addChild(background);
+        world.addChild(bgContainer);
         chunks.push(background);
 
+        await renderLogs(app, bgContainer, true);
         return background;
 }
