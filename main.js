@@ -62,17 +62,10 @@ async function startGame(app) {
         const onTick = (time) => {
                 const dx = time.deltaTime;
                 gameAssets.player.setState('flying');
-                // Decay the vertical speed by decayrate every tick
                 gameAssets.player.velocityY -= gameAssets.player.decayRate;
-                // Move world down by velocityY * dx every tick
                 world.y += (gameAssets.player.velocityY * dx);
-                // Center bober on the screen :)
                 gameAssets.player.container.y = playerScreenY;
-                // Shift the out of view chunks up
                 updateChunks();
-
-                // Check if bober.y > app.screen.height + (app.screen.height * 0.01) 
-                // to check if bober has fallen, if he has, lose game and camera doesnt follow
 
                 if (currentHighest < world.y) currentHighest = world.y;
 
@@ -90,8 +83,8 @@ async function launchCharacter(app) {
         return new Promise((resolve) => {
                 const onTick = (time) => {
                         const dx = time.deltaTime;
-                        //world.y += gameAssets.player.velocityY * dx;
-                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 1.2);                        
+                        
+                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 2);                        
 
                         if (gameAssets.player.container.y <= (app.screen.height / 2) + (gameAssets.player.container.height / 2)) {
                                 app.ticker.remove(onTick);
@@ -106,10 +99,11 @@ async function launchCharacter(app) {
 export async function updateChunks() {
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
-
+        console.log(bottomChunk.y);
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
+                console.log("här")
                 bottomChunk.y = topChunk.y - (app.screen.height * 2);
-
+                await renderLogs(app, bottomChunk);
         }
 }
 
@@ -123,7 +117,7 @@ function terminateGame(app, ticker) {
         console.log("TERMINATE");
 }
 
-export async function createChunk(worldY, app, bgAlias) {
+export async function createChunk(worldY, app, bgAlias, addLogs = false, initialChunk = false) {
         const bgContainer = new Container();
         const texture = Assets.get(bgAlias);
         const background = new Sprite(texture);
@@ -141,8 +135,10 @@ export async function createChunk(worldY, app, bgAlias) {
 
         bgContainer.addChild(background);
         world.addChild(bgContainer);
-        chunks.push(background);
+        chunks.push(bgContainer);
 
-        await renderLogs(app, bgContainer, true);
+        if (addLogs) {
+                await renderLogs(app, bgContainer, initialChunk);
+        }
         return background;
 }

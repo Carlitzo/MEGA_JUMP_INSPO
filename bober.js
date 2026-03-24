@@ -3,8 +3,8 @@ import { Application, Sprite, Container, Assets, Graphics, AnimatedSprite } from
 export class Bober {
         constructor(app, animationObj) {
                 this.velocityX = 0;
-                this.velocityY = 15;
-                this.decayRate = 0.2;
+                this.velocityY = 20;
+                this.decayRate = 0.45;
 
                 this.animations = {
                         idle: AnimatedSprite.fromFrames(animationObj.idleFrames),
