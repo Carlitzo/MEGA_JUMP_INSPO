@@ -37,4 +37,5 @@ export async function preloadAssets (app) {
         await Assets.load({ alias: 'smolLog', src: './Assets/Collectibles/smolLog.png'});
         await Assets.load({ alias: 'magnet', src: './Assets/Collectibles/Magnet.png'});
         await Assets.load({ alias: 'luckyClover', src: './Assets/Collectibles/Luck.png'});
+        await Assets.load({ alias: 'correctLog', src: './Assets/Collectibles/correctLog.png'});
 }
