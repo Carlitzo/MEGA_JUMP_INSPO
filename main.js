@@ -14,6 +14,8 @@ const app = new Application();
 export const world = new Container();
 export let gameStarted = false;
 const chunks = [];
+let currentHighest = 0;
+let lowestAllowed = 0;
 
 (async () => {
 
@@ -56,15 +58,32 @@ const chunks = [];
 // gameStarted = true, continuallyRenderBackgrounds(app), renderLogs(app)
 async function startGame(app) {
         await launchCharacter(app);
+        let playerScreenY = (app.screen.height / 2) + (gameAssets.player.container.height / 2);
 
-        app.ticker.add((time) => {
+        const onTick = (time) => {
                 const dx = time.deltaTime;
 
+                // Decay the vertical speed by decayrate every tick
                 gameAssets.player.velocityY -= gameAssets.player.decayRate;
-                world.y += gameAssets.player.velocityY * dx;
-                gameAssets.player.container.y = app.screen.height / 2;
-                updateChunks(app);
-        });
+                // Move world down by velocityY * dx every tick
+                world.y += (gameAssets.player.velocityY * dx);
+                // Center bober on the screen :)
+                gameAssets.player.container.y = playerScreenY;
+                // Shift the out of view chunks up
+                updateChunks();
+
+                // Check if bober.y > app.screen.height + (app.screen.height * 0.01) 
+                // to check if bober has fallen, if he has, lose game and camera doesnt follow
+
+                if (currentHighest < world.y) currentHighest = world.y;
+
+                lowestAllowed = currentHighest + (gameAssets.player.container.height * 4);
+                
+                if (Math.abs(world.y) > Math.abs(lowestAllowed)) {
+                        terminateGame(app, onTick);
+                }
+        };
+        app.ticker.add(onTick);
 }
 
 async function launchCharacter(app) {
@@ -73,15 +92,9 @@ async function launchCharacter(app) {
                 const onTick = (time) => {
                         const dx = time.deltaTime;
                         //world.y += gameAssets.player.velocityY * dx;
-                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 1.2);
-                        
-                        
-                        
-                        console.log("player container Y: " + gameAssets.player.container.y);
-                        console.log("app: " + app.screen.height / 2);
-                        
+                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 1.2);                        
 
-                        if (gameAssets.player.container.y <= app.screen.height / 2) {
+                        if (gameAssets.player.container.y <= (app.screen.height / 2) + (gameAssets.player.container.height / 2)) {
                                 app.ticker.remove(onTick);
                                 resolve();
                         }
@@ -95,6 +108,20 @@ export function updateChunks() {
         // Kod för att hitta chunken som är högst upp och längst ner
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
+
+        if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
+                bottomChunk.y = topChunk.y - (app.screen.height * 2);
+        }
+}
+
+function terminateGame(app, ticker) {
+        app.ticker.remove(ticker);
+
+        app.ticker.add( (time) => {
+                let dx = time.deltaTime;
+                gameAssets.player.container.y -= gameAssets.player.velocityY * dx;
+        });
+        console.log("TERMINATE");
 }
 
 export function createChunk(worldY, app, bgAlias) {
