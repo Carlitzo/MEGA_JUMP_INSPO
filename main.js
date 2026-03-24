@@ -29,7 +29,7 @@ let lowestAllowed = 0;
         renderInitialAssets(app);
 
         app.ticker.add((time) => {
-                const dt = 4 * time.deltaTime;
+                const dt = 8 * time.deltaTime;
                 if (keys['ArrowLeft']) {
                         gameAssets.player.container.x -= dt;
                         gameAssets.player.setState('walking');
