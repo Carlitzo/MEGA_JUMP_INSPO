@@ -45,7 +45,6 @@ let lowestAllowed = 0;
                 }
                 if (keys['ArrowUp'] && !gameStarted) {
                         startGame(app);
-                        gameStarted = true;
                 }
 
                 const halfWidth = gameAssets.player.container.width / 8;
@@ -57,12 +56,15 @@ let lowestAllowed = 0;
 // funktion som startar själva spelet när bober hoppar
 // gameStarted = true, continuallyRenderBackgrounds(app), renderLogs(app)
 async function startGame(app) {
+        
+        gameStarted = true;
+
         await launchCharacter(app);
         let playerScreenY = (app.screen.height / 2) + (gameAssets.player.container.height / 2);
 
         const onTick = (time) => {
                 const dx = time.deltaTime;
-
+                gameAssets.player.setState('flying');
                 // Decay the vertical speed by decayrate every tick
                 gameAssets.player.velocityY -= gameAssets.player.decayRate;
                 // Move world down by velocityY * dx every tick
@@ -126,9 +128,12 @@ function terminateGame(app, ticker) {
 
 export function createChunk(worldY, app, bgAlias) {
         const background = Sprite.from(bgAlias);
+
         background.width = app.screen.width;
         background.height = app.screen.height;
+
         background.y = worldY;
+
         world.addChild(background);
         chunks.push(background);
 

@@ -30,10 +30,10 @@ export async function renderInitialAssets(app) {
 
         await renderLogs(app);
 
-        createChunk(-app.screen.height, app, 'backgroundWithoutStart_01');
-        createChunk((-app.screen.height * 2), app, 'backgroundWithoutStart_03');
+        createChunk(-app.screen.height, app, 'backgroundWithoutStart_02');
+        createChunk((-app.screen.height * 2), app, 'backgroundWithoutStart_02');
         createChunk(app.screen.height, app, 'backgroundWithoutStart_02');
-        createChunk((app.screen.height * 2), app, 'backgroundWithoutStart_00');
+        createChunk((app.screen.height * 2), app, 'backgroundWithoutStart_02');
 
-        updateChunks();
+        
 }
