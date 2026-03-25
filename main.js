@@ -99,6 +99,15 @@ async function launchCharacter(app) {
 export async function updateChunks() {
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
+
+        const newTexture = Assets.get('backgroundWithoutStart_03');
+        const oldTexture = Assets.get('backgroundWithStart');
+        let sprite = bottomChunk.children[0];
+
+        if (sprite.texture == oldTexture) {
+                sprite.texture = newTexture;
+                console.log("HEJSAN");
+        }
         
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
                 let newY = topChunk.y - app.screen.height;
