@@ -7,25 +7,33 @@ export async function renderLogs(app, chunk, initial = true) {
         const heightPadding = app.screen.height * 0.02;
         let logCount = 8;
         
-        if (!initial) logCount = 20;
+        if (!initial) logCount = 10; 
 
         logContainer.x = -app.screen.width / 2;
         logContainer.y = 0;
+
+        const chunkTop = -app.screen.height + heightPadding;
+        const chunkBottom = initial ?
+                                -(app.screen.height / 2) + heightPadding
+                                :
+                                -heightPadding
+        const floorHeight = (chunkBottom - chunkTop) / logCount;
         
         for (let i = 0; i < logCount; i++) {
-                const logSprite = Sprite.from('correctLog');
+                const logSprite = Sprite.from('smolLog');
                 
-                const logX = widthPadding / 2 + Math.random() * (app.screen.width - widthPadding);
+                const band = i % 3;
+                const bandWidth = (app.screen.width - widthPadding * 2) / 3;
+                const bandStart = widthPadding + band * bandWidth;
+                const logX = bandStart + Math.random() * bandWidth;
 
-                const logY = initial ?
-                        -(app.screen.height / 2) - Math.random() * (app.screen.height / 2)
-                        :
-                        -(heightPadding) - Math.random() * (app.screen.height + heightPadding * 2);
+                const floorTop = chunkTop + i * floorHeight;
+                const logY = floorTop + Math.random() * floorHeight * 0.8;
 
                 logSprite.anchor.set(0.5, 0.5);
                 logSprite.x = logX;
                 logSprite.y = logY;
-                logSprite.scale.set(0.04);
+                logSprite.scale.set(0.06);
                 logSprite.roundPixels = true;
 
                 logContainer.addChild(logSprite);
@@ -50,7 +58,7 @@ export async function renderLogs(app, chunk, initial = true) {
                         ) {
                                 hit = true;
                                 if (gameAssets.player.velocityY > 15) {
-                                        gameAssets.player.velocityY + 8;
+                                        gameAssets.player.velocityY = 8;
                                 } else {
                                         gameAssets.player.velocityY = 15;
                                 }
