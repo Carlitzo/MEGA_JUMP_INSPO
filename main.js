@@ -62,7 +62,7 @@ async function startGame(app) {
         const onTick = (time) => {
                 const dx = time.deltaTime;
                 gameAssets.player.setState('flying');
-                gameAssets.player.velocityY -= gameAssets.player.decayRate;
+                gameAssets.player.velocityY -= gameAssets.player.decayRate * dx;
                 world.y += (gameAssets.player.velocityY * dx);
                 gameAssets.player.container.y = playerScreenY;
                 updateChunks();
@@ -99,11 +99,18 @@ async function launchCharacter(app) {
 export async function updateChunks() {
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
-        console.log(bottomChunk.y);
+        
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
+                let newY = topChunk.y - app.screen.height;
                 console.log("här")
-                bottomChunk.y = topChunk.y - (app.screen.height * 2);
-                await renderLogs(app, bottomChunk);
+
+                bottomChunk.children
+                        .filter(child => {child instanceof Container})
+                        .forEach(child => {child.destroy({children: true})});
+
+                bottomChunk.y = newY;
+                await renderLogs(app, bottomChunk, false);
+                
         }
 }
 

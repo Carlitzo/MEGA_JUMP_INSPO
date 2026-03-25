@@ -1,7 +1,7 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { gameStarted, gameAssets, world } from './main.js';
 
-export async function renderLogs(app, chunk, initial = true, ) {
+export async function renderLogs(app, chunk, initial = true) {
         const logContainer = new Container();
         const widthPadding = app.screen.width * 0.2;
         const heightPadding = app.screen.height * 0.02;
@@ -18,9 +18,9 @@ export async function renderLogs(app, chunk, initial = true, ) {
                 const logX = widthPadding / 2 + Math.random() * (app.screen.width - widthPadding);
 
                 const logY = initial ?
-                        -(app.screen.height / 2) - Math.random() * (app.screen.height / 2 - heightPadding)
+                        -(app.screen.height / 2) - Math.random() * (app.screen.height / 2)
                         :
-                        -(heightPadding) - Math.random() * (app.screen.height - heightPadding * 2);
+                        -(heightPadding) - Math.random() * (app.screen.height + heightPadding * 2);
 
                 logSprite.anchor.set(0.5, 0.5);
                 logSprite.x = logX;
@@ -32,7 +32,7 @@ export async function renderLogs(app, chunk, initial = true, ) {
 
                 let hit = false;
 
-                app.ticker.add((time) => {
+                const onTick = (time) => {
                         const dx = time.deltaTime * 0.03;
                         
                         if (hit) return;
@@ -56,7 +56,9 @@ export async function renderLogs(app, chunk, initial = true, ) {
                                 }
                                 logSprite.destroy();
                         };
-                });
+                };
+                app.ticker.add(onTick);
+                logSprite.on('destroyed', () => app.ticker.remove(onTick));
         };
 
         chunk.addChild(logContainer);
