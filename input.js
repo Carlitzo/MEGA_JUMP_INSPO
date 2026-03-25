@@ -10,9 +10,9 @@ window.addEventListener('touchstart', (e) => {
         } else {
             keys['ArrowRight'] = true;
         }
-    });
+});
     
     window.addEventListener('touchend', () => {
         keys['ArrowLeft'] = false;
         keys['ArrowRight'] = false;
-    });
+});

@@ -29,6 +29,21 @@ let lowestAllowed = 0;
         await preloadAssets(app);
         renderInitialAssets(app);
 
+        const btn = document.createElement("button");
+        document.body.appendChild(btn);
+
+        btn.textContent = 'Start Game!';
+        btn.style.width = '100px';
+        btn.style.height = '40px';
+        btn.style.padding = '10px';
+        btn.style.marginTop = '80%';
+        btn.style.position = 'absolute';
+
+        btn.addEventListener("click", (event) => {
+                btn.remove();
+                startGame(app);
+        })
+
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
                 if (keys['ArrowLeft']) {
@@ -41,9 +56,6 @@ let lowestAllowed = 0;
                         gameAssets.player.container.scale.x = 0.22;
                 } else {
                         gameAssets.player.setState('idle');
-                }
-                if (keys['ArrowUp'] && !gameStarted) {
-                        startGame(app);
                 }
 
                 const halfWidth = gameAssets.player.container.width / 8;
