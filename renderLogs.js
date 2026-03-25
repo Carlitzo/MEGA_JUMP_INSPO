@@ -5,9 +5,10 @@ export async function renderLogs(app, chunk, initial = true) {
         const logContainer = new Container();
         const widthPadding = app.screen.width * 0.2;
         const heightPadding = app.screen.height * 0.02;
-        let logCount = 8;
+        let logCount = 4;
+        const chainPosition = getRandomInt(logCount - 1);
         
-        if (!initial) logCount = 10; 
+        if (!initial) logCount = 7;
 
         logContainer.x = -app.screen.width / 2;
         logContainer.y = 0;
@@ -29,14 +30,74 @@ export async function renderLogs(app, chunk, initial = true) {
 
                 const floorTop = chunkTop + i * floorHeight;
                 const logY = floorTop + Math.random() * floorHeight * 0.8;
-
+                
                 logSprite.anchor.set(0.5, 0.5);
                 logSprite.x = logX;
                 logSprite.y = logY;
                 logSprite.scale.set(0.06);
                 logSprite.roundPixels = true;
-
+                
                 logContainer.addChild(logSprite);
+
+                if (chainPosition === i) {
+                        let chainedLogSpriteX = logX;
+                        let chainedLogSpriteY = logY;
+                        for (let i = 0; i < 4; i++) {
+                                let chainedLogSprite = Sprite.from('smolLog');
+                                if (band === 0) {
+                                        chainedLogSpriteX += (chainedLogSpriteX * 0.07);
+                                } else if (band === 1) {
+                                        let chainDecider = getRandomInt(2);
+                                        if (chainDecider === 1) {
+                                                chainedLogSpriteX += (chainedLogSpriteX * 0.07);
+                                        } else {
+                                                chainedLogSpriteX -= (chainedLogSpriteX * 0.07);
+                                        }
+                                } else if (band === 2) {
+                                        chainedLogSpriteX -= (chainedLogSpriteX * 0.07);
+                                }
+                                chainedLogSpriteY -= (chainedLogSpriteY * 0.07);
+
+                                chainedLogSprite.anchor.set(0.5, 0.5);
+                                chainedLogSprite.x = chainedLogSpriteX;
+                                chainedLogSprite.y = chainedLogSpriteY
+                                chainedLogSprite.scale.set(0.06);
+                                chainedLogSprite.roundPixels = true;
+
+                                logContainer.addChild(chainedLogSprite);
+
+                                let hit = false;
+
+                                const onTick = (time) => {
+                                        const dx = time.deltaTime * 0.03;
+                        
+                                        if (hit) return;
+
+                                        chainedLogSprite.rotation += dx;
+
+                                        const chainedLogBounds = chainedLogSprite.getBounds();
+                                        const playerBounds = gameAssets.player.playerHitbox.bounds;
+
+                                        if (
+                                                chainedLogBounds.x < playerBounds.x + playerBounds.width &&
+                                                chainedLogBounds.x + chainedLogBounds.width > playerBounds.x &&
+                                                chainedLogBounds.y < playerBounds.y + playerBounds.height &&
+                                                chainedLogBounds.y + chainedLogBounds.height > playerBounds.y
+                                        ) {
+                                                hit = true;
+                                                if (gameAssets.player.velocityY > 15) {
+                                                        gameAssets.player.velocityY = 8;
+                                                } else {
+                                                        gameAssets.player.velocityY = 15;
+                                                }
+                                                chainedLogSprite.destroy();
+                                        };
+                                };
+
+                                app.ticker.add(onTick);
+                                chainedLogSprite.on('destroyed', () => app.ticker.remove(onTick));
+                        };
+                };
 
                 let hit = false;
 
@@ -48,7 +109,7 @@ export async function renderLogs(app, chunk, initial = true) {
                         logSprite.rotation += dx;
 
                         const logBounds = logSprite.getBounds();
-                        const playerBounds = gameAssets.player.container.getBounds();
+                        const playerBounds = gameAssets.player.playerHitbox.bounds;
 
                         if (
                                 logBounds.x < playerBounds.x + playerBounds.width &&
@@ -65,9 +126,14 @@ export async function renderLogs(app, chunk, initial = true) {
                                 logSprite.destroy();
                         };
                 };
+
                 app.ticker.add(onTick);
                 logSprite.on('destroyed', () => app.ticker.remove(onTick));
         };
 
         chunk.addChild(logContainer);
+}
+
+function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
 }

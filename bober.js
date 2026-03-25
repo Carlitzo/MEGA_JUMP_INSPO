@@ -1,9 +1,10 @@
 import { Application, Sprite, Container, Assets, Graphics, AnimatedSprite } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { gameAssets } from './main.js';
 
 export class Bober {
         constructor(app, animationObj) {
                 this.velocityX = 0;
-                this.velocityY = 20;
+                this.velocityY = 15;
                 this.decayRate = 0.45;
 
                 this.animations = {
@@ -26,6 +27,20 @@ export class Bober {
                 this.current = this.animations.idle;
                 this.container.addChild(this.current);
                 this.current.play();
+
+                this.playerHitbox = {
+                        get bounds() {
+                                const b = gameAssets.player.container.getBounds();
+                                const shrinkX = b.width * 0.3;
+                                const shrinkY = b.height * 0.2;
+                                return {
+                                        x: b.x + shrinkX,
+                                        y: b.y + shrinkY,
+                                        width: b.width - shrinkX * 2,
+                                        height: b.height - shrinkY * 2
+                                };
+                        }
+                };
         }
 
         setState(state) {
