@@ -8,7 +8,7 @@ export async function renderLogs(app, chunk, initial = true) {
         let logCount = 4;
         const chainPosition = getRandomInt(logCount - 1);
         
-        if (!initial) logCount = 7;
+        if (!initial) logCount = 6;
 
         logContainer.x = -app.screen.width / 2;
         logContainer.y = 0;
@@ -86,10 +86,11 @@ export async function renderLogs(app, chunk, initial = true) {
                                         ) {
                                                 hit = true;
                                                 if (gameAssets.player.velocityY > 15) {
-                                                        gameAssets.player.velocityY = 8;
+                                                        gameAssets.player.velocityY = 13;
                                                 } else {
                                                         gameAssets.player.velocityY = 15;
                                                 }
+                                                console.log('DESTROYING CHAINEDSPRITE');
                                                 chainedLogSprite.destroy();
                                         };
                                 };
@@ -119,10 +120,11 @@ export async function renderLogs(app, chunk, initial = true) {
                         ) {
                                 hit = true;
                                 if (gameAssets.player.velocityY > 15) {
-                                        gameAssets.player.velocityY = 8;
+                                        gameAssets.player.velocityY = 13;
                                 } else {
                                         gameAssets.player.velocityY = 15;
                                 }
+                                console.log('DESTROYING LOGSPRITE');
                                 logSprite.destroy();
                         };
                 };

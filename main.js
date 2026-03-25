@@ -42,7 +42,7 @@ let lowestAllowed = 0;
         btn.addEventListener("click", (event) => {
                 btn.remove();
                 startGame(app);
-        })
+        });
 
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
@@ -56,12 +56,11 @@ let lowestAllowed = 0;
                         gameAssets.player.container.scale.x = 0.22;
                 } else {
                         gameAssets.player.setState('idle');
-                }
+                };
 
                 const halfWidth = gameAssets.player.container.width / 8;
                 gameAssets.player.container.x = Math.max(halfWidth, Math.min(app.screen.width - halfWidth, gameAssets.player.container.x));
-        })
-
+        });
 })();
 
 async function startGame(app) {
