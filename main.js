@@ -29,20 +29,30 @@ let lowestAllowed = 0;
         await preloadAssets(app);
         renderInitialAssets(app);
 
-        const btn = document.createElement("button");
-        document.body.appendChild(btn);
+        const img = document.createElement("img");
+        document.body.appendChild(img);
 
-        btn.textContent = 'Start Game!';
-        btn.style.width = '100px';
-        btn.style.height = '40px';
-        btn.style.padding = '10px';
-        btn.style.marginTop = '80%';
-        btn.style.position = 'absolute';
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.padding = '10px';
+        img.style.marginTop = '80%';
+        img.style.position = 'absolute';
+        img.style.zIndex = '10';
+        img.style.filter = 'drop-shadow(0 0 0.9rem white)';
+        img.src = './Assets/UI_Assets/Play.png';
 
-        btn.addEventListener("click", (event) => {
-                btn.remove();
-                startGame(app);
+        img.addEventListener("click", (event) => {
+                clickedButton(img);
+                setTimeout(() => {
+                        img.remove();
+                        startGame(app);
+                }, 150);
         });
+
+        function clickedButton(image) {
+                image.style.transform = 'scale(0.9)';
+                image.style.filter = 'drop-shadow(0 0 0.4rem white)';
+        }
 
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
