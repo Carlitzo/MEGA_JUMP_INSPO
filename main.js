@@ -1,8 +1,10 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { animationObj } from './preloadAssets.js';
 import { preloadAssets } from './preloadAssets.js';
 import { renderInitialAssets } from './renderInitialAssets.js';
 import { keys } from './input.js';
 import { renderLogs } from './renderLogs.js';
+import { Bober } from './bober.js';
 
 export const gameAssets = {
         collectibles: [],
@@ -12,13 +14,10 @@ export const gameAssets = {
 const app = new Application();
 export const world = new Container();
 export let gameStarted = false;
+let chunks = [];
 let startTime = null;
-const chunks = [];
 let currentHighest = 0;
 let lowestAllowed = 0;
-
-// currentHighest
-// lowestAllow
 
 (async () => {
 
@@ -31,33 +30,9 @@ let lowestAllowed = 0;
         app.stage.addChild(world);
 
         await preloadAssets(app);
-        renderInitialAssets(app);
 
-        const img = document.createElement("img");
-        document.body.appendChild(img);
-
-        img.style.width = '100px';
-        img.style.height = '100px';
-        img.style.padding = '10px';
-        img.style.marginTop = '80%';
-        img.style.position = 'absolute';
-        img.style.zIndex = '10';
-        img.style.filter = 'drop-shadow(0 0 0.9rem white)';
-        img.src = './Assets/UI_Assets/Play.png';
-
-        img.addEventListener("click", (event) => {
-                clickedButton(img);
-                setTimeout(() => {
-                        img.remove();
-                        startGame(app);
-                }, 150);
-        });
-
-        function clickedButton(image) {
-                image.style.transform = 'scale(0.9)';
-                image.style.filter = 'drop-shadow(0 0 0.4rem white)';
-        }
-
+        // TODO: Ta bort efter varje spel och re-attacha genom att flytta tickern till renderStartScreen()
+        // Ska vi bara ha en global variabel som innehåller alla tickerfunktioner? Så vi kan accessa alla där och ta bort dem?
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
                 if (keys['ArrowLeft']) {
@@ -75,7 +50,44 @@ let lowestAllowed = 0;
                 const halfWidth = gameAssets.player.container.width / 8;
                 gameAssets.player.container.x = Math.max(halfWidth, Math.min(app.screen.width - halfWidth, gameAssets.player.container.x));
         });
+
+        renderStartScreen(app);
 })();
+
+function renderStartScreen(app) {
+        renderInitialAssets(app);
+
+        const img = document.createElement("img");
+        document.body.appendChild(img);
+
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.padding = '10px';
+        img.style.marginTop = '80%';
+        img.style.position = 'absolute';
+        img.style.zIndex = '10';
+        img.style.filter = 'drop-shadow(0 0 0.9rem white)';
+        img.src = './Assets/UI_Assets/Play.png';
+
+        img.addEventListener("click", startGameButton);
+
+
+}
+
+function startGameButton(event) {
+        function clickedButton(image) {
+                image.style.transform = 'scale(0.9)';
+                image.style.filter = 'drop-shadow(0 0 0.4rem white)';
+        }
+
+        let img = event.currentTarget;
+        console.log(img);
+        clickedButton(img);
+        setTimeout(() => {
+                img.remove();
+                startGame(app);
+        }, 150);
+}
 
 async function startGame(app) {
         
@@ -156,12 +168,36 @@ function terminateGame(app, ticker) {
         const seconds = (elapsed / 1000).toFixed(2);
         console.log(`Game lasted ${seconds} seconds`);
         app.ticker.remove(ticker);
+        gameStarted = false;
 
-        app.ticker.add( (time) => {
+        const onTick = (time) => {
                 let dx = time.deltaTime;
                 gameAssets.player.container.y -= gameAssets.player.velocityY * dx;
-        });
-        console.log("TERMINATE");
+
+                if (gameAssets.player.velocityY > 0) gameAssets.player.velocityY = -15;
+
+                if (gameAssets.player.container.y > app.screen.height + (app.screen.height * 0.25)) {
+                        resetGame(app, onTick);
+                }
+        };
+        app.ticker.add(onTick);
+
+}
+
+function resetGame(app, ticker) {
+        
+        app.ticker.remove(ticker);
+        world.removeChildren();
+        
+        chunks = [];
+        startTime = null;
+        currentHighest = 0;
+        lowestAllowed = 0;
+        world.y = 0;
+        gameAssets.player = new Bober(app, animationObj);
+        console.log(gameAssets.player.velocityY);
+
+        renderStartScreen(app);
 }
 
 export async function createChunk(worldY, app, bgAlias, addLogs = false, initialChunk = false) {

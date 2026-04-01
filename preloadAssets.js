@@ -2,6 +2,8 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 import { gameAssets } from './main.js';
 import { Bober } from './bober.js';
 
+export let animationObj = {};
+
 export async function preloadAssets (app) {
 
         await Assets.load({
@@ -15,7 +17,7 @@ export async function preloadAssets (app) {
                 });
         };
 
-        const animationObj = {
+        animationObj = {
                 idleFrames: [],
                 flyingFrames: [],
                 jumpingFrames: [],
