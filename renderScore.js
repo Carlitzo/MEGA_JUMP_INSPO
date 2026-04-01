@@ -33,7 +33,7 @@ export function renderScore(app) {
         window.addEventListener('logHit', (e) => {
                 score += 7;
                 logAmount++;
-                
+
                 scoreDisplay.textContent = 'Score: ' + score;
                 amountDisplay.textContent = logAmount;
                 logSprite.classList.remove('vibrate');

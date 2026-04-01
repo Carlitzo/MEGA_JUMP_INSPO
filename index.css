@@ -10,12 +10,27 @@
         overflow: hidden;
 }
 
-body {
+html, body {
         display: flex;
         justify-content: center;
         align-items:center;
         width: 100vw;
         height:100vh;
+}
+
+canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+}
+
+#wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
 }
 
 #startGameBtn {
@@ -30,20 +45,21 @@ body {
 
 #scoreBG {
         height: 6rem;
-        width: 10rem;
+        width: 9rem;
         background-image: url("./Assets/UI_Assets/Table_01.png");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
         position: absolute;
         top: 1%;
-        left: 64%;
+        right: 1%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding-top: 2%;
         padding-bottom: 2%;
+        pointer-events: none;
 }
 
 #logSprite {
