@@ -1,0 +1,97 @@
+@font-face {
+        font-family: "woodFont";
+        src: url('./Assets/Font/Naluka.ttf');
+}
+
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+}
+
+body {
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        width: 100vw;
+        height:100vh;
+}
+
+#startGameBtn {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+        margin-top: 80%;
+        position: absolute;
+        z-index: 10;
+        filter: drop-shadow(0 0 0.9rem white);
+}
+
+#scoreBG {
+        height: 6rem;
+        width: 10rem;
+        background-image: url("./Assets/UI_Assets/Table_01.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 1%;
+        left: 64%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 2%;
+        padding-bottom: 2%;
+}
+
+#logSprite {
+        height: 60%;
+        width: 60%;
+}
+#amountDisplay {
+        height: 100%;
+        width: 70%;
+        font-family: "woodFont";
+        color: rgb(70, 39, 9);
+}
+
+#scoreDisplay {
+        font-family: "woodFont";
+        color: rgb(70, 39, 9);
+}
+
+#topBGDiv {
+        height: 60%;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-left: 12%;
+        padding-right: 5%;
+        padding-top: 5%;
+}
+
+#botBGDiv {
+        height: 30%;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding-right: 5%;
+}
+
+@keyframes vibrate {
+        0%   { transform: rotate(0deg); }
+        25%  { transform: rotate(15deg); }
+        50%  { transform: rotate(0deg); }
+        75%  { transform: rotate(-15deg); }
+        100% { transform: rotate(0deg); }
+}
+
+.vibrate {
+        animation: vibrate 0.3s ease;
+}

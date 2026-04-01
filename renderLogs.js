@@ -90,7 +90,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                                 } else {
                                                         gameAssets.player.velocityY = 15;
                                                 }
-                                                console.log('DESTROYING CHAINEDSPRITE');
+                                                window.dispatchEvent(new CustomEvent('logHit'));
                                                 chainedLogSprite.destroy();
                                         };
                                 };
@@ -124,7 +124,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                 } else {
                                         gameAssets.player.velocityY = 15;
                                 }
-                                console.log('DESTROYING LOGSPRITE');
+                                window.dispatchEvent(new CustomEvent('logHit'));
                                 logSprite.destroy();
                         };
                 };

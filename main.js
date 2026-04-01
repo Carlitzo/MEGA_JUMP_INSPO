@@ -5,6 +5,7 @@ import { renderInitialAssets } from './renderInitialAssets.js';
 import { keys } from './input.js';
 import { renderLogs } from './renderLogs.js';
 import { Bober } from './bober.js';
+import { renderScore } from './renderScore.js';
 
 export const gameAssets = {
         collectibles: [],
@@ -56,21 +57,14 @@ let lowestAllowed = 0;
 
 function renderStartScreen(app) {
         renderInitialAssets(app);
+        renderScore(app);
 
         const img = document.createElement("img");
         document.body.appendChild(img);
-
-        img.style.width = '100px';
-        img.style.height = '100px';
-        img.style.padding = '10px';
-        img.style.marginTop = '80%';
-        img.style.position = 'absolute';
-        img.style.zIndex = '10';
-        img.style.filter = 'drop-shadow(0 0 0.9rem white)';
         img.src = './Assets/UI_Assets/Play.png';
+        img.id = 'startGameBtn';
 
         img.addEventListener("click", startGameButton);
-
 
 }
 
