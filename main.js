@@ -12,6 +12,7 @@ export const gameAssets = {
 const app = new Application();
 export const world = new Container();
 export let gameStarted = false;
+let startTime = null;
 const chunks = [];
 let currentHighest = 0;
 let lowestAllowed = 0;
@@ -75,6 +76,7 @@ let lowestAllowed = 0;
 
 async function startGame(app) {
         
+        startTime = Date.now();
         gameStarted = true;
 
         await launchCharacter(app);
@@ -145,6 +147,9 @@ export async function updateChunks() {
 }
 
 function terminateGame(app, ticker) {
+        const elapsed = Date.now() - startTime;
+        const seconds = (elapsed / 1000).toFixed(2);
+        console.log(`Game lasted ${seconds} seconds`);
         app.ticker.remove(ticker);
 
         app.ticker.add( (time) => {
