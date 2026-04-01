@@ -17,6 +17,9 @@ const chunks = [];
 let currentHighest = 0;
 let lowestAllowed = 0;
 
+// currentHighest
+// lowestAllow
+
 (async () => {
 
    	await app.init({ resizeTo: window, backgroundColor: 0x87ceeb});
@@ -90,11 +93,13 @@ async function startGame(app) {
                 gameAssets.player.container.y = playerScreenY;
                 updateChunks();
 
-                if (currentHighest < world.y) currentHighest = world.y;
+                if (world.y > currentHighest) {
+                        currentHighest = world.y;
+                        lowestAllowed = currentHighest - (gameAssets.player.container.height * 4);
+                }
 
-                lowestAllowed = currentHighest + (gameAssets.player.container.height * 4);
                 
-                if (Math.abs(world.y) > Math.abs(lowestAllowed)) {
+                if (world.y < lowestAllowed) {
                         terminateGame(app, onTick);
                 }
         };
