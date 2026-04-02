@@ -22,7 +22,7 @@ export async function preloadAssets (app) {
                 flyingFrames: [],
                 jumpingFrames: [],
                 walkingFrames: []
-        }
+        };
 
         for (let i = 0; i < 20; i++) {
                 const number = String(i).padStart(2, '0');
@@ -40,4 +40,5 @@ export async function preloadAssets (app) {
         await Assets.load({ alias: 'magnet', src: './Assets/Collectibles/Magnet.png'});
         await Assets.load({ alias: 'luckyClover', src: './Assets/Collectibles/Luck.png'});
         await Assets.load({ alias: 'correctLog', src: './Assets/Collectibles/correctLog.png'});
+        await Assets.load({ alias: 'star', src: './Assets/UI_Assets/Star.png'});
 }

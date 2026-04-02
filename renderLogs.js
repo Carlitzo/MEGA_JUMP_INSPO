@@ -1,5 +1,5 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { gameStarted, gameAssets, world } from './main.js';
+import { gameStarted, gameAssets, world, effects } from './main.js';
 
 export async function renderLogs(app, chunk, initial = true) {
         const logContainer = new Container();
@@ -91,6 +91,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                                         gameAssets.player.velocityY = 15;
                                                 }
                                                 window.dispatchEvent(new CustomEvent('logHit'));
+                                                effects.onLogHit(app, chainedLogSprite);
                                                 chainedLogSprite.destroy();
                                         };
                                 };
@@ -125,6 +126,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                         gameAssets.player.velocityY = 15;
                                 }
                                 window.dispatchEvent(new CustomEvent('logHit'));
+                                effects.onLogHit(app, logSprite);
                                 logSprite.destroy();
                         };
                 };

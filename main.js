@@ -12,11 +12,14 @@ export const gameAssets = {
         player: null
 };
 
-const isJuicy = await fetchGameMode(); // hämta flagga från server
+// const isJuicy = await fetchGameMode(); // hämta flagga från server
+const isJuicy = true;
 
-export const { effects } = isJuicy
-    ? await import('./effectsJuicy.js').default
-    : await import('./effects.js').default;
+const module = isJuicy
+    ? await import('./effectsJuicy.js')
+    : await import('./effects.js');
+
+export const effects = module.default;
 
 const app = new Application();
 export const world = new Container();
