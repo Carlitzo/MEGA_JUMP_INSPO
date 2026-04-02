@@ -6,6 +6,7 @@ import { keys } from './input.js';
 import { renderLogs } from './renderLogs.js';
 import { Bober } from './bober.js';
 import { renderScore } from './renderScore.js';
+import { score } from './renderScore.js';
 
 export const gameAssets = {
         collectibles: [],
@@ -13,7 +14,9 @@ export const gameAssets = {
 };
 
 // const isJuicy = await fetchGameMode(); // hämta flagga från server
-const isJuicy = true;
+const versionObj = await (await fetch("/getVersion")).json();
+const isJuicy = versionObj.versionFlag;
+const version = versionObj.version;
 
 const module = isJuicy
     ? await import('./effectsJuicy.js')
@@ -30,6 +33,18 @@ let currentHighest = 0;
 let lowestAllowed = 0;
 
 (async () => {
+        const localID = localStorage.getItem("id");
+
+        console.log(localID);
+
+        localStorage.setItem("version", version);
+        console.log(localStorage.getItem("version"));
+
+        if (!localID) {
+                const newID = await (await (await fetch("/getID")).json()).userID;
+                localStorage.setItem("id", newID);
+                console.log(newID);
+        }
 
    	await app.init({ resizeTo: window, backgroundColor: 0x87ceeb});
 
@@ -171,22 +186,46 @@ function terminateGame(app, ticker) {
         app.ticker.remove(ticker);
         gameStarted = false;
 
-        const onTick = (time) => {
+        const onTick = async (time) => {
                 let dx = time.deltaTime;
                 gameAssets.player.container.y -= gameAssets.player.velocityY * dx;
 
                 if (gameAssets.player.velocityY > 0) gameAssets.player.velocityY = -15;
 
                 if (gameAssets.player.container.y > app.screen.height + (app.screen.height * 0.25)) {
-                        resetGame(app, onTick);
+                        await resetGame(app, onTick);
                 }
         };
         app.ticker.add(onTick);
 }
 
-function resetGame(app, ticker) {
+async function sendGameToDB() {
+        const gameUserID = localStorage.getItem("id");
+        const gameScore = score;
+        const gameStartTime = startTime;
+        const gameEndTime = Date.now();
+        const gameVersion = localStorage.getItem("version");
+
+        const data = JSON.stringify({
+                userID: gameUserID,
+                startTime: gameStartTime,
+                endTime: gameEndTime,
+                version: gameVersion,
+                score: gameScore
+        });
+
+        await fetch("/finish", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: data
+        });
+}
+
+async function resetGame(app, ticker) {
+        
         
         app.ticker.remove(ticker);
+        await sendGameToDB();
         world.removeChildren();
         
         chunks = [];
@@ -195,7 +234,6 @@ function resetGame(app, ticker) {
         lowestAllowed = 0;
         world.y = 0;
         gameAssets.player = new Bober(app, animationObj);
-        console.log(gameAssets.player.velocityY);
 
         renderStartScreen(app);
 }

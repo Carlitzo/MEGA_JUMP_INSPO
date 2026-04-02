@@ -3,6 +3,7 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 export let score = 0;
 
 export function renderScore(app) {
+        score = 0;
         let logAmount = 0;
 
         const scoreBG = document.createElement("div");
