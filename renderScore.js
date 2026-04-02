@@ -1,7 +1,8 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 
+export let score = 0;
+
 export function renderScore(app) {
-        let score = 0;
         let logAmount = 0;
 
         const scoreBG = document.createElement("div");

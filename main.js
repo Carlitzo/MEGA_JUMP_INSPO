@@ -12,6 +12,12 @@ export const gameAssets = {
         player: null
 };
 
+const isJuicy = await fetchGameMode(); // hämta flagga från server
+
+export const { effects } = isJuicy
+    ? await import('./effectsJuicy.js').default
+    : await import('./effects.js').default;
+
 const app = new Application();
 export const world = new Container();
 export let gameStarted = false;
@@ -65,7 +71,6 @@ function renderStartScreen(app) {
         img.id = 'startGameBtn';
 
         img.addEventListener("click", startGameButton);
-
 }
 
 function startGameButton(event) {
@@ -152,8 +157,7 @@ export async function updateChunks() {
                         .forEach(child => {child.destroy({children: true})});
 
                 bottomChunk.y = newY;
-                await renderLogs(app, bottomChunk, false);
-                
+                await renderLogs(app, bottomChunk, false); 
         }
 }
 
@@ -175,7 +179,6 @@ function terminateGame(app, ticker) {
                 }
         };
         app.ticker.add(onTick);
-
 }
 
 function resetGame(app, ticker) {
