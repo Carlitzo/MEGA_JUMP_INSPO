@@ -91,7 +91,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                                         gameAssets.player.velocityY = 15;
                                                 }
                                                 window.dispatchEvent(new CustomEvent('logHit'));
-                                                effects.onLogHit(app, chainedLogSprite);
+                                                effects.onLogHitAnimation(app, chainedLogSprite);
                                                 chainedLogSprite.destroy();
                                         };
                                 };
@@ -126,7 +126,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                         gameAssets.player.velocityY = 15;
                                 }
                                 window.dispatchEvent(new CustomEvent('logHit'));
-                                effects.onLogHit(app, logSprite);
+                                effects.onLogHitAnimation(app, logSprite);
                                 logSprite.destroy();
                         };
                 };

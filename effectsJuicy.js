@@ -1,7 +1,7 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 
 const effects = {
-        onLogHit: (app, logSprite) => {
+        onLogHitAnimation: (app, logSprite) => {
                 const position = logSprite.getGlobalPosition();
             
                 const directions = [
@@ -21,6 +21,7 @@ const effects = {
                     sprite.x = position.x;
                     sprite.y = position.y;
                     app.stage.addChild(sprite);
+
                     return { sprite, dir };
                 });
             
@@ -41,7 +42,16 @@ const effects = {
                 };
             
                 app.ticker.add(onTick);
-            }
+        },
+        onLuckyHitAnimation: (app) => {
+            // Behöver först skapa en funktion som randomly varje gång en ny chunk skapas spawnar en magnet/luckycharm/eldboll
+            // Det behöver finnas en funktion som renderar lucky charm, inuti den kan on-hit finnas där. renderLogs logAmount behöver
+            // finnas som exporterad variabel som förändras i 10 sekunder till logAmount + number (2?) och återställas efter de 10 sekunderna
+            // det behöver finnas en funktion som skapar en timer som visas på skärmen, kanske bara är siffror som tickar ner i olika färger?
+            // grön vid lucky charm, röd vid eldboll, blå vid magnet?
+            // funktionen inuti effectsJuicy ska bara skapa den visuella effekten, typ magnetism runt bävern, grön glow runt skärmen, 
+            // rött eldspår efter bäver och screenshake
+        }
 }
 
 export default effects;
