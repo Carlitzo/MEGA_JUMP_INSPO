@@ -1,4 +1,5 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
 import { gameAssets, effects } from './main.js';
 
 export let multiplier = 7;
@@ -10,6 +11,13 @@ export const gamePlayEffects =  {
 
                 const widthPadding = app.screen.width * 0.4;
                 const heightPadding = app.screen.height * 0.2;
+                const glowFilter = new GlowFilter({
+                        distance: 15,
+                        outerStrength: 6,
+                        innerStrength: 0,
+                        color: 0x00ff00,
+                        quality: 0.5
+                });
                 
                 const luckX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
                 const luckY = (-app.screen.height + heightPadding) + Math.random() * (app.screen.height - heightPadding * 2);
@@ -18,12 +26,15 @@ export const gamePlayEffects =  {
                 luckSprite.x = luckX;
                 luckSprite.y = luckY;
                 luckSprite.scale.set(0.22);
+                luckSprite.filters = [glowFilter];
                 luckSprite.roundPixels = true;
 
                 let hit = false;
-
+                
                 const onTick = (time) => {
                         const dx = time.deltaTime * 0.03;
+                        
+                        glowFilter.outerStrength = 10 + Math.sin(Date.now() * 0.005) * 1;
 
                         if (hit) return;
 
@@ -36,7 +47,7 @@ export const gamePlayEffects =  {
                                 luckBounds.y < playerBounds.y + playerBounds.height &&
                                 luckBounds.y + luckBounds.height > playerBounds.y
                         ) {
-                                console.log("hit luck")
+                                console.log("hit luck");
                                 hit = true;
                                 if (gameAssets.player.velocityY > 15) {
                                         gameAssets.player.velocityY = 13;
@@ -54,6 +65,8 @@ export const gamePlayEffects =  {
                 luckSprite.on('destroyed', () => app.ticker.remove(onTick));
 
                 chunk.addChild(luckSprite);
+                console.log(luckSprite.filters)
+                console.log(glowFilter.outerStrength);
         },
         onMagnet: (chunk, app) => {
 
