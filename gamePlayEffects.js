@@ -11,30 +11,25 @@ export const gamePlayEffects =  {
 
                 const widthPadding = app.screen.width * 0.4;
                 const heightPadding = app.screen.height * 0.2;
-                const glowFilter = new GlowFilter({
-                        distance: 15,
-                        outerStrength: 2,
-                        innerStrength: 0,
-                        color: 0x00ff00,
-                        quality: 0.5
-                });
                 
                 const luckX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
                 const luckY = (-app.screen.height + heightPadding) + Math.random() * (app.screen.height - heightPadding * 2);
                 
+                let glowFilter = undefined;
+
                 luckSprite.anchor.set(0.5, 0.5);
                 luckSprite.x = luckX;
                 luckSprite.y = luckY;
                 luckSprite.scale.set(0.22);
-                luckSprite.filters = [glowFilter];
                 luckSprite.roundPixels = true;
+
+                glowFilter = effects.applyStaticEffects(app, 'luckyCharm');
 
                 let hit = false;
                 
                 const onTick = (time) => {
-                        const dx = time.deltaTime * 0.03;
                         
-                        glowFilter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
+                        if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
 
                         if (hit) return;
 
@@ -62,15 +57,16 @@ export const gamePlayEffects =  {
                 }
                 
                 app.ticker.add(onTick);
-                luckSprite.on('destroyed', () => app.ticker.remove(onTick));
+                luckSprite.on('destroyed', () => {
+                        app.ticker.remove(onTick);
+                        if (glowFilter) app.ticker.remove(glowFilter.tickerID);
+                });
 
                 chunk.addChild(luckSprite);
-                console.log(luckSprite.filters)
-                console.log(glowFilter.outerStrength);
         },
         onMagnet: (chunk, app) => {
 
-
+                
 
                 startEffectTimer('magnet');
         },
@@ -117,6 +113,7 @@ export const gamePlayEffects =  {
                 numberDisplay.textContent = number;
 
                 const timer = setInterval(() => {
+                        // effects.onLuckyAnimation(app, 'start');
                         number --;
                         numberDisplay.textContent = number;
 
@@ -127,14 +124,13 @@ export const gamePlayEffects =  {
                                         console.log("Clearing multiplier")
                                         multiplier -= 7;
                                 } else if (typeOfEffect === 'fireball') {
-
+                                        
                                 }
                                 
+                                // effects.onLuckyAnimation(app, 'stop');
                                 clearInterval(timer);
                                 effectBGContainer.remove();
                         };
                 }, 1000);
-
-                console.log("MULTIPLIER: " + multiplier);
         }
 }

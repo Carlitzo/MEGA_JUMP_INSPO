@@ -12,6 +12,9 @@ const effects = {
         },
         onFireballHitAnimation: (app) => {
 
+        },
+        applyStaticEffect: (app) => {
+                
         }
 }
 
