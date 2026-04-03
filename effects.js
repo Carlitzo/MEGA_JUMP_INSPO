@@ -4,7 +4,13 @@ const effects = {
         onLogHitAnimation: (app, logSprite) => {
 
         },
-        onLuckyHitAnimation: () => {
+        onLuckyHitAnimation: (app) => {
+
+        },
+        onMagnetHitAnimation: (app) => {
+
+        },
+        onFireballHitAnimation: (app) => {
 
         }
 }

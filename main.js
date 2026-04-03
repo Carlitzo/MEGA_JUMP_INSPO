@@ -7,6 +7,7 @@ import { renderLogs } from './renderLogs.js';
 import { Bober } from './bober.js';
 import { renderScore } from './renderScore.js';
 import { score } from './renderScore.js';
+import { determineEffect } from './determineEffect.js';
 
 export const gameAssets = {
         collectibles: [],
@@ -15,7 +16,8 @@ export const gameAssets = {
 
 // const isJuicy = await fetchGameMode(); // hämta flagga från server
 const versionObj = await (await fetch("/getVersion")).json();
-const isJuicy = versionObj.versionFlag;
+// const isJuicy = versionObj.versionFlag;
+const isJuicy = true;
 const version = versionObj.version;
 
 const module = isJuicy
@@ -27,6 +29,7 @@ export const effects = module.default;
 const app = new Application();
 export const world = new Container();
 export let gameStarted = false;
+export let chunkCounter = 0;
 let chunks = [];
 let startTime = null;
 let currentHighest = 0;
@@ -35,10 +38,7 @@ let lowestAllowed = 0;
 (async () => {
         const localID = localStorage.getItem("id");
 
-        console.log(localID);
-
         localStorage.setItem("version", version);
-        console.log(localStorage.getItem("version"));
 
         if (!localID) {
                 const newID = await (await (await fetch("/getID")).json()).userID;
@@ -98,7 +98,7 @@ function startGameButton(event) {
         }
 
         let img = event.currentTarget;
-        console.log(img);
+        
         clickedButton(img);
         setTimeout(() => {
                 img.remove();
@@ -163,19 +163,23 @@ export async function updateChunks() {
 
         if (sprite.texture == oldTexture) {
                 sprite.texture = newTexture;
-                console.log("HEJSAN");
         }
         
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
                 let newY = topChunk.y - app.screen.height;
-                console.log("här")
 
                 bottomChunk.children
                         .filter(child => {child instanceof Container})
                         .forEach(child => {child.destroy({children: true})});
 
                 bottomChunk.y = newY;
-                await renderLogs(app, bottomChunk, false); 
+
+                if (chunkCounter === 2) {
+                        determineEffect(bottomChunk, app);
+                        chunkCounter = 0;
+                } else chunkCounter++;
+
+                await renderLogs(app, bottomChunk, false);
         }
 }
 

@@ -1,8 +1,9 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { multiplier } from './gamePlayEffects.js';
 
 export let score = 0;
 
-export function renderScore(app) {
+export function renderScore() {
         score = 0;
         let logAmount = 0;
 
@@ -33,7 +34,7 @@ export function renderScore(app) {
         document.body.appendChild(scoreBG);
 
         window.addEventListener('logHit', (e) => {
-                score += 7;
+                score += multiplier;
                 logAmount++;
 
                 scoreDisplay.textContent = 'Score: ' + score;

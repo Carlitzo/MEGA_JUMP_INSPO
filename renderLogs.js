@@ -1,11 +1,14 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { gameStarted, gameAssets, world, effects } from './main.js';
+import { gameAssets, effects } from './main.js';
+import { getRandomInt } from './getRandomInt.js';
+
 
 export async function renderLogs(app, chunk, initial = true) {
+        
+        let logCount = 4;
         const logContainer = new Container();
         const widthPadding = app.screen.width * 0.2;
         const heightPadding = app.screen.height * 0.02;
-        let logCount = 4;
         const chainPosition = getRandomInt(logCount - 1);
         
         if (!initial) logCount = 6;
@@ -136,8 +139,4 @@ export async function renderLogs(app, chunk, initial = true) {
         };
 
         chunk.addChild(logContainer);
-}
-
-function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
 }
