@@ -108,7 +108,7 @@ canvas {
         right: 1%;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
         padding-top: 2%;
         padding-bottom: 2%;
@@ -116,7 +116,27 @@ canvas {
 }
 
 #numberContainer {
-        
+        height: 100%;
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+#imgContainer {
+        height: 100%;
+        width: 40%;
+}
+
+#collectibleImg {
+        height: 100%;
+        width: 100%;
+}
+
+#numberDisplay {
+        font-family: "woodFont";
+        font-size: 1.6rem;
+        letter-spacing: 0;
 }
 
 @keyframes vibrate {

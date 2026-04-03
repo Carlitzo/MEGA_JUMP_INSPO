@@ -106,8 +106,6 @@ export const gamePlayEffects =  {
                 const timer = setInterval(() => {
                         number --;
                         numberDisplay.textContent = number;
-                        console.log(multiplier);
-                        console.log(number);
 
                         if (number === 0) {
                                 if (typeOfEffect === 'magnet') {
@@ -123,6 +121,5 @@ export const gamePlayEffects =  {
                                 effectBGContainer.remove();
                         };
                 }, 1000);
-
         }
 }
