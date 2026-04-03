@@ -13,7 +13,7 @@ export const gamePlayEffects =  {
                 const heightPadding = app.screen.height * 0.2;
                 const glowFilter = new GlowFilter({
                         distance: 15,
-                        outerStrength: 6,
+                        outerStrength: 2,
                         innerStrength: 0,
                         color: 0x00ff00,
                         quality: 0.5
@@ -34,7 +34,7 @@ export const gamePlayEffects =  {
                 const onTick = (time) => {
                         const dx = time.deltaTime * 0.03;
                         
-                        glowFilter.outerStrength = 10 + Math.sin(Date.now() * 0.005) * 1;
+                        glowFilter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
 
                         if (hit) return;
 
