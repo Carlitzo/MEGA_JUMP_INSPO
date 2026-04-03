@@ -237,6 +237,7 @@ async function resetGame(app, ticker) {
         currentHighest = 0;
         lowestAllowed = 0;
         world.y = 0;
+        document.getElementById("scoreBG").remove();
         gameAssets.player = new Bober(app, animationObj);
 
         renderStartScreen(app);
