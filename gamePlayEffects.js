@@ -86,7 +86,7 @@ export const gamePlayEffects =  {
                 } else if (typeOfEffect === 'luckyCharm') {
                         collectibleImg.src = './Assets/Collectibles/Luck.png';
                         numberDisplay.style.color = 'green';
-                        multiplier += multiplier;
+                        multiplier += 7;
                 } else if (typeOfEffect === 'fireball') {
                         collectibleImg.src = './Assets/Collectibles/Fire.png';
                         numberDisplay.style.color = 'red';
@@ -121,5 +121,7 @@ export const gamePlayEffects =  {
                                 effectBGContainer.remove();
                         };
                 }, 1000);
+
+                console.log("MULTIPLIER: " + multiplier);
         }
 }

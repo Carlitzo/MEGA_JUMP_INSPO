@@ -168,8 +168,10 @@ export async function updateChunks() {
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
                 let newY = topChunk.y - app.screen.height;
 
+                console.log(bottomChunk.children);
+
                 bottomChunk.children
-                        .filter(child => {child instanceof Container})
+                        .filter(child =>  child.label === "logContainer")
                         .forEach(child => {child.destroy({children: true})});
 
                 bottomChunk.y = newY;

@@ -138,5 +138,6 @@ export async function renderLogs(app, chunk, initial = true) {
                 logSprite.on('destroyed', () => app.ticker.remove(onTick));
         };
 
+        logContainer.label = "logContainer";
         chunk.addChild(logContainer);
 }
