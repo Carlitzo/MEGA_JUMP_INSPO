@@ -15,7 +15,7 @@ export function determineEffect(chunk, app) {
                 break;
                 case 1:
                         gamePlayEffects.onLuckyCharm(chunk, app);
-                        effects.onLuckyHitAnimation();
+                        effects.onLuckyHitAnimation(app);
                 break;
                 case 2:
                         gamePlayEffects.onFireball(chunk, app);

@@ -120,7 +120,7 @@ async function startGame(app) {
                 gameAssets.player.velocityY -= gameAssets.player.decayRate * dx;
                 world.y += (gameAssets.player.velocityY * dx);
                 gameAssets.player.container.y = playerScreenY;
-                updateChunks();
+                updateChunks(app);
 
                 if (world.y > currentHighest) {
                         currentHighest = world.y;
@@ -153,7 +153,7 @@ async function launchCharacter(app) {
         });
 }
 
-export async function updateChunks() {
+export async function updateChunks(app) {
         const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
         const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
 

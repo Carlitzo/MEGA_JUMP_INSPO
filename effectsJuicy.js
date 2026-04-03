@@ -95,7 +95,7 @@ const effects = {
                     const returnObj = {};
 
                     const glowFilter = new GlowFilter({
-                        distance: 20,
+                        distance: 35,
                         outerStrength: 2,
                         innerStrength: 0,
                         color: 0x00ff00,
@@ -105,7 +105,7 @@ const effects = {
                     returnObj.filter = glowFilter;
 
                     const onTick = () => {
-
+                        
                     };
 
                     returnObj.tickerID = onTick;
