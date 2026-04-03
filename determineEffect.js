@@ -15,7 +15,7 @@ export function determineEffect(chunk, app) {
                 break;
                 case 1:
                         gamePlayEffects.onLuckyCharm(chunk, app);
-                        effects.onLuckyHitAnimation(app);
+                        //effects.onLuckyHitAnimation(app); <- Detta anropet ska inte vara här väl? Ger oss border när en charm spawnar
                 break;
                 case 2:
                         gamePlayEffects.onFireball(chunk, app);

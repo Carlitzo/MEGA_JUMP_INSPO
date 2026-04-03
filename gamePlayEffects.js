@@ -3,11 +3,14 @@ import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pix
 import { gameAssets, effects } from './main.js';
 
 export let multiplier = 7;
+// Lägga till funktion här för reset multiplier? Så vi kan resetta den när ett game avslutas?
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
+                console.log("luckyCharm rendered on chunk")
 
                 const luckSprite = Sprite.from('luckyCharm');
+                luckSprite.label = 'luckyCharm';
 
                 const widthPadding = app.screen.width * 0.4;
                 const heightPadding = app.screen.height * 0.2;
@@ -52,7 +55,7 @@ export const gamePlayEffects =  {
                                 
                                 effects.onLuckyHitAnimation(app);
                                 luckSprite.destroy();
-                                gamePlayEffects.startEffectTimer('luckyCharm');
+                                gamePlayEffects.startEffectTimer('luckyCharm', app);
                         };
                 }
                 
@@ -68,15 +71,15 @@ export const gamePlayEffects =  {
 
                 
 
-                startEffectTimer('magnet');
+                startEffectTimer('magnet', app);
         },
         onFireball: (chunk, app) => {
 
 
 
-                startEffectTimer('fireball');
+                startEffectTimer('fireball', app);
         },
-        startEffectTimer: (typeOfEffect) => {
+        startEffectTimer: (typeOfEffect, app) => {
                 const effectBGContainer = document.createElement("div");
                 const numberContainer = document.createElement("div");
                 const imgContainer = document.createElement("div");
@@ -123,6 +126,7 @@ export const gamePlayEffects =  {
                                 } else if (typeOfEffect === 'luckyCharm') {
                                         console.log("Clearing multiplier")
                                         multiplier -= 7;
+                                        effects.onLuckyHitAnimation(app, 'stop');
                                 } else if (typeOfEffect === 'fireball') {
                                         
                                 }
