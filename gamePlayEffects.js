@@ -9,12 +9,10 @@ export const gamePlayEffects =  {
                 const luckSprite = Sprite.from('luckyCharm');
 
                 const widthPadding = app.screen.width * 0.4;
-                const heightPadding = app.screen.width * 0.2;
-                const bandWidth = (app.screen.width - widthPadding * 2)
-                const bandHeight = (app.screen.height - heightPadding * 2);
+                const heightPadding = app.screen.height * 0.2;
                 
-                const luckX = Math.random() * bandWidth;
-                const luckY = Math.random() * bandHeight;
+                const luckX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
+                const luckY = (-app.screen.height + heightPadding) + Math.random() * (app.screen.height - heightPadding * 2);
                 
                 luckSprite.anchor.set(0.5, 0.5);
                 luckSprite.x = luckX;
