@@ -19,12 +19,15 @@ window.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         if (touch.clientX < window.innerWidth / 2) {
             keys['ArrowLeft'] = true;
+            latestKey = 'ArrowLeft';
         } else {
             keys['ArrowRight'] = true;
+            latestKey = 'ArrowRight';
         }
 });
     
     window.addEventListener('touchend', () => {
         keys['ArrowLeft'] = false;
         keys['ArrowRight'] = false;
+        latestKey = null;
 });
