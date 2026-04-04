@@ -141,8 +141,7 @@ export const gamePlayEffects =  {
                         Texture.from('fireball6'),
                         Texture.from('fireball7'),
                 ];
-                // Behöver anropa effects.applyStaticEffects(app, 'fireball');
-                // Behöver anropa effects.onFireballHit();
+                
                 let fireball = null;
                 if (isJuicy) {
                         fireball = new AnimatedSprite(frames);
@@ -196,7 +195,7 @@ export const gamePlayEffects =  {
                                 gameAssets.player.velocityY = 20;
                                 gameAssets.player.decayRate = 0;
                                 
-                                effects.onFireballHitAnimation(app, 'start');
+                                effects.onFireballHitAnimation(app, 'start', world);
                                 fireball.destroy();
                                 const trailTicker = effects.onFireballTrail(app);
                                 gamePlayEffects.startEffectTimer('fireball', app, trailTicker);

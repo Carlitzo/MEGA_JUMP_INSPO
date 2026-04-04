@@ -1,6 +1,5 @@
 import { Application, Sprite, Container, Assets, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
-import { world } from "./main.js";
 
 const effects = {
         onLogHitAnimation: (app, logSprite) => {
@@ -112,7 +111,7 @@ const effects = {
         onMagnetHitAnimation: (app, state) => {
 
         },
-        onFireballHitAnimation: (app, state) => {
+        onFireballHitAnimation: (app, state, world) => {
             if (state === 'stop') return;
 
             let elapsed = 0;
