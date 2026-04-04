@@ -5,6 +5,7 @@ import { gameAssets, effects, isJuicy, world } from './main.js';
 export let multiplier = 7;
 let magnetCount = 0;
 export let fireballActive = false;
+let fireballObj = null;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
@@ -141,7 +142,7 @@ export const gamePlayEffects =  {
                         Texture.from('fireball6'),
                         Texture.from('fireball7'),
                 ];
-                
+
                 let fireball = null;
                 if (isJuicy) {
                         fireball = new AnimatedSprite(frames);
@@ -195,9 +196,9 @@ export const gamePlayEffects =  {
                                 gameAssets.player.velocityY = 20;
                                 gameAssets.player.decayRate = 0;
                                 
-                                effects.onFireballHitAnimation(app, 'start', world);
+                                fireballObj = effects.onFireballHitAnimation(app, world);
                                 fireball.destroy();
-                                const trailTicker = effects.onFireballTrail(app);
+                                const trailTicker = onFireballTrail(app);
                                 gamePlayEffects.startEffectTimer('fireball', app, trailTicker);
                         };
                 }
@@ -257,7 +258,8 @@ export const gamePlayEffects =  {
                                 } else if (typeOfEffect === 'fireball') {
                                         app.ticker.remove(trailTicker);
                                         gameAssets.player.decayRate = 0.45;
-                                        effects.onFireballHitAnimation(app, 'stop');
+                                        app.ticker.remove(fireballObj.ticker);
+                                        world.x = fireballObj.originalX;
                                         fireballActive = false;
                                         console.log("Stopping fireball speed")
                                         gameAssets.player.velocityY = 15;
@@ -301,27 +303,36 @@ function magnetDragLogs(app) {
     app.ticker.add(onTick);
 }
 
-function onFireballTrail(app) {
+function onFireballTrail (app) {
         const onTick = (time) => {
-            // Spawna en trail-sprite på boberns position varje frame
-            const trail = Sprite.from('fireball1'); // eller en egen flame-sprite
-            trail.anchor.set(0.5, 0.5);
-            trail.x = gameAssets.player.container.x;
-            trail.y = gameAssets.player.container.y;
-            trail.scale.set(0.1);
-            trail.alpha = 0.8;
-            app.stage.addChild(trail);
+            const circle = new Graphics();
+            
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            
+            circle.x = gameAssets.player.container.x + offsetX;
+            circle.y = gameAssets.player.container.y - world.y
     
-            let trailProgress = 0;
+            const colors = [0xFF4500, 0xFF6000, 0xFF2200, 0xFFAA00];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+    
+            let radius = 15 + Math.random() * 10;
+            let progress = 0;
+    
+            circle.circle(0, 0, radius);
+            circle.fill({ color });
+            world.addChild(circle);
     
             const fadeOut = (time) => {
-                trailProgress += time.deltaTime * 0.1;
-                trail.alpha = 0.8 - trailProgress;
-                trail.scale.set(0.1 + trailProgress * 0.05);
+                progress += time.deltaTime * 0.03;
     
-                if (trailProgress >= 1) {
+                circle.clear();
+                circle.circle(0, 0, radius * (1 - progress));
+                circle.fill({ color, alpha: 1 - progress });
+    
+                if (progress >= 1) {
                     app.ticker.remove(fadeOut);
-                    trail.destroy();
+                    circle.destroy();
                 }
             };
     
@@ -329,7 +340,19 @@ function onFireballTrail(app) {
         };
     
         app.ticker.add(onTick);
-        
-        // Returnera tickern så vi kan ta bort den när fireball-effekten tar slut
         return onTick;
-    }
+}
+
+function fadeOut(time) {
+        progress += time.deltaTime * 0.1;
+        circle.y -= time.deltaTime * 2;
+    
+        circle.clear();
+        circle.circle(0, 0, radius * (1 - progress));
+        circle.fill({ color, alpha: 1 - progress });
+    
+        if (progress >= 1) {
+            app.ticker.remove(fadeOut);
+            circle.destroy();
+        }
+};

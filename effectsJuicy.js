@@ -111,28 +111,22 @@ const effects = {
         onMagnetHitAnimation: (app, state) => {
 
         },
-        onFireballHitAnimation: (app, state, world) => {
-            if (state === 'stop') return;
+        onFireballHitAnimation: (app, world) => {
 
-            let elapsed = 0;
-            const duration = 30; // antal frames
-            const intensity = 8; // hur mycket den skakar i pixlar
+            const intensity = 8;
             const originalX = world.x;
 
+            
             const onTick = (time) => {
-                elapsed += time.deltaTime;
-
-                // Math.random() - 0.5 ger ett tal mellan -0.5 och 0.5
                 world.x = originalX + (Math.random() - 0.5) * intensity * 2;
-
-                if (elapsed >= duration) {
-                    world.x = originalX; // återställ till original
-                    app.ticker.remove(onTick);
-                }
             };
 
+            const returnObj = {};
+            returnObj.ticker = onTick;
+            returnObj.originalX = originalX;
             app.ticker.add(onTick);
 
+            return returnObj;
         },
         applyStaticEffects: (app, effectType, sprite = null) => {
 

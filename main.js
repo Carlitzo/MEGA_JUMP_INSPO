@@ -47,7 +47,7 @@ let lowestAllowed = 0;
                 console.log(newID);
         }
 
-   	await app.init({ resizeTo: window, backgroundColor: 0x87ceeb});
+   	await app.init({ resizeTo: window, backgroundColor: 0x491b11});
 
         document.body.appendChild(app.canvas);
         app.canvas.style.width = '100%';
@@ -57,8 +57,6 @@ let lowestAllowed = 0;
 
         await preloadAssets(app);
 
-        // TODO: Ta bort efter varje spel och re-attacha genom att flytta tickern till renderStartScreen()
-        // Ska vi bara ha en global variabel som innehåller alla tickerfunktioner? Så vi kan accessa alla där och ta bort dem?
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
                 if (keys['ArrowLeft']) {
