@@ -58,11 +58,11 @@ const effects = {
         
             const thickness = 10;
             const glowFilter = new GlowFilter({
-                distance: 20,
+                distance: 40,
                 outerStrength: 2,
                 innerStrength: 0,
                 color: 0x00ff00,
-                quality: 0.5
+                quality: 0.5,
             });
         
             border.filters = [glowFilter];
@@ -88,24 +88,54 @@ const effects = {
         onFireballHitAnimation: (app) => {
 
         },
-        applyStaticEffects: (app, effectType) => {
+        applyStaticEffects: (app, effectType, sprite = null) => {
+
+            let returnObj = {};
+            let glowFilter = undefined;
+            let onTick = undefined;
+
             switch (effectType){
                 case 'luckyCharm':
-
-                    const returnObj = {};
-
-                    const glowFilter = new GlowFilter({
-                        distance: 35,
+                    glowFilter = new GlowFilter({
+                        distance: 55,
                         outerStrength: 2,
                         innerStrength: 0,
                         color: 0x00ff00,
-                        quality: 0.5
+                        quality: 0.5,
                     });
 
                     returnObj.filter = glowFilter;
 
-                    const onTick = () => {
-                        
+                    onTick = () => {
+                        filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
+                        filter.alpha = 4 + Math.sin(Date.now() * 1.5) * 3
+                    };
+
+                    returnObj.tickerID = onTick;
+
+                    return returnObj;
+                case 'fireball':
+                    const fireball = sprite;
+
+                    fireball.animationSpeed = 0.2;
+                    fireball.loop = true;
+                    fireball.play();
+
+                    returnObj = {};
+
+                    glowFilter = new GlowFilter({
+                        distance: 55,
+                        outerStrength: 2,
+                        innerStrength: 0,
+                        color: 0xCC1100,
+                        quality: 0.5,
+                    });
+
+                    returnObj.filter = glowFilter;
+
+                    onTick = () => {
+                        filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
+                        filter.alpha = 4 + Math.sin(Date.now() * 1.5) * 3
                     };
 
                     returnObj.tickerID = onTick;

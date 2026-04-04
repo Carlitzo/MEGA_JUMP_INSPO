@@ -17,7 +17,7 @@ export const gameAssets = {
 // const isJuicy = await fetchGameMode(); // hämta flagga från server
 const versionObj = await (await fetch("/getVersion")).json();
 // const isJuicy = versionObj.versionFlag;
-const isJuicy = true;
+export const isJuicy = true;
 const version = versionObj.version;
 
 const module = isJuicy

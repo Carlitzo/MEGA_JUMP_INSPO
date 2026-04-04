@@ -35,10 +35,17 @@ export async function preloadAssets (app) {
         await Assets.load('./Assets/Character/Character.json');
         gameAssets.player = new Bober(app, animationObj);
         
-        await Assets.load({ alias: 'bigLog', src: './Assets/Collectibles/bigLog.png'});
         await Assets.load({ alias: 'smolLog', src: './Assets/Collectibles/smolLog.png'});
         await Assets.load({ alias: 'magnet', src: './Assets/Collectibles/Magnet.png'});
         await Assets.load({ alias: 'luckyCharm', src: './Assets/Collectibles/Luck.png'});
-        await Assets.load({ alias: 'correctLog', src: './Assets/Collectibles/correctLog.png'});
         await Assets.load({ alias: 'star', src: './Assets/UI_Assets/Star.png'});
+        await Assets.load([
+                { alias: 'fireball1', src: './Assets/Collectibles/fireball/1.png' },
+                { alias: 'fireball2', src: './Assets/Collectibles/fireball/2.png' },
+                { alias: 'fireball3', src: './Assets/Collectibles/fireball/3.png' },
+                { alias: 'fireball4', src: './Assets/Collectibles/fireball/4.png' },
+                { alias: 'fireball5', src: './Assets/Collectibles/fireball/5.png' },
+                { alias: 'fireball6', src: './Assets/Collectibles/fireball/6.png' },
+                { alias: 'fireball7', src: './Assets/Collectibles/fireball/7.png' },
+        ])
 }

@@ -1,6 +1,6 @@
-import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { Sprite, Container, Assets, Graphics, AnimatedSprite, Texture } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
-import { gameAssets, effects } from './main.js';
+import { gameAssets, effects, isJuicy } from './main.js';
 
 export let multiplier = 7;
 // Lägga till funktion här för reset multiplier? Så vi kan resetta den när ett game avslutas?
@@ -12,7 +12,7 @@ export const gamePlayEffects =  {
                 const luckSprite = Sprite.from('luckyCharm');
                 luckSprite.label = 'luckyCharm';
 
-                const widthPadding = app.screen.width * 0.4;
+                const widthPadding = app.screen.width * 0.2;
                 const heightPadding = app.screen.height * 0.2;
                 
                 const luckX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
@@ -25,14 +25,16 @@ export const gamePlayEffects =  {
                 luckSprite.y = luckY;
                 luckSprite.scale.set(0.22);
                 luckSprite.roundPixels = true;
-
+                
                 glowFilter = effects.applyStaticEffects(app, 'luckyCharm');
 
+                if (glowFilter) luckSprite.filters = [glowFilter.filter];
+                
                 let hit = false;
                 
                 const onTick = (time) => {
                         
-                        if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
+                        if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3; 
 
                         if (hit) return;
 
@@ -53,7 +55,7 @@ export const gamePlayEffects =  {
                                         gameAssets.player.velocityY = 15;
                                 }
                                 
-                                effects.onLuckyHitAnimation(app);
+                                effects.onLuckyHitAnimation(app, 'start');
                                 luckSprite.destroy();
                                 gamePlayEffects.startEffectTimer('luckyCharm', app);
                         };
@@ -64,7 +66,7 @@ export const gamePlayEffects =  {
                         app.ticker.remove(onTick);
                         if (glowFilter) app.ticker.remove(glowFilter.tickerID);
                 });
-
+                console.log(luckSprite.filters);
                 chunk.addChild(luckSprite);
         },
         onMagnet: (chunk, app) => {
@@ -75,9 +77,85 @@ export const gamePlayEffects =  {
         },
         onFireball: (chunk, app) => {
 
+                
+                console.log('fireball rendered on app');
+                
+                const frames = [
+                        Texture.from('fireball1'),
+                        Texture.from('fireball2'),
+                        Texture.from('fireball3'),
+                        Texture.from('fireball4'),
+                        Texture.from('fireball5'),
+                        Texture.from('fireball6'),
+                        Texture.from('fireball7'),
+                ];
+                // Behöver anropa effects.applyStaticEffects(app, 'fireball');
+                // Behöver anropa effects.onFireballHit();
+                let fireball = null;
+                if (isJuicy) {
+                        fireball = new AnimatedSprite(frames);
+                } else {
+                        fireball = Sprite.from('fireball1');
+                }
+                
+                fireball.label = 'fireball';
 
+                const widthPadding = app.screen.width * 0.2;
+                const heightPadding = app.screen.height * 0.2;
+                
+                const fireX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
+                const fireY = (-app.screen.height + heightPadding) + Math.random() * (app.screen.height - heightPadding * 2);
 
-                startEffectTimer('fireball', app);
+                fireball.anchor.set(0.5, 0.5);
+                fireball.x = fireX;
+                fireball.y = fireY;
+                fireball.scale.set(0.22);
+                fireball.roundPixels = true;
+
+                let glowFilter = undefined;
+
+                glowFilter = effects.applyStaticEffects(app, 'fireball', fireball);
+
+                if (glowFilter) fireball.filters = [glowFilter.filter];
+
+                let hit = false;
+                
+                const onTick = (time) => {
+
+                        if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
+
+                        if (hit) return;
+
+                        const fireBounds = fireball.getBounds();
+                        const playerBounds = gameAssets.player.playerHitbox.bounds;
+
+                        if (
+                                fireBounds.x < playerBounds.x + playerBounds.width &&
+                                fireBounds.x + fireBounds.width > playerBounds.x &&
+                                fireBounds.y < playerBounds.y + playerBounds.height &&
+                                fireBounds.y + fireBounds.height > playerBounds.y
+                        ) {
+                                console.log("hit luck");
+                                hit = true;
+                                if (gameAssets.player.velocityY > 15) {
+                                        gameAssets.player.velocityY = 13;
+                                } else {
+                                        gameAssets.player.velocityY = 15;
+                                }
+                                
+                                effects.onFireballHitAnimation(app, 'start');
+                                fireball.destroy();
+                                gamePlayEffects.startEffectTimer('fireball', app);
+                        };
+                }
+                
+                app.ticker.add(onTick);
+                fireball.on('destroyed', () => {
+                        app.ticker.remove(onTick);
+                        if (glowFilter) app.ticker.remove(glowFilter.tickerID);
+                });
+
+                chunk.addChild(fireball);
         },
         startEffectTimer: (typeOfEffect, app) => {
                 const effectBGContainer = document.createElement("div");
@@ -97,11 +175,11 @@ export const gamePlayEffects =  {
                         numberDisplay.style.color = 'blue';
                 } else if (typeOfEffect === 'luckyCharm') {
                         collectibleImg.src = './Assets/Collectibles/Luck.png';
-                        numberDisplay.style.color = 'green';
+                        numberDisplay.style.color = '0x00ff00';
                         multiplier += 7;
                 } else if (typeOfEffect === 'fireball') {
-                        collectibleImg.src = './Assets/Collectibles/Fire.png';
-                        numberDisplay.style.color = 'red';
+                        collectibleImg.src = './Assets/Collectibles/fireball/10.png';
+                        numberDisplay.style.color = '0xCC1100';
                 }
 
                 numberContainer.appendChild(numberDisplay);
@@ -116,7 +194,6 @@ export const gamePlayEffects =  {
                 numberDisplay.textContent = number;
 
                 const timer = setInterval(() => {
-                        // effects.onLuckyAnimation(app, 'start');
                         number --;
                         numberDisplay.textContent = number;
 
@@ -128,10 +205,10 @@ export const gamePlayEffects =  {
                                         multiplier -= 7;
                                         effects.onLuckyHitAnimation(app, 'stop');
                                 } else if (typeOfEffect === 'fireball') {
-                                        
+                                        console.log("Stopping fireball speed")
+                                        effects.onFireballHitAnimation(app, 'stop');
                                 }
                                 
-                                // effects.onLuckyAnimation(app, 'stop');
                                 clearInterval(timer);
                                 effectBGContainer.remove();
                         };
