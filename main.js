@@ -177,6 +177,10 @@ export async function updateChunks(app) {
                         .filter(child => child.label === 'luckyCharm')
                         .forEach(child => child.destroy({children: true}));
 
+                bottomChunk.children
+                        .filter(child => child.label === 'magnet')
+                        .forEach(child => child.destroy({children: true}));
+
                 bottomChunk.y = newY;
 
                 if (chunkCounter === 2) {

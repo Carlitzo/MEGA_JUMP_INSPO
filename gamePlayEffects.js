@@ -4,7 +4,7 @@ import { gameAssets, effects, isJuicy, world } from './main.js';
 
 export let multiplier = 7;
 // Lägga till funktion här för reset multiplier? Så vi kan resetta den när ett game avslutas?
-let magnetActive = false;
+let magnetCount = 0;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
@@ -248,7 +248,7 @@ export const gamePlayEffects =  {
 
                         if (number === 0) {
                                 if (typeOfEffect === 'magnet') {
-                                        magnetActive = false;
+                                        magnetCount--;
                                         
                                 } else if (typeOfEffect === 'luckyCharm') {
                                         console.log("Clearing multiplier")
@@ -267,10 +267,10 @@ export const gamePlayEffects =  {
 }
 
 function magnetDragLogs(app) {
-    magnetActive = true;
+    magnetCount++;
 
     const onTick = (time) => {
-        if (!magnetActive) {
+        if (magnetCount <= 0) {
             app.ticker.remove(onTick);
             return;
         }
