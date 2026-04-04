@@ -186,7 +186,7 @@ const effects = {
             switch (effectType){
                 case 'luckyCharm':
                     glowFilter = new GlowFilter({
-                        distance: 55,
+                        distance: 20,
                         outerStrength: 2,
                         innerStrength: 0,
                         color: 0x00ff00,
