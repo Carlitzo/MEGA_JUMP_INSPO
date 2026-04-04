@@ -189,7 +189,7 @@ export const gamePlayEffects =  {
                                 fireBounds.y + fireBounds.height > playerBounds.y
                         ) {
                                 if (fireballActive) return;
-                                console.log("hit luck");
+                                console.log("hit fireball");
                                 hit = true;
                                 fireballActive = true;
 

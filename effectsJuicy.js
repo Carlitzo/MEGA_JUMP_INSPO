@@ -164,7 +164,7 @@ const effects = {
                     returnObj = {};
 
                     glowFilter = new GlowFilter({
-                        distance: 55,
+                        distance: 30,
                         outerStrength: 2,
                         innerStrength: 0,
                         color: 0xCC1100,
