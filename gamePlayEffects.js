@@ -51,16 +51,17 @@ export const gamePlayEffects =  {
                                 console.log("hit luck");
                                 hit = true;
                                 if (!fireballActive) {
-                                        if (gameAssets.player.velocityY > 15) {
+                                        if (gameAssets.player.velocityY > 17) {
                                                 gameAssets.player.velocityY = 13;
                                         } else {
-                                                gameAssets.player.velocityY = 15;
+                                                gameAssets.player.velocityY = 17;
                                         }
                                 }
                                 
                                 effects.onLuckyHitAnimation(app, 'start');
                                 luckSprite.destroy();
                                 gamePlayEffects.startEffectTimer('luckyCharm', app);
+                                multiplier += 7;
                         };
                 }
                 
@@ -105,15 +106,16 @@ export const gamePlayEffects =  {
                         ) {
                                 console.log("hit magnet");
                                 hit = true;
-                                if (gameAssets.player.velocityY > 15) {
+                                if (gameAssets.player.velocityY > 17) {
                                         gameAssets.player.velocityY = 13;
                                 } else {
-                                        gameAssets.player.velocityY = 15;
+                                        gameAssets.player.velocityY = 17;
                                 }
                                 
                                 effects.onMagnetHitAnimation(app, 'start');
                                 magnetSprite.destroy();
                                 gamePlayEffects.startEffectTimer('magnet', app);
+                                magnetDragLogs(app);
                         };
                 }
                 
@@ -223,15 +225,10 @@ export const gamePlayEffects =  {
 
                 if (typeOfEffect === 'magnet') {
                         collectibleImg.src = './Assets/Collectibles/Magnet.png';
-                        numberDisplay.style.color = 'blue';
-                        magnetDragLogs(app);
                 } else if (typeOfEffect === 'luckyCharm') {
                         collectibleImg.src = './Assets/Collectibles/Luck.png';
-                        numberDisplay.style.color = '0x00ff00';
-                        multiplier += 7;
                 } else if (typeOfEffect === 'fireball') {
                         collectibleImg.src = './Assets/Collectibles/fireball/10.png';
-                        numberDisplay.style.color = '0xCC1100';
                 }
 
                 numberContainer.appendChild(numberDisplay);

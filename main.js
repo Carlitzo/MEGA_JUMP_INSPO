@@ -208,7 +208,7 @@ function terminateGame(app, ticker) {
                 let dx = time.deltaTime;
                 gameAssets.player.container.y -= gameAssets.player.velocityY * dx;
 
-                if (gameAssets.player.velocityY > 0) gameAssets.player.velocityY = -15;
+                if (gameAssets.player.velocityY > 0) gameAssets.player.velocityY = -17;
 
                 if (gameAssets.player.container.y > app.screen.height + (app.screen.height * 0.25)) {
                         await resetGame(app, onTick);

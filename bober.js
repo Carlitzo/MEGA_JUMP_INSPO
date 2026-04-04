@@ -4,7 +4,7 @@ import { gameAssets } from './main.js';
 export class Bober {
         constructor(app, animationObj) {
                 this.velocityX = 0;
-                this.velocityY = 15;
+                this.velocityY = 17
                 this.decayRate = 0.45;
 
                 this.animations = {

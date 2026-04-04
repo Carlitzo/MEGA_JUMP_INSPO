@@ -1,4 +1,4 @@
-import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { Application, Sprite, Container, Assets, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
 
 const effects = {
@@ -49,12 +49,25 @@ const effects = {
                 const existing = app.stage.getChildByName('luckyBorder');
                 if (existing) {
                     existing.destroy();
-                }
+                };
                 return;
-            }
+            };
         
             const border = new Graphics();
             border.label = 'luckyBorder';
+
+            const text = new Text({
+                text: `X 2`,
+                style: {
+                    fontFamily: 'woodFont',
+                    fontSize: 80,
+                    fill: 0x00ff00,
+                }
+            });
+        
+            text.anchor.set(0.5, 0.5);
+            text.x = app.screen.width / 2;
+            text.y = app.screen.height / 2;
         
             const thickness = 10;
             const glowFilter = new GlowFilter({
@@ -66,13 +79,26 @@ const effects = {
             });
         
             border.filters = [glowFilter];
-        
+            text.filters = [glowFilter];
+
             border.rect(0, 0, app.screen.width, app.screen.height);
             border.stroke({ color: 0x00ff00, width: thickness });
         
             app.stage.addChild(border);
+            app.stage.addChild(text);
+
+            let progress = 0;
         
             const onTick = (time) => {
+                const dx = time.deltaTime;
+                progress += dx * 0.02;
+
+                text.alpha = 1 - progress;
+
+                if (progress >= 1) {
+                    text.destroy();
+                }
+                
                 glowFilter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
         
                 if (border.destroyed) {
