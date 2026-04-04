@@ -1,5 +1,6 @@
 import { Application, Sprite, Container, Assets, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
+import { world } from "./main.js";
 
 const effects = {
         onLogHitAnimation: (app, logSprite) => {
@@ -108,10 +109,30 @@ const effects = {
         
             app.ticker.add(onTick);
         },
-        onMagnetHitAnimation: (app) => {
+        onMagnetHitAnimation: (app, state) => {
 
         },
-        onFireballHitAnimation: (app) => {
+        onFireballHitAnimation: (app, state) => {
+            if (state === 'stop') return;
+
+            let elapsed = 0;
+            const duration = 30; // antal frames
+            const intensity = 8; // hur mycket den skakar i pixlar
+            const originalX = world.x;
+
+            const onTick = (time) => {
+                elapsed += time.deltaTime;
+
+                // Math.random() - 0.5 ger ett tal mellan -0.5 och 0.5
+                world.x = originalX + (Math.random() - 0.5) * intensity * 2;
+
+                if (elapsed >= duration) {
+                    world.x = originalX; // återställ till original
+                    app.ticker.remove(onTick);
+                }
+            };
+
+            app.ticker.add(onTick);
 
         },
         applyStaticEffects: (app, effectType, sprite = null) => {

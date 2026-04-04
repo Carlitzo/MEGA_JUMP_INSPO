@@ -8,7 +8,7 @@ export function determineEffect(chunk, app) {
         
         // let effect = getRandomInt(effectsArray.length);
 
-        let effect = 0;
+        let effect = 2;
 
         if (effect === 0 && fireballActive) {
                 effect++;

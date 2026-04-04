@@ -198,7 +198,8 @@ export const gamePlayEffects =  {
                                 
                                 effects.onFireballHitAnimation(app, 'start');
                                 fireball.destroy();
-                                gamePlayEffects.startEffectTimer('fireball', app);
+                                const trailTicker = effects.onFireballTrail(app);
+                                gamePlayEffects.startEffectTimer('fireball', app, trailTicker);
                         };
                 }
                 
@@ -210,7 +211,7 @@ export const gamePlayEffects =  {
 
                 chunk.addChild(fireball);
         },
-        startEffectTimer: (typeOfEffect, app) => {
+        startEffectTimer: (typeOfEffect, app, trailTicker = null) => {
                 const effectBGContainer = document.createElement("div");
                 const numberContainer = document.createElement("div");
                 const imgContainer = document.createElement("div");
@@ -255,6 +256,7 @@ export const gamePlayEffects =  {
                                         multiplier -= 7;
                                         effects.onLuckyHitAnimation(app, 'stop');
                                 } else if (typeOfEffect === 'fireball') {
+                                        app.ticker.remove(trailTicker);
                                         gameAssets.player.decayRate = 0.45;
                                         effects.onFireballHitAnimation(app, 'stop');
                                         fireballActive = false;
@@ -299,3 +301,36 @@ function magnetDragLogs(app) {
 
     app.ticker.add(onTick);
 }
+
+function onFireballTrail(app) {
+        const onTick = (time) => {
+            // Spawna en trail-sprite på boberns position varje frame
+            const trail = Sprite.from('fireball1'); // eller en egen flame-sprite
+            trail.anchor.set(0.5, 0.5);
+            trail.x = gameAssets.player.container.x;
+            trail.y = gameAssets.player.container.y;
+            trail.scale.set(0.1);
+            trail.alpha = 0.8;
+            app.stage.addChild(trail);
+    
+            let trailProgress = 0;
+    
+            const fadeOut = (time) => {
+                trailProgress += time.deltaTime * 0.1;
+                trail.alpha = 0.8 - trailProgress;
+                trail.scale.set(0.1 + trailProgress * 0.05);
+    
+                if (trailProgress >= 1) {
+                    app.ticker.remove(fadeOut);
+                    trail.destroy();
+                }
+            };
+    
+            app.ticker.add(fadeOut);
+        };
+    
+        app.ticker.add(onTick);
+        
+        // Returnera tickern så vi kan ta bort den när fireball-effekten tar slut
+        return onTick;
+    }
