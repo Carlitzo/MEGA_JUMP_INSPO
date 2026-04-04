@@ -75,14 +75,13 @@ const effects = {
             const thickness = 10;
             const glowFilter = new GlowFilter({
                 distance: 20,
-                outerStrength: 2,
+                outerStrength: 1,
                 innerStrength: 0,
                 color: 0x00ff00,
                 quality: 0.5,
             });
         
             border.filters = [glowFilter];
-            text.filters = [glowFilter];
 
             border.rect(0, 0, app.screen.width, app.screen.height);
             border.stroke({ color: 0x00ff00, width: thickness });
