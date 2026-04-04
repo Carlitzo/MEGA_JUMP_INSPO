@@ -164,8 +164,8 @@ const effects = {
                     returnObj = {};
 
                     glowFilter = new GlowFilter({
-                        distance: 30,
-                        outerStrength: 2,
+                        distance: 20,
+                        outerStrength: 1,
                         innerStrength: 0,
                         color: 0xCC1100,
                         quality: 0.5,
@@ -174,8 +174,8 @@ const effects = {
                     returnObj.filter = glowFilter;
 
                     onTick = () => {
-                        filter.outerStrength = 2 + Math.sin(Date.now() * 0.005) * 3;
-                        filter.alpha = 2 + Math.sin(Date.now() * 1.5) * 3
+                        filter.outerStrength = 1 + Math.sin(Date.now() * 0.005) * 2;
+                        filter.alpha = 1 + Math.sin(Date.now() * 1.5) * 2;
                     };
 
                     returnObj.tickerID = onTick;
