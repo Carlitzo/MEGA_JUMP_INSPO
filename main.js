@@ -2,7 +2,7 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 import { animationObj } from './preloadAssets.js';
 import { preloadAssets } from './preloadAssets.js';
 import { renderInitialAssets } from './renderInitialAssets.js';
-import { keys, latestKey } from './input.js';
+import { keys, input } from './input.js';
 import { renderLogs } from './renderLogs.js';
 import { Bober } from './bober.js';
 import { renderScore } from './renderScore.js';
@@ -61,11 +61,11 @@ let lowestAllowed = 0;
 
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
-                if (latestKey === 'ArrowLeft') {
+                if (input.latestKey === 'ArrowLeft') {
                         gameAssets.player.container.x -= dt;
                         gameAssets.player.setState('walking');
                         gameAssets.player.container.scale.x = -0.22;
-                } else if (latestKey === 'ArrowRight') {
+                } else if (input.latestKey === 'ArrowRight') {
                         gameAssets.player.container.x += dt;
                         gameAssets.player.setState('walking');
                         gameAssets.player.container.scale.x = 0.22;

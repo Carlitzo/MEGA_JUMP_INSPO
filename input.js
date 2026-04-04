@@ -1,17 +1,19 @@
 export const keys = {};
 
-export let latestKey = null;
+export const input = {
+    latestKey = null;
+}
 
 window.addEventListener('keydown', (e) =>  {
     keys[e.code] = true;
-    latestKey = e.code;
+    input.latestKey = e.code;
 });
 window.addEventListener('keyup', (e) => {
     keys[e.code] = false;
-    if (latestKey === e.code) {
-        if (keys['ArrowLeft']) latestKey = 'ArrowLeft';
-        else if (keys['ArrowRight']) latestKey = 'ArrowRight';
-        else latestKey = null;
+    if (input.latestKey === e.code) {
+        if (keys['ArrowLeft']) input.latestKey = 'ArrowLeft';
+        else if (keys['ArrowRight']) input.latestKey = 'ArrowRight';
+        else input.latestKey = null;
     }
 });
 
@@ -19,15 +21,15 @@ window.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         if (touch.clientX < window.innerWidth / 2) {
             keys['ArrowLeft'] = true;
-            latestKey = 'ArrowLeft';
+            input.latestKey = 'ArrowLeft';
         } else {
             keys['ArrowRight'] = true;
-            latestKey = 'ArrowRight';
+            input.latestKey = 'ArrowRight';
         }
 });
     
     window.addEventListener('touchend', () => {
         keys['ArrowLeft'] = false;
         keys['ArrowRight'] = false;
-        latestKey = null;
+        input.latestKey = null;
 });
