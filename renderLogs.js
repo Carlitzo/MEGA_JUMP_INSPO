@@ -1,11 +1,12 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { gameAssets, effects } from './main.js';
 import { getRandomInt } from './getRandomInt.js';
+import { fireballActive } from './gamePlayEffects.js';
 
 
 export async function renderLogs(app, chunk, initial = true) {
         
-        let logCount = 4;
+        let logCount = 5;
         const logContainer = new Container();
         const widthPadding = app.screen.width * 0.2;
         const heightPadding = app.screen.height * 0.02;
@@ -88,10 +89,13 @@ export async function renderLogs(app, chunk, initial = true) {
                                                 chainedLogBounds.y + chainedLogBounds.height > playerBounds.y
                                         ) {
                                                 hit = true;
-                                                if (gameAssets.player.velocityY > 15) {
-                                                        gameAssets.player.velocityY = 13;
-                                                } else {
-                                                        gameAssets.player.velocityY = 15;
+                                                
+                                                if (!fireballActive) {
+                                                        if (gameAssets.player.velocityY > 15) {
+                                                                gameAssets.player.velocityY = 13;
+                                                        } else {
+                                                                gameAssets.player.velocityY = 15;
+                                                        }
                                                 }
                                                 window.dispatchEvent(new CustomEvent('logHit'));
                                                 effects.onLogHitAnimation(app, chainedLogSprite);
@@ -123,10 +127,12 @@ export async function renderLogs(app, chunk, initial = true) {
                                 logBounds.y + logBounds.height > playerBounds.y
                         ) {
                                 hit = true;
-                                if (gameAssets.player.velocityY > 15) {
-                                        gameAssets.player.velocityY = 13;
-                                } else {
-                                        gameAssets.player.velocityY = 15;
+                                if (!fireballActive) {
+                                        if (gameAssets.player.velocityY > 15) {
+                                                gameAssets.player.velocityY = 13;
+                                        } else {
+                                                gameAssets.player.velocityY = 15;
+                                        }
                                 }
                                 window.dispatchEvent(new CustomEvent('logHit'));
                                 effects.onLogHitAnimation(app, logSprite);

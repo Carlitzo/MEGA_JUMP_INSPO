@@ -8,6 +8,7 @@ import { Bober } from './bober.js';
 import { renderScore } from './renderScore.js';
 import { score } from './renderScore.js';
 import { determineEffect } from './determineEffect.js';
+import { fireballActive } from "./gamePlayEffects.js";
 
 export const gameAssets = {
         collectibles: [],
@@ -117,7 +118,7 @@ async function startGame(app) {
         const onTick = (time) => {
                 const dx = time.deltaTime;
                 gameAssets.player.setState('flying');
-                gameAssets.player.velocityY -= gameAssets.player.decayRate * dx;
+                if (!fireballActive) gameAssets.player.velocityY -= gameAssets.player.decayRate * dx;
                 world.y += (gameAssets.player.velocityY * dx);
                 gameAssets.player.container.y = playerScreenY;
                 updateChunks(app);
@@ -141,7 +142,7 @@ async function launchCharacter(app) {
                 const onTick = (time) => {
                         const dx = time.deltaTime;
                         
-                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 2);                        
+                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 2);
 
                         if (gameAssets.player.container.y <= (app.screen.height / 2) + (gameAssets.player.container.height / 2)) {
                                 app.ticker.remove(onTick);
@@ -176,6 +177,10 @@ export async function updateChunks(app) {
                 bottomChunk.children
                         .filter(child => child.label === 'luckyCharm')
                         .forEach(child => child.destroy({children: true}));
+                
+                bottomChunk.children
+                        .filter(child => child.label === 'fireball')
+                        .forEach(child => child.destroy({children: true}));
 
                 bottomChunk.children
                         .filter(child => child.label === 'magnet')
@@ -183,7 +188,7 @@ export async function updateChunks(app) {
 
                 bottomChunk.y = newY;
 
-                if (chunkCounter === 2) {
+                if (chunkCounter === 3) {
                         determineEffect(bottomChunk, app);
                         chunkCounter = 0;
                 } else chunkCounter++;

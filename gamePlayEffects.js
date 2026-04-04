@@ -3,8 +3,8 @@ import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pix
 import { gameAssets, effects, isJuicy, world } from './main.js';
 
 export let multiplier = 7;
-// Lägga till funktion här för reset multiplier? Så vi kan resetta den när ett game avslutas?
 let magnetCount = 0;
+export let fireballActive = false;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
@@ -50,10 +50,12 @@ export const gamePlayEffects =  {
                         ) {
                                 console.log("hit luck");
                                 hit = true;
-                                if (gameAssets.player.velocityY > 15) {
-                                        gameAssets.player.velocityY = 13;
-                                } else {
-                                        gameAssets.player.velocityY = 15;
+                                if (!fireballActive) {
+                                        if (gameAssets.player.velocityY > 15) {
+                                                gameAssets.player.velocityY = 13;
+                                        } else {
+                                                gameAssets.player.velocityY = 15;
+                                        }
                                 }
                                 
                                 effects.onLuckyHitAnimation(app, 'start');
@@ -169,6 +171,7 @@ export const gamePlayEffects =  {
                 let hit = false;
                 
                 const onTick = (time) => {
+                        const dx = time.deltaTime;
 
                         if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
 
@@ -183,13 +186,13 @@ export const gamePlayEffects =  {
                                 fireBounds.y < playerBounds.y + playerBounds.height &&
                                 fireBounds.y + fireBounds.height > playerBounds.y
                         ) {
-                                console.log("hit fire");
+                                if (fireballActive) return;
+                                console.log("hit luck");
                                 hit = true;
-                                if (gameAssets.player.velocityY > 15) {
-                                        gameAssets.player.velocityY = 13;
-                                } else {
-                                        gameAssets.player.velocityY = 15;
-                                }
+                                fireballActive = true;
+
+                                gameAssets.player.velocityY = 20;
+                                gameAssets.player.decayRate = 0;
                                 
                                 effects.onFireballHitAnimation(app, 'start');
                                 fireball.destroy();
@@ -255,8 +258,11 @@ export const gamePlayEffects =  {
                                         multiplier -= 7;
                                         effects.onLuckyHitAnimation(app, 'stop');
                                 } else if (typeOfEffect === 'fireball') {
-                                        console.log("Stopping fireball speed")
+                                        gameAssets.player.decayRate = 0.45;
                                         effects.onFireballHitAnimation(app, 'stop');
+                                        fireballActive = false;
+                                        console.log("Stopping fireball speed")
+                                        gameAssets.player.velocityY = 15;
                                 }
                                 
                                 clearInterval(timer);

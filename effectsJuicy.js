@@ -58,7 +58,7 @@ const effects = {
         
             const thickness = 10;
             const glowFilter = new GlowFilter({
-                distance: 40,
+                distance: 20,
                 outerStrength: 2,
                 innerStrength: 0,
                 color: 0x00ff00,
