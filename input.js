@@ -1,8 +1,8 @@
 export const keys = {};
 
 export const input = {
-    latestKey = null;
-}
+    latestKey: null
+};
 
 window.addEventListener('keydown', (e) =>  {
     keys[e.code] = true;
