@@ -6,6 +6,7 @@ export let multiplier = 7;
 let magnetCount = 0;
 export let fireballActive = false;
 let fireballObj = null;
+let magnetActive = false;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
@@ -105,7 +106,8 @@ export const gamePlayEffects =  {
                                 magnetBounds.y < playerBounds.y + playerBounds.height &&
                                 magnetBounds.y + magnetBounds.height > playerBounds.y
                         ) {
-                                console.log("hit magnet");
+                                if (magnetActive) return;
+                                magnetActive = true;
                                 hit = true;
                                 if (gameAssets.player.velocityY > 17) {
                                         gameAssets.player.velocityY = 13;
@@ -113,7 +115,7 @@ export const gamePlayEffects =  {
                                         gameAssets.player.velocityY = 17;
                                 }
                                 
-                                effects.onMagnetHitAnimation(app, 'start');
+                                effects.onMagnetHitAnimation(app, 'start', gameAssets, magnetCount);
                                 magnetSprite.destroy();
                                 gamePlayEffects.startEffectTimer('magnet', app);
                                 magnetDragLogs(app);
@@ -250,7 +252,8 @@ export const gamePlayEffects =  {
                         if (number === 0) {
                                 if (typeOfEffect === 'magnet') {
                                         magnetCount--;
-                                        
+                                        magnetActive = false;
+                                        effects.onMagnetHitAnimation(app, 'stop', gameAssets, magnetCount);
                                 } else if (typeOfEffect === 'luckyCharm') {
                                         console.log("Clearing multiplier")
                                         multiplier -= 7;

@@ -1,6 +1,9 @@
 import { Application, Sprite, Container, Assets, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
 
+let magnetTimer = null;
+let circles = [];
+
 const effects = {
         onLogHitAnimation: (app, logSprite) => {
                 const position = logSprite.getGlobalPosition();
@@ -108,8 +111,54 @@ const effects = {
         
             app.ticker.add(onTick);
         },
-        onMagnetHitAnimation: (app, state) => {
+        onMagnetHitAnimation: (app, state, gameAssets, count) => {
+            if (state === "stop") {
+                
+                gameAssets.player.container.children
+                    .filter(child => child.label === 'magnetCircle')
+                    .forEach(child => child.destroy({ children: true }));
+                return;
+            }
 
+            const smallRadius = gameAssets.player.container.height * 1;
+            const mediumRadius = gameAssets.player.container.height * 1.5;
+            const bigRadius = gameAssets.player.container.height * 2;
+            const maxSize = gameAssets.player.container.height * 2.5;
+
+            circles = [smallRadius, mediumRadius, bigRadius].map((startRadius, index) => {
+                const startColor = index === 1 ? 0x880808 : 0x0018F9; // middle one starts red
+                const circle = new Graphics();
+                circle.label = 'magnetCircle';
+                circle.circle(0, 0, startRadius);
+                circle.fill({ color: 0x000000, alpha: 0 });
+                circle.stroke({ color: startColor, width: 10 });
+                gameAssets.player.container.addChild(circle);
+                return { graphic: circle, radius: startRadius, color: startColor };
+            });
+
+            const onTick = (time) => {
+                const dx = time.deltaTime;
+                circles.forEach(c => {
+                    
+                    if (!c.graphic || c.graphic.destroyed) {
+                        app.ticker.remove(onTick);
+                        return;
+                    }
+
+                    c.radius += 1.5 * dx;
+                    if (c.radius >= maxSize) {
+                        c.radius = smallRadius;
+                        // toggle color on reset
+                        c.color = c.color === 0x0018F9 ? 0x880808 : 0x0018F9;
+                    }
+                    c.graphic.clear();
+                    c.graphic.circle(0, 0, c.radius);
+                    c.graphic.fill({ color: 0x000000, alpha: 0 });
+                    c.graphic.stroke({ color: c.color, width: 3 });
+                });
+            };
+
+            app.ticker.add(onTick);
         },
         onFireballHitAnimation: (app, world) => {
 
