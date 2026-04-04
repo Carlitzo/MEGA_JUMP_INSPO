@@ -2,7 +2,7 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 import { animationObj } from './preloadAssets.js';
 import { preloadAssets } from './preloadAssets.js';
 import { renderInitialAssets } from './renderInitialAssets.js';
-import { keys } from './input.js';
+import { keys, latestKey } from './input.js';
 import { renderLogs } from './renderLogs.js';
 import { Bober } from './bober.js';
 import { renderScore } from './renderScore.js';
@@ -57,13 +57,16 @@ let lowestAllowed = 0;
 
         await preloadAssets(app);
 
+        app.canvas.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        app.canvas.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
+
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
-                if (keys['ArrowLeft']) {
+                if (latestKey === 'ArrowLeft') {
                         gameAssets.player.container.x -= dt;
                         gameAssets.player.setState('walking');
                         gameAssets.player.container.scale.x = -0.22;
-                } else if (keys['ArrowRight']) {
+                } else if (latestKey === 'ArrowRight') {
                         gameAssets.player.container.x += dt;
                         gameAssets.player.setState('walking');
                         gameAssets.player.container.scale.x = 0.22;

@@ -1,7 +1,19 @@
 export const keys = {};
 
-window.addEventListener('keydown', (e) => keys[e.code] = true );
-window.addEventListener('keyup', (e) => keys[e.code] = false );
+export let latestKey = null;
+
+window.addEventListener('keydown', (e) =>  {
+    keys[e.code] = true;
+    latestKey = e.code;
+});
+window.addEventListener('keyup', (e) => {
+    keys[e.code] = false;
+    if (latestKey === e.code) {
+        if (keys['ArrowLeft']) latestKey = 'ArrowLeft';
+        else if (keys['ArrowRight']) latestKey = 'ArrowRight';
+        else latestKey = null;
+    }
+});
 
 window.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
