@@ -101,8 +101,6 @@ const effects = {
                 if (progress >= 1) {
                     text.destroy();
                 }
-                
-                glowFilter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
         
                 if (border.destroyed) {
                     app.ticker.remove(onTick);
