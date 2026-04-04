@@ -232,7 +232,6 @@ async function sendGameToDB() {
 
 async function resetGame(app, ticker) {
         
-        
         app.ticker.remove(ticker);
         await sendGameToDB();
         world.removeChildren();
@@ -243,8 +242,12 @@ async function resetGame(app, ticker) {
         lowestAllowed = 0;
         world.y = 0;
         document.getElementById("scoreBG").remove();
-        const existing = app.stage.getChildByName('luckyBorder');
-        if (existing) existing.destroy();
+
+        const luckyBorder = app.stage.getChildByName('luckyBorder');
+        if (luckyBorder) luckyBorder.destroy();
+
+        const magnetBorder = app.stage.getChildByName('magnetBorder');
+        if (magnetBorder) magnetBorder.destroy();
 
         gameAssets.player = new Bober(app, animationObj);
 

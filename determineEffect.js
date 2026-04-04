@@ -6,7 +6,7 @@ export function determineEffect(chunk, app) {
         let effectsArray = ['magnet', 'luckyCharm', 'fireball'];
         
         // let effect = getRandomInt(effectsArray.length);
-        let effect = 2;
+        let effect = 0;
 
         switch (effect) {
                 case 0:

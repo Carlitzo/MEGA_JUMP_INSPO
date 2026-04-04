@@ -1,9 +1,10 @@
 import { Sprite, Container, Assets, Graphics, AnimatedSprite, Texture } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
-import { gameAssets, effects, isJuicy } from './main.js';
+import { gameAssets, effects, isJuicy, world } from './main.js';
 
 export let multiplier = 7;
 // Lägga till funktion här för reset multiplier? Så vi kan resetta den när ett game avslutas?
+let magnetActive = false;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
@@ -70,10 +71,57 @@ export const gamePlayEffects =  {
                 chunk.addChild(luckSprite);
         },
         onMagnet: (chunk, app) => {
+                const magnetSprite = Sprite.from('magnet');
+                magnetSprite.label = 'magnet';
+
+                const widthPadding = app.screen.width * 0.2;
+                const heightPadding = app.screen.height * 0.2;
+                
+                const magnetX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
+                const magnetY = (-app.screen.height + heightPadding) + Math.random() * (app.screen.height - heightPadding * 2);
+                
+                magnetSprite.anchor.set(0.5, 0.5);
+                magnetSprite.x = magnetX;
+                magnetSprite.y = magnetY;
+                magnetSprite.scale.set(0.22);
+                magnetSprite.roundPixels = true;
+                                
+                let hit = false;
+
+                const onTick = (time) => {
+                        
+                        if (hit) return;
+
+                        const magnetBounds = magnetSprite.getBounds();
+                        const playerBounds = gameAssets.player.playerHitbox.bounds;
+
+                        if (
+                                magnetBounds.x < playerBounds.x + playerBounds.width &&
+                                magnetBounds.x + magnetBounds.width > playerBounds.x &&
+                                magnetBounds.y < playerBounds.y + playerBounds.height &&
+                                magnetBounds.y + magnetBounds.height > playerBounds.y
+                        ) {
+                                console.log("hit magnet");
+                                hit = true;
+                                if (gameAssets.player.velocityY > 15) {
+                                        gameAssets.player.velocityY = 13;
+                                } else {
+                                        gameAssets.player.velocityY = 15;
+                                }
+                                
+                                effects.onMagnetHitAnimation(app, 'start');
+                                magnetSprite.destroy();
+                                gamePlayEffects.startEffectTimer('magnet', app);
+                        };
+                }
+                
+                app.ticker.add(onTick);
+                magnetSprite.on('destroyed', () => {
+                        app.ticker.remove(onTick);
+                });
+                chunk.addChild(magnetSprite);
 
                 
-
-                startEffectTimer('magnet', app);
         },
         onFireball: (chunk, app) => {
 
@@ -135,7 +183,7 @@ export const gamePlayEffects =  {
                                 fireBounds.y < playerBounds.y + playerBounds.height &&
                                 fireBounds.y + fireBounds.height > playerBounds.y
                         ) {
-                                console.log("hit luck");
+                                console.log("hit fire");
                                 hit = true;
                                 if (gameAssets.player.velocityY > 15) {
                                         gameAssets.player.velocityY = 13;
@@ -173,6 +221,7 @@ export const gamePlayEffects =  {
                 if (typeOfEffect === 'magnet') {
                         collectibleImg.src = './Assets/Collectibles/Magnet.png';
                         numberDisplay.style.color = 'blue';
+                        magnetDragLogs(app);
                 } else if (typeOfEffect === 'luckyCharm') {
                         collectibleImg.src = './Assets/Collectibles/Luck.png';
                         numberDisplay.style.color = '0x00ff00';
@@ -199,7 +248,8 @@ export const gamePlayEffects =  {
 
                         if (number === 0) {
                                 if (typeOfEffect === 'magnet') {
-
+                                        magnetActive = false;
+                                        
                                 } else if (typeOfEffect === 'luckyCharm') {
                                         console.log("Clearing multiplier")
                                         multiplier -= 7;
@@ -214,4 +264,35 @@ export const gamePlayEffects =  {
                         };
                 }, 1000);
         }
+}
+
+function magnetDragLogs(app) {
+    magnetActive = true;
+
+    const onTick = (time) => {
+        if (!magnetActive) {
+            app.ticker.remove(onTick);
+            return;
+        }
+
+        const playerBounds = gameAssets.player.playerHitbox.bounds;
+
+        world.children.forEach(chunk => {
+            chunk.children.forEach(child => {
+                if (child.label !== 'logContainer') return;
+                child.children.forEach(log => {
+                    if (!log || log.destroyed) return;
+
+                    const logScreenPos = log.getGlobalPosition();
+                    if (logScreenPos.y < playerBounds.y) return;
+
+                    const localTarget = log.parent.toLocal(playerBounds);
+                    log.x += (localTarget.x - log.x) * 0.2 * time.deltaTime;
+                    log.y += (localTarget.y - log.y) * 0.2 * time.deltaTime;
+                });
+            });
+        });
+    };
+
+    app.ticker.add(onTick);
 }
