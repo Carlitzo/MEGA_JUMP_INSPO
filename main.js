@@ -58,7 +58,6 @@ let lowestAllowed = 0;
         await preloadAssets(app);
 
         app.canvas.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
-        app.canvas.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
 
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
