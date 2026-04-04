@@ -196,7 +196,6 @@ const effects = {
                     returnObj.filter = glowFilter;
 
                     onTick = () => {
-                        filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
                         filter.alpha = 4 + Math.sin(Date.now() * 1.5) * 3
                     };
 
