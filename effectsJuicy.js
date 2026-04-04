@@ -187,7 +187,7 @@ const effects = {
                 case 'luckyCharm':
                     glowFilter = new GlowFilter({
                         distance: 20,
-                        outerStrength: 2,
+                        outerStrength: 1,
                         innerStrength: 0,
                         color: 0x00ff00,
                         quality: 0.5,
