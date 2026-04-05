@@ -95,7 +95,7 @@ function renderStartScreen(app) {
         img.src = './Assets/UI_Assets/Play.png';
         img.id = 'startGameBtn';
 
-        img.addEventListener("click", startGameButton);
+        img.addEventListener("pointerup", startGameButton);
 }
 
 function startGameButton(event) {
@@ -104,7 +104,7 @@ function startGameButton(event) {
                 image.style.filter = 'drop-shadow(0 0 0.4rem white)';
         }
 
-        let img = event.currentTarget;
+        const img = event.currentTarget;
         
         clickedButton(img);
         setTimeout(() => {
