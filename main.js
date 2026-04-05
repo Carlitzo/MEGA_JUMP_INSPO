@@ -82,8 +82,6 @@ let lowestAllowed = 0;
                 const halfWidth = gameAssets.player.container.width / 8;
                 gameAssets.player.container.x = Math.max(halfWidth, Math.min(app.screen.width - halfWidth, gameAssets.player.container.x));
         });
-
-        renderStartScreen(app);
 })();
 
 function renderStartScreen(app) {
