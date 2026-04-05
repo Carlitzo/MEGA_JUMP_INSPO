@@ -27,6 +27,16 @@ Deno.serve(async (request) => {
         return Response.json({ versionFlag: isEven, version });
     }
 
+    // Returns ALL entries
+    if (url.pathname === "/getAll" && request.method === "GET") {
+        const entries = [];
+        const iter = kv.list({ prefix: ["games"] });
+        for await (const entry of iter) {
+            entries.push(entry.value);
+        }
+        return Response.json(entries);
+    }
+
     // Game finishes -> saves everything to database, including version
     // NOTE: Make sure v1 and v2 are aligned with what we want if we even care lmao?
     if (url.pathname === "/finish" && request.method === "POST") {
