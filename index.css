@@ -196,6 +196,8 @@ canvas {
         content: '';
         animation: dots 1.5s steps(3, end) infinite;
         color: white;
+        font-family: "woodFont";
+        font-size: 2rem;
 }
     
 @keyframes dots {
