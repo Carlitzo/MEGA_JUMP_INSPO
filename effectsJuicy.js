@@ -48,16 +48,16 @@ const effects = {
                 app.ticker.add(onTick);
         },
         onLuckyHitAnimation: (app, state) => {
+
             if (state === 'stop') {
-                const existing = app.stage.getChildByName('luckyBorder');
-                if (existing) {
-                    existing.destroy();
-                };
+                const existing = document.getElementById('luckyBorder');
+                if (existing) existing.remove();
                 return;
-            };
+            }
         
-            const border = new Graphics();
-            border.label = 'luckyBorder';
+            const borderDiv = document.createElement('div');
+            borderDiv.id = 'luckyBorder';
+            document.body.appendChild(borderDiv);
 
             const text = new Text({
                 text: `X 2`,
@@ -71,22 +71,7 @@ const effects = {
             text.anchor.set(0.5, 0.5);
             text.x = app.screen.width / 2;
             text.y = app.screen.height / 2;
-        
-            const thickness = 10;
-            const glowFilter = new GlowFilter({
-                distance: 20,
-                outerStrength: 1,
-                innerStrength: 0,
-                color: 0x00ff00,
-                quality: 0.5,
-            });
-        
-            border.filters = [glowFilter];
 
-            border.rect(0, 0, app.screen.width, app.screen.height);
-            border.stroke({ color: 0x00ff00, width: thickness });
-        
-            app.stage.addChild(border);
             app.stage.addChild(text);
 
             let progress = 0;
@@ -101,7 +86,7 @@ const effects = {
                     text.destroy();
                 }
         
-                if (border.destroyed) {
+                if (!document.getElementById("luckyBorder")) {
                     app.ticker.remove(onTick);
                 }
             };
