@@ -230,7 +230,7 @@ export const gamePlayEffects =  {
                 computer.anchor.set(0.5, 0.5);
                 computer.x = computerX;
                 computer.y = computerY;
-                computer.scale.set(1.5);
+                computer.scale.set(0.22);
                 computer.roundPixels = true;
 
                 let asciiFilter = undefined;
