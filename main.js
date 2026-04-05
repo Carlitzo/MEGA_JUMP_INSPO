@@ -104,7 +104,8 @@ function startGameButton(event) {
                 image.style.filter = 'drop-shadow(0 0 0.4rem white)';
         }
 
-        const img = event.currentTarget;
+        const img = document.getElementById('startGameBtn');
+        if (!img) return;
         
         clickedButton(img);
         setTimeout(() => {
