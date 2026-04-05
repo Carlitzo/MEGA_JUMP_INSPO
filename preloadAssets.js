@@ -8,7 +8,7 @@ export async function preloadAssets (app) {
 
         const loadingText = document.getElementById('loadingText');
 
-        loadingText.innerHTML = 'Laddar bakgrunder<span id="dots"></span>';
+        loadingText.innerHTML = 'Loading backgrounds<span id="dots"></span>';
 
         await Assets.load({
                 alias: 'backgroundWithStart',
@@ -28,7 +28,7 @@ export async function preloadAssets (app) {
                 walkingFrames: []
         };
 
-        loadingText.innerHTML = 'Laddar karaktärer<span id="dots"></span>';
+        loadingText.innerHTML = 'Loading character<span id="dots"></span>';
 
         for (let i = 0; i < 20; i++) {
                 const number = String(i).padStart(2, '0');
@@ -41,7 +41,7 @@ export async function preloadAssets (app) {
         await Assets.load('./Assets/Character/Character.json');
         gameAssets.player = new Bober(app, animationObj);
 
-        loadingText.innerHTML = 'Laddar collectibles<span id="dots"></span>';
+        loadingText.innerHTML = 'Loading collectibles<span id="dots"></span>';
         
         await Assets.load({ alias: 'smolLog', src: './Assets/Collectibles/smolLog.png'});
         await Assets.load({ alias: 'magnet', src: './Assets/Collectibles/Magnet.png'});
