@@ -2,22 +2,22 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 
 const effects = {
         onLogHitAnimation: (app, logSprite) => {
-
+                return undefined;
         },
         onLuckyHitAnimation: (app, state) => {
-
+                return undefined;
         },
         onMagnetHitAnimation: (app, state, gameAssets, count) => {
-
+                return undefined;
         },
         onFireballHitAnimation: (app, world) => {
-
+                return undefined;
         },
         onComputerHitAnimation: (app, state) => {
-
+                return undefined;
         },
-        applyStaticEffect: (app, effectType, sprite = null) => {
-                
+        applyStaticEffects: (app, effectType, sprite = null) => {
+                return undefined;
         }
 }
 

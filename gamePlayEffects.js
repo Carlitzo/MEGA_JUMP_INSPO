@@ -331,8 +331,10 @@ export const gamePlayEffects =  {
                                 } else if (typeOfEffect === 'fireball') {
                                         app.ticker.remove(trailTicker);
                                         gameAssets.player.decayRate = 0.55;
-                                        app.ticker.remove(fireballObj.ticker);
-                                        world.x = fireballObj.originalX;
+                                        if (fireballObj) {
+                                                app.ticker.remove(fireballObj.ticker);
+                                                world.x = fireballObj.originalX;
+                                        }
                                         fireballActive = false;
                                         console.log("Stopping fireball speed")
                                         gameAssets.player.velocityY = 19;
