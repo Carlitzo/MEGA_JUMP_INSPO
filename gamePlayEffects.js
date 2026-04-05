@@ -242,6 +242,7 @@ export const gamePlayEffects =  {
                 document.body.appendChild(effectBGContainer);
 
                 let number = 4;
+                if (typeOfEffect === 'luckyCharm') number = 8;
 
                 numberDisplay.textContent = number;
 

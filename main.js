@@ -57,6 +57,12 @@ let lowestAllowed = 0;
 
         await preloadAssets(app);
 
+        const loadingScreen = document.getElementById('loadingScreen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => loadingScreen.remove(), 500);
+
+        renderStartScreen(app);
+
         app.canvas.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 
         app.ticker.add((time) => {
