@@ -52,6 +52,7 @@ export const gamePlayEffects =  {
                                 luckBounds.y + luckBounds.height > playerBounds.y
                         ) {
                                 console.log("hit luck");
+                                if (!gameAssets.player.playerHitbox.active) return;
                                 hit = true;
                                 if (!fireballActive) {
                                         if (gameAssets.player.velocityY > 19) {
@@ -108,6 +109,7 @@ export const gamePlayEffects =  {
                                 magnetBounds.y + magnetBounds.height > playerBounds.y
                         ) {
                                 if (magnetActive) return;
+                                if (!gameAssets.player.playerHitbox.active) return;
                                 magnetActive = true;
                                 hit = true;
                                 if (gameAssets.player.velocityY > 19) {
@@ -192,6 +194,7 @@ export const gamePlayEffects =  {
                                 fireBounds.y + fireBounds.height > playerBounds.y
                         ) {
                                 if (fireballActive) return;
+                                if (!gameAssets.player.playerHitbox.active) return;
                                 console.log("hit fireball");
                                 hit = true;
                                 fireballActive = true;
@@ -216,6 +219,7 @@ export const gamePlayEffects =  {
         },
         onComputer: (chunk, app) => {
                 const computer = Sprite.from('computer');
+                computer.label = 'computer';
 
                 const widthPadding = app.screen.width * 0.2;
                 const heightPadding = app.screen.height * 0.2;
@@ -250,6 +254,7 @@ export const gamePlayEffects =  {
                                 computerBounds.y + computerBounds.height > playerBounds.y
                         ) {
                                 if (computerActive) return;
+                                if (!gameAssets.player.playerHitbox.active) return;
                                 console.log("hit computer");
                                 hit = true;
                                 computerActive = true;

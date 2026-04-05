@@ -29,6 +29,7 @@ export class Bober {
                 this.current.play();
 
                 this.playerHitbox = {
+                        active: true,
                         get bounds() {
                                 const b = gameAssets.player.container.getBounds();
                                 const shrinkX = b.width * 0.4;

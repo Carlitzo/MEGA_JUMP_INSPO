@@ -88,6 +88,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                                 chainedLogBounds.y < playerBounds.y + playerBounds.height &&
                                                 chainedLogBounds.y + chainedLogBounds.height > playerBounds.y
                                         ) {
+                                                if (!gameAssets.player.playerHitbox.active) return;
                                                 hit = true;
                                                 
                                                 if (!fireballActive) {
@@ -126,6 +127,7 @@ export async function renderLogs(app, chunk, initial = true) {
                                 logBounds.y < playerBounds.y + playerBounds.height &&
                                 logBounds.y + logBounds.height > playerBounds.y
                         ) {
+                                if (!gameAssets.player.playerHitbox.active) return;
                                 hit = true;
                                 if (!fireballActive) {
                                         if (gameAssets.player.velocityY > 19) {

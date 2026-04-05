@@ -191,6 +191,10 @@ export async function updateChunks(app) {
                         .filter(child => child.label === 'magnet')
                         .forEach(child => child.destroy({children: true}));
 
+                bottomChunk.children
+                        .filter(child => child.label === 'computer')
+                        .forEach(child => child.destroy({children: true}));
+
                 bottomChunk.y = newY;
 
                 if (chunkCounter === 3) {
@@ -208,6 +212,7 @@ function terminateGame(app, ticker) {
         console.log(`Game lasted ${seconds} seconds`);
         app.ticker.remove(ticker);
         gameStarted = false;
+        gameAssets.player.playerHitbox.active = false;
 
         const onTick = async (time) => {
                 let dx = time.deltaTime;
@@ -248,24 +253,28 @@ async function resetGame(app, ticker) {
         
         app.ticker.remove(ticker);
         await sendGameToDB();
-        world.removeChildren();
+        fadeTransition(() => {
+                world.removeChildren();
+                
+                chunks = [];
+                startTime = null;
+                currentHighest = 0;
+                lowestAllowed = 0;
+                world.y = 0;
+                document.getElementById("scoreBG").remove();
+
+                const luckyBorder = app.stage.getChildByName('luckyBorder');
+                if (luckyBorder) luckyBorder.destroy();
+
+                const magnetBorder = app.stage.getChildByName('magnetBorder');
+                if (magnetBorder) magnetBorder.destroy();
+
+                gameAssets.player = new Bober(app, animationObj);
+
         
-        chunks = [];
-        startTime = null;
-        currentHighest = 0;
-        lowestAllowed = 0;
-        world.y = 0;
-        document.getElementById("scoreBG").remove();
-
-        const luckyBorder = app.stage.getChildByName('luckyBorder');
-        if (luckyBorder) luckyBorder.destroy();
-
-        const magnetBorder = app.stage.getChildByName('magnetBorder');
-        if (magnetBorder) magnetBorder.destroy();
-
-        gameAssets.player = new Bober(app, animationObj);
-
-        renderStartScreen(app);
+                renderStartScreen(app);
+                gameAssets.player.playerHitbox.active = true;
+        });
 }
 
 export async function createChunk(worldY, app, bgAlias, addLogs = false, initialChunk = false) {
@@ -292,4 +301,24 @@ export async function createChunk(worldY, app, bgAlias, addLogs = false, initial
                 await renderLogs(app, bgContainer, initialChunk);
         }
         return background;
+}
+
+function fadeTransition(onMidpoint) {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.inset = '0';
+    overlay.style.backgroundColor = '#491b11';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.5s ease';
+    overlay.style.zIndex = '100';
+    overlay.style.pointerEvents = 'none';
+    document.body.appendChild(overlay);
+
+    setTimeout(() => overlay.style.opacity = '1', 15);
+
+    setTimeout(() => {
+        onMidpoint();
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.remove(), 500);
+    }, 550);
 }
