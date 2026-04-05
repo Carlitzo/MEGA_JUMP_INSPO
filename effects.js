@@ -4,16 +4,19 @@ const effects = {
         onLogHitAnimation: (app, logSprite) => {
 
         },
-        onLuckyHitAnimation: (app) => {
+        onLuckyHitAnimation: (app, state) => {
 
         },
-        onMagnetHitAnimation: (app) => {
+        onMagnetHitAnimation: (app, state, gameAssets, count) => {
 
         },
-        onFireballHitAnimation: (app) => {
+        onFireballHitAnimation: (app, world) => {
 
         },
-        applyStaticEffect: (app) => {
+        onComputerHitAnimation: (app, state) => {
+
+        },
+        applyStaticEffect: (app, effectType, sprite = null) => {
                 
         }
 }

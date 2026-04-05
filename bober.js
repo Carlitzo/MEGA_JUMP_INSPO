@@ -4,8 +4,8 @@ import { gameAssets } from './main.js';
 export class Bober {
         constructor(app, animationObj) {
                 this.velocityX = 0;
-                this.velocityY = 17
-                this.decayRate = 0.45;
+                this.velocityY = 19
+                this.decayRate = 0.55;
 
                 this.animations = {
                         idle: AnimatedSprite.fromFrames(animationObj.idleFrames),

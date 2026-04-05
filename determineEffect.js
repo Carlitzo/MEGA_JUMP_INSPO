@@ -4,7 +4,7 @@ import { effects } from "./main.js";
 import { fireballActive } from "./gamePlayEffects.js";
 
 export function determineEffect(chunk, app) {
-        let effectsArray = ['magnet', 'luckyCharm', 'fireball'];
+        let effectsArray = ['magnet', 'luckyCharm', 'fireball', 'computer'];
         
         let effect = getRandomInt(effectsArray.length);
 
@@ -21,6 +21,9 @@ export function determineEffect(chunk, app) {
                 break;
                 case 2:
                         gamePlayEffects.onFireball(chunk, app);
+                break;
+                case 3:
+                        gamePlayEffects.onComputer(chunk, app);
                 break;
         };
 }

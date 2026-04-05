@@ -91,10 +91,10 @@ export async function renderLogs(app, chunk, initial = true) {
                                                 hit = true;
                                                 
                                                 if (!fireballActive) {
-                                                        if (gameAssets.player.velocityY > 15) {
-                                                                gameAssets.player.velocityY = 13;
-                                                        } else {
+                                                        if (gameAssets.player.velocityY > 19) {
                                                                 gameAssets.player.velocityY = 15;
+                                                        } else {
+                                                                gameAssets.player.velocityY = 19;
                                                         }
                                                 }
                                                 window.dispatchEvent(new CustomEvent('logHit'));
@@ -128,10 +128,10 @@ export async function renderLogs(app, chunk, initial = true) {
                         ) {
                                 hit = true;
                                 if (!fireballActive) {
-                                        if (gameAssets.player.velocityY > 15) {
-                                                gameAssets.player.velocityY = 13;
-                                        } else {
+                                        if (gameAssets.player.velocityY > 19) {
                                                 gameAssets.player.velocityY = 15;
+                                        } else {
+                                                gameAssets.player.velocityY = 19;
                                         }
                                 }
                                 window.dispatchEvent(new CustomEvent('logHit'));

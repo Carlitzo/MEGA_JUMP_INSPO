@@ -55,5 +55,6 @@ export async function preloadAssets (app) {
                 { alias: 'fireball5', src: './Assets/Collectibles/fireball/5.png' },
                 { alias: 'fireball6', src: './Assets/Collectibles/fireball/6.png' },
                 { alias: 'fireball7', src: './Assets/Collectibles/fireball/7.png' },
-        ])
+        ]);
+        await Assets.load({ alias: 'computer', src: './Assets/Collectibles/Computer.png'});
 }

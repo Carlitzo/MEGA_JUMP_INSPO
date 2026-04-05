@@ -7,6 +7,7 @@ let magnetCount = 0;
 export let fireballActive = false;
 let fireballObj = null;
 let magnetActive = false;
+let computerActive = false;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
@@ -53,10 +54,10 @@ export const gamePlayEffects =  {
                                 console.log("hit luck");
                                 hit = true;
                                 if (!fireballActive) {
-                                        if (gameAssets.player.velocityY > 17) {
-                                                gameAssets.player.velocityY = 13;
+                                        if (gameAssets.player.velocityY > 19) {
+                                                gameAssets.player.velocityY = 15;
                                         } else {
-                                                gameAssets.player.velocityY = 17;
+                                                gameAssets.player.velocityY = 19;
                                         }
                                 }
                                 
@@ -109,10 +110,10 @@ export const gamePlayEffects =  {
                                 if (magnetActive) return;
                                 magnetActive = true;
                                 hit = true;
-                                if (gameAssets.player.velocityY > 17) {
-                                        gameAssets.player.velocityY = 13;
+                                if (gameAssets.player.velocityY > 19) {
+                                        gameAssets.player.velocityY = 15;
                                 } else {
-                                        gameAssets.player.velocityY = 17;
+                                        gameAssets.player.velocityY = 19;
                                 }
                                 
                                 effects.onMagnetHitAnimation(app, 'start', gameAssets, magnetCount);
@@ -213,6 +214,67 @@ export const gamePlayEffects =  {
 
                 chunk.addChild(fireball);
         },
+        onComputer: (chunk, app) => {
+                const computer = Sprite.from('computer');
+
+                const widthPadding = app.screen.width * 0.2;
+                const heightPadding = app.screen.height * 0.2;
+                
+                const computerX = (-app.screen.width / 2) + widthPadding + Math.random() * (app.screen.width - widthPadding * 2);
+                const computerY = (-app.screen.height + heightPadding) + Math.random() * (app.screen.height - heightPadding * 2);
+
+                computer.anchor.set(0.5, 0.5);
+                computer.x = computerX;
+                computer.y = computerY;
+                computer.scale.set(1.5);
+                computer.roundPixels = true;
+
+                let asciiFilter = undefined;
+
+                if (asciiFilter) fireball.filters = [asciiFilter.filter];
+
+                let hit = false;
+
+                const onTick = (time) => {
+                        const dx = time.deltaTime;
+
+                        if (hit) return;
+
+                        const computerBounds = computer.getBounds();
+                        const playerBounds = gameAssets.player.playerHitbox.bounds;
+
+                        if (
+                                computerBounds.x < playerBounds.x + playerBounds.width &&
+                                computerBounds.x + computerBounds.width > playerBounds.x &&
+                                computerBounds.y < playerBounds.y + playerBounds.height &&
+                                computerBounds.y + computerBounds.height > playerBounds.y
+                        ) {
+                                if (computerActive) return;
+                                console.log("hit computer");
+                                hit = true;
+                                computerActive = true;
+                                if (!fireballActive) {
+                                        if (gameAssets.player.velocityY > 19) {
+                                                gameAssets.player.velocityY = 15;
+                                        } else {
+                                                gameAssets.player.velocityY = 19;
+                                        }
+                                }
+                                
+                                effects.onComputerHitAnimation(app, 'start', world);
+                                computer.destroy();
+                                gamePlayEffects.startEffectTimer('computer', app);
+                        };
+                }
+                
+                app.ticker.add(onTick);
+                computer.on('destroyed', () => {
+                        app.ticker.remove(onTick);
+                        if (asciiFilter) app.ticker.remove(asciiFilter.tickerID);
+                });
+
+                chunk.addChild(computer);
+        },
         startEffectTimer: (typeOfEffect, app, trailTicker = null) => {
                 const effectBGContainer = document.createElement("div");
                 const numberContainer = document.createElement("div");
@@ -232,6 +294,8 @@ export const gamePlayEffects =  {
                         collectibleImg.src = './Assets/Collectibles/Luck.png';
                 } else if (typeOfEffect === 'fireball') {
                         collectibleImg.src = './Assets/Collectibles/fireball/10.png';
+                } else if (typeOfEffect === 'computer') {
+                        collectibleImg.src = './Assets/Collectibles/Computer.png';
                 }
 
                 numberContainer.appendChild(numberDisplay);
@@ -261,12 +325,15 @@ export const gamePlayEffects =  {
                                         effects.onLuckyHitAnimation(app, 'stop');
                                 } else if (typeOfEffect === 'fireball') {
                                         app.ticker.remove(trailTicker);
-                                        gameAssets.player.decayRate = 0.45;
+                                        gameAssets.player.decayRate = 0.55;
                                         app.ticker.remove(fireballObj.ticker);
                                         world.x = fireballObj.originalX;
                                         fireballActive = false;
                                         console.log("Stopping fireball speed")
-                                        gameAssets.player.velocityY = 15;
+                                        gameAssets.player.velocityY = 19;
+                                } else if (typeOfEffect === 'computer') {
+                                        effects.onComputerHitAnimation(app, 'stop', world);
+                                        computerActive = false;
                                 }
                                 
                                 clearInterval(timer);

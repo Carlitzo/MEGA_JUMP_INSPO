@@ -1,5 +1,5 @@
 import { Application, Sprite, Container, Assets, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
+import { GlowFilter, AsciiFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
 
 let magnetTimer = null;
 let circles = [];
@@ -158,6 +158,23 @@ const effects = {
             app.ticker.add(onTick);
 
             return returnObj;
+        },
+        onComputerHitAnimation: (app, state, world) => {
+
+            if (state === 'stop') {
+                world.filters = [];
+                app.renderer.background.color = 0x491b11;
+                return;
+            } else {
+                const asciiFilter = new AsciiFilter({
+                    size: 1.5,
+                    color: 0xffffff
+                });
+    
+                world.filters = [asciiFilter];
+                app.renderer.background.color = 0x000000;
+            }
+
         },
         applyStaticEffects: (app, effectType, sprite = null) => {
 
