@@ -281,13 +281,30 @@ export const gamePlayEffects =  {
                 chunk.addChild(computer);
         },
         startEffectTimer: (typeOfEffect, app, trailTicker = null) => {
+                let allEffects = document.getElementById("allEffects");
+
+                let type = document.getElementById(typeOfEffect);
+
+                if (!allEffects) {
+                        allEffects = document.createElement("div");
+                        allEffects.id = 'allEffects';
+                        document.body.appendChild(allEffects);
+                }
+
+                const nodeList = document.querySelectorAll('.effectBGContainer');
+
+                nodeList.forEach( (ele) => {
+                        if (ele.id === typeOfEffect) ele.remove();
+                });
+
                 const effectBGContainer = document.createElement("div");
                 const numberContainer = document.createElement("div");
                 const imgContainer = document.createElement("div");
                 const numberDisplay = document.createElement("p");
                 const collectibleImg = document.createElement("img");
 
-                effectBGContainer.id = 'effectBGContainer';
+                effectBGContainer.classList.add('effectBGContainer');
+                effectBGContainer.id = typeOfEffect;
                 numberContainer.id = 'numberContainer';
                 imgContainer.id = 'imgContainer';
                 numberDisplay.id = 'numberDisplay';
@@ -300,6 +317,7 @@ export const gamePlayEffects =  {
                 } else if (typeOfEffect === 'fireball') {
                         collectibleImg.src = './Assets/Collectibles/fireball/10.png';
                 } else if (typeOfEffect === 'computer') {
+                        numberDisplay.style.color = 'white';
                         collectibleImg.src = './Assets/Collectibles/Computer.png';
                 }
 
@@ -308,7 +326,7 @@ export const gamePlayEffects =  {
 
                 effectBGContainer.append(numberContainer, imgContainer);
 
-                document.body.appendChild(effectBGContainer);
+                allEffects.appendChild(effectBGContainer);
 
                 let number = 4;
                 if (typeOfEffect === 'luckyCharm') number = 8;

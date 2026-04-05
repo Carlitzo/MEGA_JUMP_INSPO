@@ -102,18 +102,21 @@ const effects = {
                 return;
             }
 
-            const smallRadius = gameAssets.player.container.height * 1;
-            const mediumRadius = gameAssets.player.container.height * 1.5;
-            const bigRadius = gameAssets.player.container.height * 2;
-            const maxSize = gameAssets.player.container.height * 2.5;
+            const charHeight = gameAssets.player.animations.idle.height;
+            const offsetY = (-charHeight / 2) + charHeight * 0.1;
+
+            const smallRadius = charHeight * 0.25;
+            const mediumRadius = charHeight * 0.3;
+            const bigRadius = charHeight * 0.35;
+            const maxSize = charHeight * 0.4;
 
             circles = [smallRadius, mediumRadius, bigRadius].map((startRadius, index) => {
-                const startColor = index === 1 ? 0x880808 : 0x0018F9; // middle one starts red
+                const startColor = index === 1 ? 0xFF0000 : 0x0000FF; // middle one starts red
                 const circle = new Graphics();
                 circle.label = 'magnetCircle';
-                circle.circle(0, 0, startRadius);
+                circle.circle(0.5, offsetY, startRadius);
                 circle.fill({ color: 0x000000, alpha: 0 });
-                circle.stroke({ color: startColor, width: 10 });
+                circle.stroke({ color: startColor, width: 15 });
                 gameAssets.player.container.addChild(circle);
                 return { graphic: circle, radius: startRadius, color: startColor };
             });
@@ -131,12 +134,12 @@ const effects = {
                     if (c.radius >= maxSize) {
                         c.radius = smallRadius;
                         // toggle color on reset
-                        c.color = c.color === 0x0018F9 ? 0x880808 : 0x0018F9;
+                        c.color = c.color === 0x0000FF ? 0xFF0000 : 0x0000FF;
                     }
                     c.graphic.clear();
-                    c.graphic.circle(0, 0, c.radius);
+                    c.graphic.circle(0.5, offsetY, c.radius);
                     c.graphic.fill({ color: 0x000000, alpha: 0 });
-                    c.graphic.stroke({ color: c.color, width: 3 });
+                    c.graphic.stroke({ color: c.color, width: 15 });
                 });
             };
 
