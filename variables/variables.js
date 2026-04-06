@@ -19,7 +19,7 @@ const versionObj = await (await fetch("/getVersion")).json();
 const version = versionObj.version;
 
 // export const isJuicy = versionObj.versionFlag;
-export const isJuicy = false;
+export const isJuicy = true;
 
 const module = isJuicy
     ? await import('./../effectFunctions/effectsJuicy.js')
