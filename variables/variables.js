@@ -20,7 +20,6 @@ const version = versionObj.version;
 
 export const isJuicy = versionObj.versionFlag;
 
-
 const module = isJuicy
     ? await import('./../effectFunctions/effectsJuicy.js')
     : await import('./../effectFunctions/effects.js');

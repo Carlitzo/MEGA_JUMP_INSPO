@@ -194,7 +194,8 @@ export const gamePlayEffects =  {
                                 
                                 fireballObj = effects.onFireballHitAnimation(app, world);
                                 fireball.destroy();
-                                const trailTicker = onFireballTrail(app);
+                                let trailTicker;
+                                if (isJuicy) trailTicker = onFireballTrail(app);
                                 gamePlayEffects.startEffectTimer('fireball', app, trailTicker);
                         };
                 }
