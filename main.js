@@ -9,16 +9,15 @@ import { renderScore } from './renderScore.js';
 import { score } from './renderScore.js';
 import { determineEffect } from './determineEffect.js';
 import { fireballActive } from "./gamePlayEffects.js";
+import { renderIntro } from "./renderIntro.js";
 
 export const gameAssets = {
         collectibles: [],
         player: null
 };
 
-// const isJuicy = await fetchGameMode(); // hämta flagga från server
 const versionObj = await (await fetch("/getVersion")).json();
-// const isJuicy = versionObj.versionFlag;
-export const isJuicy = true;
+export const isJuicy = versionObj.versionFlag;
 const version = versionObj.version;
 
 const module = isJuicy
@@ -44,7 +43,6 @@ let lowestAllowed = 0;
         if (!localID) {
                 const newID = await (await (await fetch("/getID")).json()).userID;
                 localStorage.setItem("id", newID);
-                console.log(newID);
         }
 
    	await app.init({ resizeTo: window, backgroundColor: 0x491b11});
@@ -60,6 +58,8 @@ let lowestAllowed = 0;
         const loadingScreen = document.getElementById('loadingScreen');
         loadingScreen.style.opacity = '0';
         setTimeout(() => loadingScreen.remove(), 500);
+
+        if (!localStorage.getItem('acceptedIntro')) await renderIntro();
 
         renderStartScreen(app);
 
@@ -173,7 +173,6 @@ export async function updateChunks(app) {
         
         if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
                 let newY = topChunk.y - app.screen.height;
-                console.log(chunkCounter);
 
                 bottomChunk.children
                         .filter(child => child.label === "logContainer")
@@ -209,7 +208,6 @@ export async function updateChunks(app) {
 function terminateGame(app, ticker) {
         const elapsed = Date.now() - startTime;
         const seconds = (elapsed / 1000).toFixed(2);
-        console.log(`Game lasted ${seconds} seconds`);
         app.ticker.remove(ticker);
         gameStarted = false;
         gameAssets.player.playerHitbox.active = false;

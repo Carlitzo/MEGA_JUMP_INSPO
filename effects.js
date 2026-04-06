@@ -13,7 +13,7 @@ const effects = {
         onFireballHitAnimation: (app, world) => {
                 return undefined;
         },
-        onComputerHitAnimation: (app, state) => {
+        onComputerHitAnimation: (app, state, world) => {
                 return undefined;
         },
         applyStaticEffects: (app, effectType, sprite = null) => {

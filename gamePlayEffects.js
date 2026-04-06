@@ -11,7 +11,6 @@ let computerActive = false;
 
 export const gamePlayEffects =  {
         onLuckyCharm: (chunk, app) => {
-                console.log("luckyCharm rendered on chunk")
 
                 const luckSprite = Sprite.from('luckyCharm');
                 luckSprite.label = 'luckyCharm';
@@ -51,7 +50,6 @@ export const gamePlayEffects =  {
                                 luckBounds.y < playerBounds.y + playerBounds.height &&
                                 luckBounds.y + luckBounds.height > playerBounds.y
                         ) {
-                                console.log("hit luck");
                                 if (!gameAssets.player.playerHitbox.active) return;
                                 hit = true;
                                 if (!fireballActive) {
@@ -74,7 +72,6 @@ export const gamePlayEffects =  {
                         app.ticker.remove(onTick);
                         if (glowFilter) app.ticker.remove(glowFilter.tickerID);
                 });
-                console.log(luckSprite.filters);
                 chunk.addChild(luckSprite);
         },
         onMagnet: (chunk, app) => {
@@ -134,9 +131,6 @@ export const gamePlayEffects =  {
                 
         },
         onFireball: (chunk, app) => {
-
-                
-                console.log('fireball rendered on app');
                 
                 const frames = [
                         Texture.from('fireball1'),
@@ -195,7 +189,6 @@ export const gamePlayEffects =  {
                         ) {
                                 if (fireballActive) return;
                                 if (!gameAssets.player.playerHitbox.active) return;
-                                console.log("hit fireball");
                                 hit = true;
                                 fireballActive = true;
 
@@ -255,7 +248,6 @@ export const gamePlayEffects =  {
                         ) {
                                 if (computerActive) return;
                                 if (!gameAssets.player.playerHitbox.active) return;
-                                console.log("hit computer");
                                 hit = true;
                                 computerActive = true;
                                 if (!fireballActive) {
@@ -343,7 +335,6 @@ export const gamePlayEffects =  {
                                         magnetActive = false;
                                         effects.onMagnetHitAnimation(app, 'stop', gameAssets, magnetCount);
                                 } else if (typeOfEffect === 'luckyCharm') {
-                                        console.log("Clearing multiplier")
                                         multiplier -= 7;
                                         effects.onLuckyHitAnimation(app, 'stop');
                                 } else if (typeOfEffect === 'fireball') {
@@ -354,7 +345,6 @@ export const gamePlayEffects =  {
                                                 world.x = fireballObj.originalX;
                                         }
                                         fireballActive = false;
-                                        console.log("Stopping fireball speed")
                                         gameAssets.player.velocityY = 19;
                                 } else if (typeOfEffect === 'computer') {
                                         effects.onComputerHitAnimation(app, 'stop', world);
