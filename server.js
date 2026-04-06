@@ -1,5 +1,8 @@
 import { serveDir } from "jsr:@std/http";
 
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+const SUPABASE_KEY = Deno.env.get('SUPABASE_KEY');
+
 // För loggning med stacktrace
 const originalLog = console.log;
 
@@ -29,12 +32,15 @@ Deno.serve(async (request) => {
 
     // Returns ALL entries
     if (url.pathname === "/getAll" && request.method === "GET") {
-        const entries = [];
-        const iter = kv.list({ prefix: ["games"] });
-        for await (const entry of iter) {
-            entries.push(entry.value);
-        }
-        return Response.json(entries);
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/games?select=*`, {
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`
+            }
+        });
+        
+        const data = await response.json();
+        return Response.json(data);
     }
 
     // Game finishes -> saves everything to database, including version
@@ -45,20 +51,24 @@ Deno.serve(async (request) => {
         const gameID = crypto.randomUUID();
         const version = body.version;
 
-        await kv.set(["games", version, gameID], {
-            id: body.userID,
-            score: body.score,
-            startTime: body.startTime,
-            endTime: body.endTime,
-            version: body.version
-        });
+        await fetch(`${SUPABASE_URL}/rest/v1/games`, {
+            method: "POST",
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                game_id: gameID,
+                user_id: body.userID,
+                score: body.score,
+                start_time: body.startTime,
+                end_time: body.endTime,
+                version: body.version
+            })
+        })
 
-        // Just logging to check if it works as it should
-        //const check = await kv.get(["games", version, gameID]);
-        //console.log("\nSaved to KV:", check.value);
-        //console.log("GAME ID: " + gameID);
-
-        return Response.json({ success: true });
+        return Response.json({success: true});
     }
 
     // Everything else → serve static files as before
