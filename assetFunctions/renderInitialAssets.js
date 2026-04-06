@@ -1,6 +1,7 @@
 import { Sprite, Container, Assets, AnimatedSprite } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { renderLogs } from './renderLogs.js';
-import { gameAssets, createChunk, updateChunks, world } from './main.js';
+import { renderLogs } from '../renderFunctions/renderLogs.js';
+import { world, gameAssets } from './../variables/variables.js';
+import { updateChunks, createChunk } from "../assetFunctions/chunks.js";
 
 export async function renderInitialAssets(app) {
         

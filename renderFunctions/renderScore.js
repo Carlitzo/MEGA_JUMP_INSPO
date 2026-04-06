@@ -1,5 +1,5 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { multiplier } from './gamePlayEffects.js';
+import { multiplier } from '../effectFunctions/gamePlayEffects.js';
 
 export let score = 0;
 

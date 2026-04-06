@@ -1,7 +1,7 @@
 import { Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { gameAssets, effects } from './main.js';
-import { getRandomInt } from './getRandomInt.js';
-import { fireballActive } from './gamePlayEffects.js';
+import { gameAssets, effects } from './../variables/variables.js';
+import { getRandomInt } from '../helperFunctions/getRandomInt.js';
+import { fireballActive } from '../effectFunctions/gamePlayEffects.js';
 
 
 export async function renderLogs(app, chunk, initial = true) {

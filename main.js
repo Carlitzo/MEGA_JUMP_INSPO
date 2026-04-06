@@ -1,49 +1,13 @@
 import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { animationObj } from './preloadAssets.js';
-import { preloadAssets } from './preloadAssets.js';
-import { renderInitialAssets } from './renderInitialAssets.js';
+import { preloadAssets } from './assetFunctions/preloadAssets.js';
 import { keys, input } from './input.js';
-import { renderLogs } from './renderLogs.js';
-import { Bober } from './bober.js';
-import { renderScore } from './renderScore.js';
-import { score } from './renderScore.js';
-import { determineEffect } from './determineEffect.js';
-import { fireballActive } from "./gamePlayEffects.js";
-import { renderIntro } from "./renderIntro.js";
-
-export const gameAssets = {
-        collectibles: [],
-        player: null
-};
-
-const versionObj = await (await fetch("/getVersion")).json();
-export const isJuicy = versionObj.versionFlag;
-const version = versionObj.version;
-
-const module = isJuicy
-    ? await import('./effectsJuicy.js')
-    : await import('./effects.js');
-
-export const effects = module.default;
-
-const app = new Application();
-export const world = new Container();
-export let gameStarted = false;
-export let chunkCounter = 0;
-let chunks = [];
-let startTime = null;
-let currentHighest = 0;
-let lowestAllowed = 0;
+import { score } from './renderFunctions/renderScore.js';
+import { renderIntro } from "./renderFunctions/renderIntro.js";
+import { initGameVariables, app, world, gameAssets, startTime } from './variables/variables.js';
+import { renderStartScreen } from './renderFunctions/renderStartScreen.js';
 
 (async () => {
-        const localID = localStorage.getItem("id");
-
-        localStorage.setItem("version", version);
-
-        if (!localID) {
-                const newID = await (await (await fetch("/getID")).json()).userID;
-                localStorage.setItem("id", newID);
-        }
+        await initGameVariables();
 
    	await app.init({ resizeTo: window, backgroundColor: 0x491b11});
 
@@ -84,148 +48,7 @@ let lowestAllowed = 0;
         });
 })();
 
-function renderStartScreen(app) {
-        renderInitialAssets(app);
-        renderScore(app);
-
-        const img = document.createElement("img");
-        document.body.appendChild(img);
-        img.src = './Assets/UI_Assets/Play.png';
-        img.id = 'startGameBtn';
-
-        img.addEventListener("pointerup", startGameButton);
-}
-
-function startGameButton(event) {
-        function clickedButton(image) {
-                image.style.transform = 'scale(0.9)';
-                image.style.filter = 'drop-shadow(0 0 0.4rem white)';
-        }
-
-        const img = document.getElementById('startGameBtn');
-        if (!img) return;
-        
-        clickedButton(img);
-        setTimeout(() => {
-                img.remove();
-                startGame(app);
-        }, 150);
-}
-
-async function startGame(app) {
-        
-        startTime = Date.now();
-        gameStarted = true;
-
-        await launchCharacter(app);
-        let playerScreenY = (app.screen.height / 2) + (gameAssets.player.container.height / 2);
-
-        const onTick = (time) => {
-                const dx = time.deltaTime;
-                gameAssets.player.setState('flying');
-                if (!fireballActive) gameAssets.player.velocityY -= gameAssets.player.decayRate * dx;
-                world.y += (gameAssets.player.velocityY * dx);
-                gameAssets.player.container.y = playerScreenY;
-                updateChunks(app);
-
-                if (world.y > currentHighest) {
-                        currentHighest = world.y;
-                        lowestAllowed = currentHighest - (gameAssets.player.container.height * 4);
-                }
-
-                
-                if (world.y < lowestAllowed) {
-                        terminateGame(app, onTick);
-                }
-        };
-        app.ticker.add(onTick);
-}
-
-async function launchCharacter(app) {
-        
-        return new Promise((resolve) => {
-                const onTick = (time) => {
-                        const dx = time.deltaTime;
-                        
-                        gameAssets.player.container.y -= (gameAssets.player.velocityY * 2);
-
-                        if (gameAssets.player.container.y <= (app.screen.height / 2) + (gameAssets.player.container.height / 2)) {
-                                app.ticker.remove(onTick);
-                                resolve();
-                        }
-                };
-
-                app.ticker.add(onTick);
-        });
-}
-
-export async function updateChunks(app) {
-        const topChunk = chunks.reduce((a, b) => a.y < b.y ? a : b);
-        const bottomChunk = chunks.reduce((a, b) => a.y > b.y ? a : b);
-        
-        const newTexture = Assets.get('backgroundWithoutStart_03');
-        const oldTexture = Assets.get('backgroundWithStart');
-        let sprite = bottomChunk.children[0];
-
-        if (sprite.texture == oldTexture) {
-                sprite.texture = newTexture;
-        }
-        
-        if ( bottomChunk.y + world.y > (app.screen.height * 3) ) {
-                let newY = topChunk.y - app.screen.height;
-
-                bottomChunk.children
-                        .filter(child => child.label === "logContainer")
-                        .forEach(child => {child.destroy({children: true})});
-
-                bottomChunk.children
-                        .filter(child => child.label === 'luckyCharm')
-                        .forEach(child => child.destroy({children: true}));
-                
-                bottomChunk.children
-                        .filter(child => child.label === 'fireball')
-                        .forEach(child => child.destroy({children: true}));
-
-                bottomChunk.children
-                        .filter(child => child.label === 'magnet')
-                        .forEach(child => child.destroy({children: true}));
-
-                bottomChunk.children
-                        .filter(child => child.label === 'computer')
-                        .forEach(child => child.destroy({children: true}));
-
-                bottomChunk.y = newY;
-
-                if (chunkCounter === 3) {
-                        determineEffect(bottomChunk, app);
-                        chunkCounter = 0;
-                } else chunkCounter++;
-
-                await renderLogs(app, bottomChunk, false);
-        }
-}
-
-function terminateGame(app, ticker) {
-        const elapsed = Date.now() - startTime;
-        const seconds = (elapsed / 1000).toFixed(2);
-        app.ticker.remove(ticker);
-        gameStarted = false;
-        gameAssets.player.playerHitbox.active = false;
-
-        const onTick = async (time) => {
-                let dx = time.deltaTime;
-                gameAssets.player.container.y -= gameAssets.player.velocityY * dx;
-
-                if (gameAssets.player.velocityY > 0) gameAssets.player.velocityY = -17;
-
-                if (gameAssets.player.container.y > app.screen.height + (app.screen.height * 0.25)) {
-                        await resetGame(app, onTick);
-                }
-        };
-        app.ticker.add(onTick);
-}
-
-async function sendGameToDB() {
+export async function sendGameToDB() {
         const gameUserID = localStorage.getItem("id");
         const gameScore = score;
         const gameStartTime = startTime;
@@ -247,61 +70,7 @@ async function sendGameToDB() {
         });
 }
 
-async function resetGame(app, ticker) {
-        
-        app.ticker.remove(ticker);
-        await sendGameToDB();
-        fadeTransition(() => {
-                world.removeChildren();
-                
-                chunks = [];
-                startTime = null;
-                currentHighest = 0;
-                lowestAllowed = 0;
-                world.y = 0;
-                document.getElementById("scoreBG").remove();
-
-                const luckyBorder = app.stage.getChildByName('luckyBorder');
-                if (luckyBorder) luckyBorder.destroy();
-
-                const magnetBorder = app.stage.getChildByName('magnetBorder');
-                if (magnetBorder) magnetBorder.destroy();
-
-                gameAssets.player = new Bober(app, animationObj);
-
-        
-                renderStartScreen(app);
-                gameAssets.player.playerHitbox.active = true;
-        });
-}
-
-export async function createChunk(worldY, app, bgAlias, addLogs = false, initialChunk = false) {
-        const bgContainer = new Container();
-        const texture = Assets.get(bgAlias);
-        const background = new Sprite(texture);
-
-        background.anchor.set(0.5, 1);
-
-        background.width = app.screen.width;
-        background.height = app.screen.height;
-
-        bgContainer.width = app.screen.width;
-        bgContainer.height = app.screen.height;
-
-        bgContainer.x = app.screen.width / 2;
-        bgContainer.y = worldY;
-
-        bgContainer.addChild(background);
-        world.addChild(bgContainer);
-        chunks.push(bgContainer);
-
-        if (addLogs) {
-                await renderLogs(app, bgContainer, initialChunk);
-        }
-        return background;
-}
-
-function fadeTransition(onMidpoint) {
+export function fadeTransition(onMidpoint) {
     const overlay = document.createElement('div');
     overlay.style.position = 'fixed';
     overlay.style.inset = '0';

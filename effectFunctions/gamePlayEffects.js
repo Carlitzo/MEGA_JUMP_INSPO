@@ -1,6 +1,6 @@
 import { Sprite, Container, Assets, Graphics, AnimatedSprite, Texture } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
-import { gameAssets, effects, isJuicy, world } from './main.js';
+import { gameAssets, effects, isJuicy, world, app } from './../variables/variables.js';
 
 export let multiplier = 7;
 let magnetCount = 0;
@@ -30,7 +30,6 @@ export const gamePlayEffects =  {
                 luckSprite.roundPixels = true;
                 
                 glowFilter = effects.applyStaticEffects(app, 'luckyCharm');
-
                 if (glowFilter) luckSprite.filters = [glowFilter.filter];
                 
                 let hit = false;
@@ -114,7 +113,6 @@ export const gamePlayEffects =  {
                                 } else {
                                         gameAssets.player.velocityY = 19;
                                 }
-                                
                                 effects.onMagnetHitAnimation(app, 'start', gameAssets, magnetCount);
                                 magnetSprite.destroy();
                                 gamePlayEffects.startEffectTimer('magnet', app);
@@ -166,7 +164,6 @@ export const gamePlayEffects =  {
                 let glowFilter = undefined;
 
                 glowFilter = effects.applyStaticEffects(app, 'fireball', fireball);
-
                 if (glowFilter) fireball.filters = [glowFilter.filter];
 
                 let hit = false;

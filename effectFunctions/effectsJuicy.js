@@ -6,6 +6,7 @@ let circles = [];
 
 const effects = {
         onLogHitAnimation: (app, logSprite) => {
+
                 const position = logSprite.getGlobalPosition();
             
                 const directions = [
@@ -192,7 +193,6 @@ const effects = {
                         color: 0x00ff00,
                         quality: 0.5,
                     });
-
                     returnObj.filter = glowFilter;
 
                     onTick = () => {

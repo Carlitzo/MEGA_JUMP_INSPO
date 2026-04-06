@@ -1,6 +1,6 @@
 import { gamePlayEffects } from "./gamePlayEffects.js";
-import { getRandomInt } from "./getRandomInt.js";
-import { effects } from "./main.js";
+import { getRandomInt } from "../helperFunctions/getRandomInt.js";
+import { effects } from "../variables/variables.js";
 import { fireballActive } from "./gamePlayEffects.js";
 
 export function determineEffect(chunk, app) {

@@ -1,5 +1,5 @@
 import { Application, Sprite, Container, Assets, Graphics, AnimatedSprite } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { gameAssets } from './main.js';
+import { gameAssets } from './../variables/variables.js';
 
 export class Bober {
         constructor(app, animationObj) {
