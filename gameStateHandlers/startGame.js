@@ -7,6 +7,8 @@ export let currentHighest = 0;
 export let lowestAllowed = 0;
 
 export async function startGame(app) {
+        document.getElementById("infoButton")?.remove();
+        document.getElementById("screenText")?.remove();
 
         await launchCharacter(app);
         const playerScreenY = (app.screen.height / 2) + (gameAssets.player.container.height / 2);

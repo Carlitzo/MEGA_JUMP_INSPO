@@ -5,8 +5,11 @@ export function renderIntro() {
 
                 introDiv.innerHTML = `
                 <div id="introContent">
-                        <h1>Welcome to Bober jump!</h1>
-                        <p>Help our little bober climb as high as possible through the forest.</p>
+                        <h1>Welcome to Bober Jump!</h1>
+                        <p>This game is part of a student lead research study. We, Adrian and Esmir, 
+                        are doing our Bachelor thesis at Malmo University and need to collect data about 
+                        how different people play our game. 
+                        </p>
                         
                         <h2>How to play</h2>
                         <p>Press the left or right side of the screen to move in that direction. 
@@ -14,9 +17,13 @@ export function renderIntro() {
                         <p>Along the way you'll find special items that might help you on your journey.</p>
                         
                         <h2>About this study</h2>
-                        <p>This game is part of a research study about game experience. 
-                        There are no right or wrong ways to play – just play as you normally would.</p>
-                        <p>Anonymised data about your gameplay will be collected. No personal information is stored.</p>
+                        <p>
+                        We do not store any personal information and all data is completely anonymous.
+                        The data we store includes scores, attempts, and things like that.
+                        </p>
+
+                        <p>Due to the nature of the study, you may experience different versions of the game when you play it. It's not broken, it's the way it's supposed to be.</p>
+                        
                         
                         <button id="introBtn">Let's go!</button>
                 </div>
