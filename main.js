@@ -1,6 +1,5 @@
-import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { preloadAssets } from './assetFunctions/preloadAssets.js';
-import { keys, input } from './input.js';
+import { input } from './input.js';
 import { score } from './renderFunctions/renderScore.js';
 import { renderIntro } from "./renderFunctions/renderIntro.js";
 import { initGameVariables, app, world, gameAssets, startTime } from './variables/variables.js';
@@ -31,6 +30,8 @@ import { renderStartScreen } from './renderFunctions/renderStartScreen.js';
 
         app.ticker.add((time) => {
                 const dt = 8 * time.deltaTime;
+                
+
                 if (input.latestKey === 'ArrowLeft') {
                         gameAssets.player.container.x -= dt;
                         gameAssets.player.setState('walking');

@@ -1,5 +1,4 @@
-import { Sprite, Container, Assets, Graphics, AnimatedSprite, Texture } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
-import { GlowFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
+import { Sprite, Graphics, AnimatedSprite, Texture } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { gameAssets, effects, isJuicy, world, app } from './../variables/variables.js';
 
 export let multiplier = 7;
@@ -34,7 +33,7 @@ export const gamePlayEffects =  {
                 
                 let hit = false;
                 
-                const onTick = (time) => {
+                const onTick = () => {
                         
                         if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3; 
 
@@ -91,7 +90,7 @@ export const gamePlayEffects =  {
                                 
                 let hit = false;
 
-                const onTick = (time) => {
+                const onTick = () => {
                         
                         if (hit) return;
 
@@ -168,8 +167,7 @@ export const gamePlayEffects =  {
 
                 let hit = false;
                 
-                const onTick = (time) => {
-                        const dx = time.deltaTime;
+                const onTick = () => {
 
                         if (glowFilter) glowFilter.filter.outerStrength = 4 + Math.sin(Date.now() * 0.005) * 3;
 
@@ -224,14 +222,13 @@ export const gamePlayEffects =  {
                 computer.scale.set(0.22);
                 computer.roundPixels = true;
 
-                let asciiFilter = undefined;
+                const asciiFilter = undefined;
 
                 if (asciiFilter) fireball.filters = [asciiFilter.filter];
 
                 let hit = false;
 
-                const onTick = (time) => {
-                        const dx = time.deltaTime;
+                const onTick = () => {
 
                         if (hit) return;
 
@@ -272,8 +269,6 @@ export const gamePlayEffects =  {
         },
         startEffectTimer: (typeOfEffect, app, trailTicker = null) => {
                 let allEffects = document.getElementById("allEffects");
-
-                let type = document.getElementById(typeOfEffect);
 
                 if (!allEffects) {
                         allEffects = document.createElement("div");
@@ -388,11 +383,10 @@ function magnetDragLogs(app) {
 }
 
 function onFireballTrail (app) {
-        const onTick = (time) => {
+        const onTick = () => {
             const circle = new Graphics();
             
             const offsetX = (Math.random() - 0.5) * 20;
-            const offsetY = (Math.random() - 0.5) * 20;
             
             circle.x = gameAssets.player.container.x + offsetX;
             circle.y = gameAssets.player.container.y - world.y
@@ -400,7 +394,7 @@ function onFireballTrail (app) {
             const colors = [0xFF4500, 0xFF6000, 0xFF2200, 0xFFAA00];
             const color = colors[Math.floor(Math.random() * colors.length)];
     
-            let radius = 15 + Math.random() * 10;
+            const radius = 15 + Math.random() * 10;
             let progress = 0;
     
             circle.circle(0, 0, radius);

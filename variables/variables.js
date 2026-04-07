@@ -1,4 +1,4 @@
-import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { Application, Container } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { resetChunks } from './../assetFunctions/chunks.js';
 import { resetCurrentHighest } from './../gameStateHandlers/startGame.js';
 import { Bober } from './../assetFunctions/bober.js';
@@ -8,6 +8,10 @@ export let startTime = null;
 export let app;
 export let world;
 export let gameStarted;
+let suppressNextClick = false;
+export function suppressNextCanvasClick() { suppressNextClick = true; }
+export function getSuppressNextClick() { return suppressNextClick; }
+export function clearSuppressNextClick() { suppressNextClick = false; }
 
 export const gameAssets = {
         collectibles: [],
@@ -18,15 +22,15 @@ const versionObj = await (await fetch("/getVersion")).json();
 
 const version = versionObj.version;
 
-export const isJuicy = versionObj.versionFlag;
+//export const isJuicy = versionObj.versionFlag;
+export const isJuicy = true;
+
 
 const module = isJuicy
     ? await import('./../effectFunctions/effectsJuicy.js')
     : await import('./../effectFunctions/effects.js');
 
 export const effects = module.default;
-
-
 
 export async function initGameVariables() {
     app = new Application();
@@ -42,6 +46,8 @@ export async function initGameVariables() {
                 const newID = await (await (await fetch("/getID")).json()).userID;
                 localStorage.setItem("id", newID);
         }
+
+    
 }
 
 export function resetGameVariables() {

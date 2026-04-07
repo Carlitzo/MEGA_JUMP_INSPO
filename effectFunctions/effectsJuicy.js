@@ -1,7 +1,6 @@
-import { Application, Sprite, Container, Assets, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
+import { Sprite, Graphics, Text } from 'https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.mjs';
 import { GlowFilter, AsciiFilter } from 'https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs';
 
-let magnetTimer = null;
 let circles = [];
 
 const effects = {
@@ -94,7 +93,7 @@ const effects = {
         
             app.ticker.add(onTick);
         },
-        onMagnetHitAnimation: (app, state, gameAssets, count) => {
+        onMagnetHitAnimation: (app, state, gameAssets) => {
             if (state === "stop") {
                 
                 gameAssets.player.container.children

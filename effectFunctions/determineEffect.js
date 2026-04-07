@@ -1,13 +1,11 @@
 import { gamePlayEffects } from "./gamePlayEffects.js";
 import { getRandomInt } from "../helperFunctions/getRandomInt.js";
-import { effects } from "../variables/variables.js";
 import { fireballActive } from "./gamePlayEffects.js";
 
 export function determineEffect(chunk, app) {
-        let effectsArray = ['magnet', 'luckyCharm', 'fireball', 'computer'];
+        const effectsArray = ['magnet', 'luckyCharm', 'fireball', 'computer'];
         
-        // let effect = getRandomInt(effectsArray.length);
-        let effect = 3;
+        let effect = getRandomInt(effectsArray.length);
 
         if (effect === 0 && fireballActive) {
                 effect++;

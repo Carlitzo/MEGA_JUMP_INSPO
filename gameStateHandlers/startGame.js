@@ -9,7 +9,7 @@ export let lowestAllowed = 0;
 export async function startGame(app) {
 
         await launchCharacter(app);
-        let playerScreenY = (app.screen.height / 2) + (gameAssets.player.container.height / 2);
+        const playerScreenY = (app.screen.height / 2) + (gameAssets.player.container.height / 2);
 
         const onTick = (time) => {
                 const dx = time.deltaTime;
@@ -37,7 +37,7 @@ export function startGameButton(event) {
                 image.style.transform = 'scale(0.9)';
                 image.style.filter = 'drop-shadow(0 0 0.4rem white)';
         }
-
+        
         const img = document.getElementById('startGameBtn');
         if (!img) return;
         

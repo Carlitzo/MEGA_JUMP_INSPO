@@ -8,6 +8,10 @@ export async function resetGame(app, ticker) {
         await sendGameToDB();
         fadeTransition(() => {
                 world.removeChildren();
+
+                document.getElementById('luckyBorder')?.remove();
+                document.getElementById('allEffects')?.remove();
+                world.filters = [];
                 
                 resetGameVariables();
                 document.getElementById("scoreBG").remove();

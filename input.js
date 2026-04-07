@@ -1,3 +1,5 @@
+import { getSuppressNextClick, clearSuppressNextClick } from './variables/variables.js';
+
 export const keys = {};
 
 export const input = {
@@ -18,6 +20,10 @@ window.addEventListener('keyup', (e) => {
 });
 
 window.addEventListener('touchstart', (e) => {
+    if (getSuppressNextClick()) {
+        clearSuppressNextClick();
+        return;
+    }
     const touch = e.changedTouches[0]; // ← senast tillagda fingret
     if (touch.clientX < window.innerWidth / 2) {
         input.latestKey = 'ArrowLeft';

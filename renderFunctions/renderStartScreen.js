@@ -1,7 +1,7 @@
 import { renderInitialAssets } from '../assetFunctions/renderInitialAssets.js';
 import { renderScore } from '../renderFunctions/renderScore.js';
 import { startGameButton } from '../gameStateHandlers/startGame.js';
-import { app } from './../variables/variables.js';
+import { suppressNextCanvasClick } from './../variables/variables.js';
 
 export function renderStartScreen(app) {
         renderInitialAssets(app);
@@ -11,6 +11,10 @@ export function renderStartScreen(app) {
         document.body.appendChild(img);
         img.src = './Assets/UI_Assets/Play.png';
         img.id = 'startGameBtn';
+
+        img.addEventListener('touchstart', () => {
+                suppressNextCanvasClick();
+        }, { passive: true });
 
         img.addEventListener("pointerup", startGameButton);
 }
