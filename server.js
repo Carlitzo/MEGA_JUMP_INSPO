@@ -25,7 +25,13 @@ Deno.serve(async (request) => {
 
     // Checks if todays date is even or uneven, sends true or false to client
     if (url.pathname === "/getVersion" && request.method === "GET") {
-        const isEven = new Date().getDate() % 2 === 0;
+        const juicyParam = url.searchParams.get('juicy');
+        let isEven;
+        if (juicyParam !== null) {
+            isEven = juicyParam === 'true';
+        } else {
+            isEven = new Date().getDate() % 2 === 0;
+        }
         const version = isEven ? "juicy" : "standard";
         return Response.json({ versionFlag: isEven, version });
     }

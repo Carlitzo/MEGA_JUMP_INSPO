@@ -18,13 +18,16 @@ export const gameAssets = {
         player: null
 };
 
+const params = new URLSearchParams(window.location.search);
+const juicyParam = params.get('juicy');
+
 const versionObj = await (await fetch("/getVersion")).json();
 
 const version = versionObj.version;
 
-//export const isJuicy = versionObj.versionFlag;
-export const isJuicy = true;
-
+export const isJuicy = juicyParam !== null 
+    ? juicyParam === 'true' 
+    : versionObj.versionFlag;
 
 const module = isJuicy
     ? await import('./../effectFunctions/effectsJuicy.js')
