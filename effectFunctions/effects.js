@@ -2,7 +2,6 @@ import { Application, Sprite, Container, Assets, Graphics } from 'https://cdn.js
 
 const effects = {
         onLogHitAnimation: (app, logSprite) => {
-                console.log("errm hello??")
                 return undefined;
         },
         onLuckyHitAnimation: (app, state) => {

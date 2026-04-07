@@ -1,4 +1,4 @@
-import { gameAssets, app, world } from './../variables/variables.js';
+import { gameAssets, app, world, startGameTime } from './../variables/variables.js';
 import { fireballActive } from './../effectFunctions/gamePlayEffects.js';
 import { updateChunks } from './../assetFunctions/chunks.js';
 import { terminateGame } from './terminateGame.js';
@@ -44,6 +44,7 @@ export function startGameButton(event) {
         clickedButton(img);
         setTimeout(() => {
                 img.remove();
+                startGameTime();
                 startGame(app);
         }, 150);
 }

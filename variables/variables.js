@@ -18,8 +18,7 @@ const versionObj = await (await fetch("/getVersion")).json();
 
 const version = versionObj.version;
 
-// export const isJuicy = versionObj.versionFlag;
-export const isJuicy = true;
+export const isJuicy = versionObj.versionFlag;
 
 const module = isJuicy
     ? await import('./../effectFunctions/effectsJuicy.js')
@@ -33,7 +32,7 @@ export async function initGameVariables() {
     app = new Application();
     world = new Container();
     
-    gameStarted = false
+    gameStarted = false;
 
     const localID = localStorage.getItem("id");
 
@@ -43,8 +42,6 @@ export async function initGameVariables() {
                 const newID = await (await (await fetch("/getID")).json()).userID;
                 localStorage.setItem("id", newID);
         }
-
-    
 }
 
 export function resetGameVariables() {
