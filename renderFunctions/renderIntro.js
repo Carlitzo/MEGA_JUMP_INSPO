@@ -6,6 +6,7 @@ export function renderIntro() {
                 introDiv.innerHTML = `
                 <div id="introContent">
                         <h1>Welcome to Bober Jump!</h1>
+                        <p id="important">THIS GAME IS MADE TO BE PLAYED ON MOBILE DEVICES ONLY!</p>
                         <p>This game is part of a student lead research study. We, Adrian and Esmir, 
                         are doing our Bachelor thesis at Malmo University and need to collect data about 
                         how different people play our game. 

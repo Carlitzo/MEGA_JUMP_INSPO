@@ -224,6 +224,10 @@ canvas {
         color: white;
 }
 
+#important {
+        color: red;
+}
+
 #dots::after {
         content: '';
         animation: dots 1.5s steps(3, end) infinite;
