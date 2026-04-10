@@ -23,8 +23,6 @@ const juicyParam = params.get('juicy');
 
 const versionObj = await (await fetch("/getVersion")).json();
 
-const version = versionObj.version;
-
 export const isJuicy = juicyParam !== null 
     ? juicyParam === 'true' 
     : versionObj.versionFlag;
@@ -34,6 +32,8 @@ const module = isJuicy
     : await import('./../effectFunctions/effects.js');
 
 export const effects = module.default;
+
+const version = isJuicy ? "juicy" : "standard";
 
 export async function initGameVariables() {
     app = new Application();
