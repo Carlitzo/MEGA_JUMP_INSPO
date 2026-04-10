@@ -54,7 +54,13 @@ export async function sendGameToDB() {
         const gameScore = score;
         const gameStartTime = startTime;
         const gameEndTime = Date.now();
-        const gameVersion = localStorage.getItem("version");
+        
+        const params = new URLSearchParams(window.location.search);
+        const juicyParam = params.get('juicy');
+        const isJuicy = juicyParam !== null
+            ? juicyParam === 'true'
+            : new Date().getDate() % 2 === 0;
+        const gameVersion = isJuicy ? "juicy" : "standard";
 
         const data = JSON.stringify({
                 userID: gameUserID,

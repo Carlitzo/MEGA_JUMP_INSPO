@@ -52,7 +52,6 @@ export async function initGameVariables() {
             localStorage.setItem("id", newID);
         }
 
-    
 }
 
 export function resetGameVariables() {

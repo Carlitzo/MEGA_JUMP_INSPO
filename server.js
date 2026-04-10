@@ -57,6 +57,7 @@ Deno.serve(async (request) => {
         const gameID = crypto.randomUUID();
         const version = body.version;
 
+
         await fetch(`${SUPABASE_URL}/rest/v1/games`, {
             method: "POST",
             headers: {
