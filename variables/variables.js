@@ -46,8 +46,10 @@ export async function initGameVariables() {
         localStorage.setItem("version", version);
 
         if (!localID) {
-                const newID = await (await (await fetch("/getID")).json()).userID;
-                localStorage.setItem("id", newID);
+            const response = await fetch("/getID");
+            const data = await response.json();
+            const newID = data.userID;
+            localStorage.setItem("id", newID);
         }
 
     
