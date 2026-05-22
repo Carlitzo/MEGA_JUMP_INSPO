@@ -1,4 +1,5 @@
 import { serveDir } from "jsr:@std/http";
+import { displayHighscores } from "./highscores/displayHighscores.js";
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
 const SUPABASE_KEY = Deno.env.get('SUPABASE_KEY');
@@ -36,6 +37,19 @@ Deno.serve(async (request) => {
         return Response.json({ versionFlag: isEven, version });
     }
 
+    if (url.pathname === "/highscores" && request.method === "GET") {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/highscores?select=*`, {
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`
+            }
+        });
+        
+        const highscores = await response.json();
+
+        await displayHighscores(highscores);
+    }
+
     // Returns ALL entries
     if (url.pathname === "/getAll" && request.method === "GET") {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/games?select=*`, {
@@ -48,6 +62,22 @@ Deno.serve(async (request) => {
         const data = await response.json();
         return Response.json(data);
     }
+
+    if (url.pathname === "/finish" && request.method === "POST" && request.body.today) {
+
+        await fetch(`${SUPABASE_URL}/rest/v1/highscores`, {
+            method: "POST",
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                score: body.score,
+                username: body.username
+            })
+        });
+    };
 
     // Game finishes -> saves everything to database, including version
     // NOTE: Make sure v1 and v2 are aligned with what we want if we even care lmao?

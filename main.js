@@ -4,6 +4,7 @@ import { score } from './renderFunctions/renderScore.js';
 import { renderIntro } from "./renderFunctions/renderIntro.js";
 import { initGameVariables, app, world, gameAssets, startTime } from './variables/variables.js';
 import { renderStartScreen } from './renderFunctions/renderStartScreen.js';
+import { sendHighscoreRequest } from "./highscores/highscoreRequests.js";
 
 (async () => {
         await initGameVariables();
@@ -75,6 +76,13 @@ export async function sendGameToDB() {
                 headers: {"Content-Type": "application/json"},
                 body: data
         });
+
+        let username = "";
+        if (localStorage.getItem("username")) {
+                username = localStorage.getItem("username");
+        }
+
+        await sendHighscoreRequest(username, gameScore);
 }
 
 export function fadeTransition(onMidpoint) {
