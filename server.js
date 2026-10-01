@@ -12,8 +12,6 @@ console.log = (...args) => {
     originalLog(`[${location}]`, ...args);
 };
 
-const kv = await Deno.openKv();
-
 Deno.serve(async (request) => {
     const url = new URL(request.url);
 
