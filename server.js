@@ -30,7 +30,7 @@ Deno.serve(async (request) => {
         } else {
             isEven = new Date().getDate() % 2 === 0;
         }
-        const version = isEven ? "juicy" : "standard";
+        const version = "juicy";
         return Response.json({ versionFlag: isEven, version });
     }
 
